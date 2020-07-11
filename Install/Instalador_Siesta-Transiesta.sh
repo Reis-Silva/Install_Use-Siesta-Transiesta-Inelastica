@@ -28,13 +28,20 @@ sudo apt-get dist-upgrade -y
 
 #############PACOTES A SEREM INSTALADOS############
 
+
+#PACOTE gfortran
+sudo apt-get install fort77 -y #77
+sudo apt-get install gfortran -y #90/95
+
+#PACOTE GaussSum e seus requerimentos#
+sudo apt-get install gnuplot -y #instalando GNUplot
+sudo apt-get install python3-numpy -y #instalando numpy
+sudo python3 -m pip install cclib --upgrade  #instalando cclib
+sudo apt-get install gausssum -y
+
 #PACOTE m4#
 wget http://archive.ubuntu.com/ubuntu/pool/main/m/m4/m4_1.4.18-4_amd64.deb
 sudo dpkg -i m4_1.4.18-4_amd64.deb
-
-#PACOTE abinit#
-wget http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
-sudo dpkg -i abinit_8.10.2-2_amd64.deb
 
 #PACOTE bcc
 sudo apt install bcc bpfcc-tools -y
@@ -46,13 +53,13 @@ sudo apt-get install cccc -y
 wget http://archive.ubuntu.com/ubuntu/pool/universe/c/cccc/cccc_3.1.4-12_amd64.deb
 sudo dpkg -i cccc_3.1.4-12_amd64.deb
 
-#PACOTE gfortran
-sudo apt-get install fort77 -y #77
-sudo apt-get install gfortran -y #90/95
-
 #PACOTE fcc
 wget http://ubuntu.mirrors.tds.net/ubuntu/pool/universe/l/looptools/fcc_2.8-1build3_amd64.deb
 sudo dpkg -i fcc_2.8-1build3_amd64.deb
+
+#PACOTE abinit#
+wget http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
+sudo dpkg -i abinit_8.10.2-2_amd64.deb
 
 #PACOTE GPAW
 sudo apt install python3-dev libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
@@ -76,8 +83,6 @@ sudo dpkg -i quantum-espresso_6.3-4_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/e/espresso/quantum-espresso-data_6.3-4_all.deb
 sudo dpkg -i quantum-espresso-data_6.3-4_all.deb
 
-
-
 #PACOTE meep-lam4#  amd64
 sudo apt-get install libblas-dev liblapack-dev libopenblas-dev -y
 sudo apt-get install guile-3.0 -y
@@ -90,11 +95,5 @@ sudo apt install libatlas-ecmwf-utils -y
 wget http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
 sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
 
-
-#PACOTE GaussSum e seus requerimentos#
-sudo apt-get install gnuplot -y #instalando GNUplot
-sudo apt-get install python3-numpy -y #instalando numpy
-sudo python3 -m pip install cclib --upgrade  #instalando cclib
-sudo apt-get install gausssum -y
 
  
