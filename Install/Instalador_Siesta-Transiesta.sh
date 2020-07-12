@@ -17,7 +17,7 @@ sudo rm /var/lib/dpkg/lock
 sudo rm /var/lib/dpkg/lock-frontend
 
 #ativando repositorio canoninal e adicionando repositorios
-sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list 
+sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list -y
 
 #Atualização de repositorios e bibliotecas
 sudo apt-get update -y  
@@ -37,7 +37,7 @@ sudo apt-get install gfortran -y #90/95
 #PACOTE GaussSum e seus requerimentos#
 sudo apt-get install gnuplot -y #instalando GNUplot
 sudo apt-get install python3-numpy -y #instalando numpy
-sudo python3 -m pip install cclib --upgrade  #instalando cclib
+sudo python3 -m pip install cclib --upgrade -y #instalando cclib
 sudo apt-get install gausssum -y
 
 #PACOTE m4#
