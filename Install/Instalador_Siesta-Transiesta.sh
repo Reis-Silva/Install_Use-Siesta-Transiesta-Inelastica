@@ -19,14 +19,14 @@ sudo rm /var/lib/dpkg/lock-frontend
 #ativando repositorio canoninal e adicionando repositorios
 sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list 
 
+#Atualização de repositorios e bibliotecas
+sudo apt-get update -y  
+sudo apt-get dist-upgrade -y
+
 # instalando programas essenciais de instalação
 sudo apt-get install wget -y #instalando para baixar direito de sites
 sudo apt-get install python3 python3-tk -y #instalando Python 3
 sudo apt install python3-pip -y #instalando pip-Python3/ Uso "sudo python3 -m pip"
-
-#Atualização de repositorios e bibliotecas
-sudo apt-get update -y  
-sudo apt-get dist-upgrade -y
 
 #####PACOTES A SEREM INSTALADOS####
 
