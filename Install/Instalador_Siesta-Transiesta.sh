@@ -292,4 +292,8 @@ wget http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-
 sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
 echo -e "\n\n"
 
- 
+#Reatualização de repositorios e bibliotecas
+echo -e "Reatualização de repositorios e bibliotecas\n\n"
+sudo apt-get update -y  
+sudo apt-get dist-upgrade -y
+echo -e "\n\n"
