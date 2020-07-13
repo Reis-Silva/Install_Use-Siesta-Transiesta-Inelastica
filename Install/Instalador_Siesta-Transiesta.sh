@@ -21,7 +21,7 @@ sudo rm /var/lib/apt/lists/lock
 sudo rm /var/cache/apt/archives/lock
 sudo rm /var/lib/dpkg/lock
 sudo rm /var/lib/dpkg/lock-frontend
-echo -e "\n\n"
+echo "\n\n"
 
 #Ativando repositorio canoninal e adicionando repositorios
 echo "ativando repositorio canoninal e adicionando repositorios\n\n"
@@ -87,8 +87,11 @@ sudo dpkg -i python3-bpfcc_0.12.0-2_all.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/i/ieee-data/ieee-data_20150531.1_all.deb
 sudo dpkg -i ieee-data_20150531.1_all.deb
 python3 -m pip install netaddr
-wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/python-netaddr/python3-netaddr_0.7.19-1_all.deb
-sudo dpkg -i python3-netaddr_0.7.19-1_all.deb
+wget -c https://github.com/netaddr/netaddr/archive/master.zip
+unzip master.zip
+cd netaddr-master
+python3 setup.py install -y
+cd ..
 echo "\n\n"
 
 ###bcc
