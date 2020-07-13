@@ -1,5 +1,7 @@
 #!/bin/bash
 
+exec > teste.log
+
 Packages(){
 
 clear
@@ -209,7 +211,7 @@ wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-
 sudo dpkg -i libpython3-dev_3.8.2-3_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-dev_3.8.2-3_amd64.deb
 sudo dpkg -i python3-dev_3.8.2-3_amd64.deb
-sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
+sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev -y
 sudo apt-get install python3-matplotlib -y
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/f/fonts-font-awesome/fonts-font-awesome_5.0.10+really4.7.0~dfsg-1_all.deb
 sudo dpkg -i fonts-font-awesome_5.0.10+really4.7.0~dfsg-1_all.deb
@@ -307,7 +309,7 @@ echo "\n\n"
 
 ###meep-lam4
 echo "###meep-lam4\n\n"
-sudo apt-get install libblas-dev liblapack-dev libopenblas-dev -y
+sudo apt-get install libblas-dev liblapack-dev -y
 sudo apt-get install guile-3.0 -y
 sudo apt-get install mpich -y
 sudo apt-get install libhdf5-serial-dev -y
