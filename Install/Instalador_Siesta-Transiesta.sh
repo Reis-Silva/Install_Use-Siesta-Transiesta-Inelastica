@@ -37,10 +37,10 @@ echo "\n\n"
 # Instalando programas essenciais de instalação
 echo "Instalando programas essenciais de instalação\n\n"
 sudo apt-get install wget -y #instalando para baixar direito de sites
-wget http://mirrors.kernel.org/ubuntu/pool/main/w/wget/wget_1.20.3-1ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/w/wget/wget_1.20.3-1ubuntu1_amd64.deb
 sudo dpkg -i wget_1.20.3-1ubuntu1_amd64.deb
 
-wget http://mirrors.kernel.org/ubuntu/pool/main/p/python3-stdlib-extensions/python3-tk_3.8.2-1ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/python3-stdlib-extensions/python3-tk_3.8.2-1ubuntu1_amd64.deb
 sudo dpkg -i python3-tk_3.8.2-1ubuntu1_amd64.deb
 sudo apt-get install python3 python3-tk -y #instalando Python 3
 sudo apt install python3-pip -y #instalando pip-Python3/ Uso "sudo python3 -m pip"
@@ -147,8 +147,10 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libfabric/libfabric1
 sudo dpkg -i libfabric1_1.5.3-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/libhwloc5_1.11.9-1_amd64.deb
 sudo dpkg -i libhwloc5_1.11.9-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/libibverbs1_17.1-1_amd64.deb
-sudo dpkg -i libibverbs1_17.1-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/libibverbs1_28.0-1ubuntu1_amd64.deb
+sudo dpkg -i libibverbs1_28.0-1ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/libibverbs-dev_28.0-1ubuntu1_amd64.deb
+sudo dpkg -i libibverbs-dev_28.0-1ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/i/infinipath-psm/libpsm-infinipath1_3.3+20.604758e7-5_amd64.deb
 sudo dpkg -i libpsm-infinipath1_3.3+20.604758e7-5_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/ocl-icd/ocl-icd-libopencl1_2.2.11-1ubuntu1_amd64.deb
@@ -159,10 +161,6 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libfabric/libfabric1
 sudo dpkg -i libfabric1_1.5.3-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/libopenmpi2_2.1.1-8_amd64.deb
 sudo dpkg -i libopenmpi2_2.1.1-8_amd64.deb
-#wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/openmpi-common_2.1.1-8_all.deb
-#sudo dpkg -i openmpi-common_2.1.1-8_all.deb
-#wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/openmpi-bin_2.1.1-8_amd64.deb
-#sudo dpkg -i openmpi-bin_2.1.1-8_amd64.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_4.0.3-0ubuntu1_all.deb
 sudo dpkg -i openmpi-common_4.0.3-0ubuntu1_all.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-bin_4.0.3-0ubuntu1_amd64.deb
@@ -189,27 +187,27 @@ echo "\n\n"
 
 ##DEPEDENCIA libxc5
 echo "##DEPEDENCIA libxc5\n\n"
-wget http://mirrors.kernel.org/ubuntu/pool/universe/libx/libxc/libxc5_4.3.4-1build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libx/libxc/libxc5_4.3.4-1build1_amd64.deb
 sudo dpkg -i libxc5_4.3.4-1build1_amd64.deb
 echo "\n\n"
 
 ##DEPENDENCIA PYTHON3
 echo "##DEPENDENCIA PYTHON3\n\n"
-wget http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
 sudo dpkg -i libpython3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
-wget http://archive.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
 sudo dpkg -i python3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
-wget http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8_3.8.2-1ubuntu1.1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8_3.8.2-1ubuntu1.1_amd64.deb
 sudo dpkg -i python3.8_3.8.2-1ubuntu1.1_amd64.deb
-wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-minimal_3.8.2-3_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-minimal_3.8.2-3_amd64.deb
 sudo dpkg -i python3-minimal_3.8.2-3_amd64.deb
-wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-stdlib_3.8.2-3_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-stdlib_3.8.2-3_amd64.deb
 sudo dpkg -i libpython3-stdlib_3.8.2-3_amd64.deb
-wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3_3.8.2-3_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3_3.8.2-3_amd64.deb
 sudo dpkg -i python3_3.8.2-3_amd64.deb
-wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-dev_3.8.2-3_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-dev_3.8.2-3_amd64.deb
 sudo dpkg -i libpython3-dev_3.8.2-3_amd64.deb
-wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-dev_3.8.2-3_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-dev_3.8.2-3_amd64.deb
 sudo dpkg -i python3-dev_3.8.2-3_amd64.deb
 sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
 sudo apt-get install python3-matplotlib -y
@@ -279,10 +277,6 @@ echo "#PACOTE meep-lam4\n\n"
 echo "##DEPENDENCIAS\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libc/libctl/libctl7_4.4.0-3_amd64.deb
 sudo dpkg -i libctl7_4.4.0-3_amd64.deb
-#wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_4.0.3-0ubuntu1_all.deb
-#sudo dpkg -i openmpi-common_4.0.3-0ubuntu1_all.deb
-#wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-bin_4.0.3-0ubuntu1_amd64.deb
-#sudo dpkg -i openmpi-bin_4.0.3-0ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/liblam4_7.1.4-6build1_amd64.deb
 sudo dpkg -i liblam4_7.1.4-6build1_amd64.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/atlas/libatlas3-base_3.10.3-8ubuntu7_amd64.deb
