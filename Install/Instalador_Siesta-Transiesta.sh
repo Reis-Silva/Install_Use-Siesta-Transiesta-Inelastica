@@ -13,10 +13,10 @@ echo '\033[05;33m####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA -
 #sudo apt-get install -f        /reparar pacotes quebrados
 
 ###Atualização do repositorio e Atualização de pacotes para a versão mais recente####
-echo -e "###Atualização do repositorio e Atualização de pacotes para a versão mais recente####\n\n"
+echo "###Atualização do repositorio e Atualização de pacotes para a versão mais recente####\n\n"
 
 # Removendo processos anteriores
-echo -e "Removendo processos anteriores \n\n"
+echo "Removendo processos anteriores \n\n"
 sudo rm /var/lib/apt/lists/lock
 sudo rm /var/cache/apt/archives/lock
 sudo rm /var/lib/dpkg/lock
@@ -24,53 +24,55 @@ sudo rm /var/lib/dpkg/lock-frontend
 echo -e "\n\n"
 
 #Ativando repositorio canoninal e adicionando repositorios
-echo -e "ativando repositorio canoninal e adicionando repositorios\n\n"
+echo "ativando repositorio canoninal e adicionando repositorios\n\n"
 sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list -y
-echo -e "\n\n"
+echo "\n\n"
 
 #Atualização de repositorios e bibliotecas
-echo -e "Atualização de repositorios e bibliotecas\n\n"
+echo "Atualização de repositorios e bibliotecas\n\n"
 sudo apt-get update -y  
 sudo apt-get dist-upgrade -y
-echo -e "\n\n"
+echo "\n\n"
 
 # Instalando programas essenciais de instalação
-echo -e "Instalando programas essenciais de instalação\n\n"
+echo "Instalando programas essenciais de instalação\n\n"
 sudo apt-get install wget -y #instalando para baixar direito de sites
+wget http://mirrors.kernel.org/ubuntu/pool/main/w/wget/wget_1.20.3-1ubuntu1_amd64.deb
+sudo dpkg -i wget_1.20.3-1ubuntu1_amd64.deb
 sudo apt-get install python3 python3-tk -y #instalando Python 3
 sudo apt install python3-pip -y #instalando pip-Python3/ Uso "sudo python3 -m pip"
-echo -e "\n\n"
+echo "\n\n"
 
 #####PACOTES A SEREM INSTALADOS####
-echo -e "#####PACOTES A SEREM INSTALADOS####\n\n"
+echo "#####PACOTES A SEREM INSTALADOS####\n\n"
 
 #PACOTE gfortran
-echo -e "#PACOTE gfortran\n\n"
+echo "#PACOTE gfortran\n\n"
 sudo apt-get install fort77 -y #77
 sudo apt-get install gfortran -y #90/95
-echo -e "\n\n"
+echo "\n\n"
 
 #PACOTE GaussSum
-echo -e "#PACOTE GaussSum\n\n"
+echo "#PACOTE GaussSum\n\n"
 sudo apt-get install gnuplot -y #instalando GNUplot
 sudo apt-get install python3-numpy -y #instalando numpy
 sudo python3 -m pip install cclib --upgrade -y #instalando cclib
 sudo apt-get install gausssum -y
-echo -e "\n\n"
+echo "\n\n"
 
 #PACOTE m4
-echo -e "#PACOTE m4"
+echo "#PACOTE m4"
 wget -c http://ftp.us.debian.org/debian/pool/main/libs/libsigsegv/libsigsegv2_2.12-2_amd64.deb
 sudo dpkg -i libsigsegv2_2.12-2_amd64.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/main/m/m4/m4_1.4.18-4_amd64.deb
 sudo dpkg -i m4_1.4.18-4_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 #PACOTE bcc
-echo -e "#PACOTE bcc\n\n"
+echo "#PACOTE bcc\n\n"
 
 ##DEPENDENCIAS 
-echo -e "##DEPENDENCIAS\n\n"
+echo "##DEPENDENCIAS\n\n"
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/l/linux86/bin86_0.16.17-3.3_amd64.deb
 sudo dpkg -i bin86_0.16.17-3.3_amd64.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/l/linux86/elks-libc_0.16.17-3.3_all.deb
@@ -84,39 +86,39 @@ sudo dpkg -i ieee-data_20150531.1_all.deb
 python3 -m pip install netaddr
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/python-netaddr/python3-netaddr_0.7.19-1_all.deb
 sudo dpkg -i python3-netaddr_0.7.19-1_all.deb
-echo -e "\n\n"
+echo "\n\n"
 
 ###bcc
-echo -e "###bcc\n\n"
+echo "###bcc\n\n"
 sudo apt install bcc bpfcc-tools -y
 echo "deb [trusted=yes] https://repo.iovisor.org/apt/bionic bionic-nightly main" | sudo tee /etc/apt/sources.list.d/iovisor.list
 deb [trusted=yes] https://repo.iovisor.org/apt/bionic bionic-nightly main
-echo -e "\n\n"
+echo "\n\n"
 
 #PACOTE CCCC
-echo -e "#PACOTE CCCC\n\n"
+echo "#PACOTE CCCC\n\n"
 sudo apt-get install cccc -y
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/c/cccc/cccc_3.1.4-12_amd64.deb
 sudo dpkg -i cccc_3.1.4-12_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 #PACOTE fcc
-echo -e "#PACOTE fcc\n\n"
+echo "#PACOTE fcc\n\n"
 wget -c http://ubuntu.mirrors.tds.net/ubuntu/pool/universe/l/looptools/fcc_2.8-1build3_amd64.deb
 sudo dpkg -i fcc_2.8-1build3_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 #PACOTE abinit
-echo -e "#PACOTE abinit\n\n"
+echo "#PACOTE abinit\n\n"
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
 sudo dpkg -i abinit_8.10.2-2_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 #PACOTE GPAW e suas dependencias
-echo -e "#PACOTE GPAW e suas dependencias\n\n"
+echo "#PACOTE GPAW e suas dependencias\n\n"
 
 ##DEPENDENCIA libfftw3-dev
-echo -e "##DEPENDENCIA libfftw3-dev\n\n"
+echo "##DEPENDENCIA libfftw3-dev\n\n"
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-bin_3.3.8-2_amd64.deb
 sudo dpkg -i libfftw3-bin_3.3.8-2_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-single3_3.3.8-2_amd64.deb
@@ -124,15 +126,15 @@ sudo dpkg -i libfftw3-single3_3.3.8-2_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-long3_3.3.8-2_amd64.deb
 sudo dpkg -i libfftw3-long3_3.3.8-2_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-double3_3.3.8-2_amd64.deb
-sudo dpkg -i ibfftw3-double3_3.3.8-2_amd64.deb
+sudo dpkg -i libfftw3-double3_3.3.8-2_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-quad3_3.3.8-2_amd64.deb
 sudo dpkg -i libfftw3-quad3_3.3.8-2_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-dev_3.3.8-2_amd64.deb
 sudo dpkg -i libfftw3-dev_3.3.8-2_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 ##DEPENDENCIA openmpi-bin
-echo -e "##DEPENDENCIA openmpi-bin\n\n"
+echo "##DEPENDENCIA openmpi-bin\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/librdmacm1_17.1-1_amd64.deb
 sudo dpkg -i librdmacm1_17.1-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libfabric/libfabric1_1.5.3-1_amd64.deb
@@ -159,10 +161,10 @@ wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_
 sudo dpkg -i openmpi-common_4.0.3-0ubuntu1_all.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-bin_4.0.3-0ubuntu1_amd64.deb
 sudo dpkg -i openmpi-bin_4.0.3-0ubuntu1_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 ##DEPENDENCIA libopenmpi3
-echo -e "##DEPENDENCIA libopenmpi3\n\n"
+echo "##DEPENDENCIA libopenmpi3\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/libe/libevent/libevent-2.1-7_2.1.11-stable-1_amd64.deb
 sudo dpkg -i libevent-2.1-7_2.1.11-stable-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/libe/libevent/libevent-core-2.1-7_2.1.11-stable-1_amd64.deb
@@ -177,16 +179,16 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/libhwloc15_2.1.0+
 sudo dpkg -i libhwloc15_2.1.0+dfsg-4_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/libopenmpi3_4.0.3-0ubuntu1_amd64.deb
 sudo dpkg -i libopenmpi3_4.0.3-0ubuntu1_amd64.deb libopenmpi3_4.0.3-0ubuntu1_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 ##DEPEDENCIA libxc5
-echo -e "##DEPEDENCIA libxc5\n\n"
+echo "##DEPEDENCIA libxc5\n\n"
 wget http://mirrors.kernel.org/ubuntu/pool/universe/libx/libxc/libxc5_4.3.4-1build1_amd64.deb
 sudo dpkg -i libxc5_4.3.4-1build1_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 ##DEPENDENCIA PYTHON3
-echo -e "##DEPENDENCIA PYTHON3\n\n"
+echo "##DEPENDENCIA PYTHON3\n\n"
 wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-minimal_3.8.2-3_amd64.deb
 sudo dpkg -i python3-minimal_3.8.2-3_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-stdlib_3.8.2-3_amd64.deb
@@ -222,22 +224,22 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lbfgsb/liblbfgsb0_3.0+d
 sudo dpkg -i liblbfgsb0_3.0+dfsg.3-7build1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/s/scipy/python3-scipy_1.3.3-3build1_amd64.deb
 sudo dpkg -i python3-scipy_1.3.3-3build1_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 ###GPAW
-echo -e "###GPAW\n\n"
+echo "###GPAW\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gpaw-setups/gpaw-data_0.9.20000-2_all.deb
 sudo dpkg -i gpaw-data_0.9.20000-2_all.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gpaw/gpaw_20.1.0-2build1_amd64.deb
 sudo dpkg -i gpaw_20.1.0-2build1_amd64.deb
 python3 -m pip install --upgrade --user numpy scipy matplotlib -y
-echo -e "\n\n"
+echo "\n\n"
 
 #PACOTE quantum-espresso
-echo -e "#PACOTE quantum-espresso\n\n"
+echo "#PACOTE quantum-espresso\n\n"
 
 ##DEPENDENCIAS
-echo -e "##DEPENDENCIAS\n\n"
+echo "##DEPENDENCIAS\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/e/elpa/libelpa4_2016.05.001-6build1_amd64.deb
 sudo dpkg -i libelpa4_2016.05.001-6build1_amd64.deb
 wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-7/gcc-7-base_7.5.0-3ubuntu1~18.04_amd64.deb
@@ -248,21 +250,21 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mpi-defaults/mpi-defaul
 sudo dpkg -i mpi-default-bin_1.10_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/s/scalapack/libscalapack-openmpi2.0_2.0.2-4_amd64.deb
 sudo dpkg -i libscalapack-openmpi2.0_2.0.2-4_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 ###quantum-espresso
-echo -e "###quantum-espresso\n\n"
+echo "###quantum-espresso\n\n"
 wget -c http://ftp.us.debian.org/debian/pool/main/e/espresso/quantum-espresso_6.3-4_amd64.deb
 sudo dpkg -i quantum-espresso_6.3-4_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/e/espresso/quantum-espresso-data_6.3-4_all.deb
 sudo dpkg -i quantum-espresso-data_6.3-4_all.deb
-echo -e "\n\n"
+echo "\n\n"
 
 #PACOTE meep-lam4
-echo -e "#PACOTE meep-lam4\n\n"
+echo "#PACOTE meep-lam4\n\n"
 
 ##DEPENDENCIAS
-echo -e "##DEPENDENCIAS\n\n"
+echo "##DEPENDENCIAS\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libc/libctl/libctl7_4.4.0-3_amd64.deb
 sudo dpkg -i libctl7_4.4.0-3_amd64.deb
 #wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_4.0.3-0ubuntu1_all.deb
@@ -271,8 +273,8 @@ sudo dpkg -i libctl7_4.4.0-3_amd64.deb
 #sudo dpkg -i openmpi-bin_4.0.3-0ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/liblam4_7.1.4-6build1_amd64.deb
 sudo dpkg -i liblam4_7.1.4-6build1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/atlas/libatlas3-base_3.10.3-8ubuntu5_amd64.deb
-sudo dpkg -i libatlas3-base_3.10.3-8ubuntu5_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/atlas/libatlas3-base_3.10.3-8ubuntu7_amd64.deb
+sudo dpkg -i libatlas3-base_3.10.3-8ubuntu7_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgslcblas0_2.5+dfsg-6_amd64.deb
 sudo dpkg -i libgslcblas0_2.5+dfsg-6_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgsl23_2.5+dfsg-6_amd64.deb
@@ -295,10 +297,10 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-server_8.2p
 sudo dpkg -i openssh-server_8.2p1-4_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/lam-runtime_7.1.4-6build1_amd64.deb
 sudo dpkg -i lam-runtime_7.1.4-6build1_amd64.deb
-echo -e "\n\n"
+echo "\n\n"
 
 ###meep-lam4
-echo -e "###meep-lam4\n\n"
+echo "###meep-lam4\n\n"
 sudo apt-get install libblas-dev liblapack-dev libopenblas-dev -y
 sudo apt-get install guile-3.0 -y
 sudo apt-get install mpich -y
@@ -312,10 +314,10 @@ sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
 echo -e "\n\n"
 
 #Reatualização de repositorios e bibliotecas
-echo -e "Reatualização de repositorios e bibliotecas\n\n"
+echo "Reatualização de repositorios e bibliotecas\n\n"
 sudo apt-get update -y  
 sudo apt-get dist-upgrade -y
-echo -e "\n\n"
+echo "\n\n"
 
 cd ..
 }
@@ -327,7 +329,7 @@ sleep 3
 while :
 do
     clear
-    echo -e '\033[05;37m####                              ESCOLHA A OPÇÃO####\033[00;00m
+    echo -e '\033[05;37m####                       ESCOLHA A OPÇÃO####\033[00;00m
     \n\033[01;36m 1 - INSTALAR OS PACOTES INICIAIS PARA SIESTA/TRANSIESTA\033[00;00m
     \n\033[01;32m 2 - INSTALAR SIESTA/TRANSIESTA\033[00;00m
     \n\033[01;31m 3 - EXIT\033[00;00m
