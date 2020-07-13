@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sudo su
-
 Packages(){
 
 clear
@@ -91,7 +89,7 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/i/ieee-data/ieee-data_2015053
 sudo dpkg -i ieee-data_20150531.1_all.deb
 python3 -m pip install netaddr
 wget -c https://github.com/netaddr/netaddr/archive/master.zip
-unzip -o master.zip
+unzip -n master.zip
 cd netaddr-master
 python3 setup.py install -y
 cd ..
@@ -319,8 +317,6 @@ sudo apt-get install libatlas-base-dev -y
 sudo apt install libatlas-ecmwf-utils -y
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
 sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
-wget http://mirrors.kernel.org/ubuntu/pool/universe/m/meep/meep_1.12.0-2build2_amd64.deb
-sudo dpkg -i meep_1.12.0-2build2_amd64.deb
 echo "\n\n"
 
 #Reatualização de repositorios e bibliotecas
@@ -333,13 +329,13 @@ cd ..
 }
 
 ####INICIANDO SISTEMA####
-echo  '\033[05;37m####                              INICIANDO SISTEMA####\033[00;00m\n\n'
+echo  '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
 sleep 3
 
 while :
 do
-    clear
-    echo -e '\033[05;37m####                       ESCOLHA A OPÇÃO####\033[00;00m
+    
+    echo '\033[05;37m                     ####ESCOLHA A OPÇÃO####\033[00;00m
     \n\033[01;36m 1 - INSTALAR OS PACOTES INICIAIS PARA SIESTA/TRANSIESTA\033[00;00m
     \n\033[01;32m 2 - INSTALAR SIESTA/TRANSIESTA\033[00;00m
     \n\033[01;31m 3 - EXIT\033[00;00m
