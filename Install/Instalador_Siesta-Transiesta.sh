@@ -151,10 +151,14 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libfabric/libfabric1
 sudo dpkg -i libfabric1_1.5.3-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/libopenmpi2_2.1.1-8_amd64.deb
 sudo dpkg -i libopenmpi2_2.1.1-8_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/openmpi-common_2.1.1-8_all.deb
-sudo dpkg -i openmpi-common_2.1.1-8_all.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/openmpi-bin_2.1.1-8_amd64.deb
-sudo dpkg -i openmpi-bin_2.1.1-8_amd64.deb
+#wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/openmpi-common_2.1.1-8_all.deb
+#sudo dpkg -i openmpi-common_2.1.1-8_all.deb
+#wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/openmpi-bin_2.1.1-8_amd64.deb
+#sudo dpkg -i openmpi-bin_2.1.1-8_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_4.0.3-0ubuntu1_all.deb
+sudo dpkg -i openmpi-common_4.0.3-0ubuntu1_all.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-bin_4.0.3-0ubuntu1_amd64.deb
+sudo dpkg -i openmpi-bin_4.0.3-0ubuntu1_amd64.deb
 echo -e "\n\n"
 
 ##DEPENDENCIA libopenmpi3
@@ -261,10 +265,10 @@ echo -e "#PACOTE meep-lam4\n\n"
 echo -e "##DEPENDENCIAS\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libc/libctl/libctl7_4.4.0-3_amd64.deb
 sudo dpkg -i libctl7_4.4.0-3_amd64.deb
-wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_4.0.3-0ubuntu1_all.deb
-sudo dpkg -i openmpi-common_4.0.3-0ubuntu1_all.deb
-wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-bin_4.0.3-0ubuntu1_amd64.deb
-sudo dpkg -i openmpi-bin_4.0.3-0ubuntu1_amd64.deb
+#wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_4.0.3-0ubuntu1_all.deb
+#sudo dpkg -i openmpi-common_4.0.3-0ubuntu1_all.deb
+#wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-bin_4.0.3-0ubuntu1_amd64.deb
+#sudo dpkg -i openmpi-bin_4.0.3-0ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/liblam4_7.1.4-6build1_amd64.deb
 sudo dpkg -i liblam4_7.1.4-6build1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/atlas/libatlas3-base_3.10.3-8ubuntu5_amd64.deb
