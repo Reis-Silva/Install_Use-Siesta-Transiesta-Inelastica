@@ -1,9 +1,10 @@
 #!/bin/bash
 
-function Package{
+Packages(){
 
+clear
 ####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####
-echo -e '\033[05;33m####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####\033[00;33m'
+echo '\033[05;33m####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####\033[00;00m'
 
 #### COMANDOS GERAIS #### 
 
@@ -305,34 +306,35 @@ cd ..
 }
 
 ####INICIANDO SISTEMA####
-echo -e '\033[05;31m####INICIANDO SISTEMA####\033[00;31m\n\n'
-sleep 2
+echo  '\033[05;37m####                              INICIANDO SISTEMA####\033[00;00m\n\n'
+sleep 3
 
 while :
 do
-    echo -e '\033[05;37m####ESCOLHA A OPÇÃO####\033[00;37m
-    \n\033[01;36m 1 - INSTALAR OS PACOTES INICIAIS PARA SIESTA/TRANSIESTA\033[00;36m
-    \n\033[01;32m 2 - INSTALAR SIESTA/TRANSIESTA\033[00;32m
-    \n\033[01;31m 3 - EXIT[00;31m
+    clear
+    echo -e '\033[05;37m####                              ESCOLHA A OPÇÃO####\033[00;00m
+    \n\033[01;36m 1 - INSTALAR OS PACOTES INICIAIS PARA SIESTA/TRANSIESTA\033[00;00m
+    \n\033[01;32m 2 - INSTALAR SIESTA/TRANSIESTA\033[00;00m
+    \n\033[01;31m 3 - EXIT\033[00;00m
     \n\nDIGITE A NUMERAÇÃO: '
 
     read input
     case $input in
 
     1) if [ -e "DownloadPackage" ]; then
-         echo -e 'O DIRETÓRIO \033[32mDownloadPackage"\033[00m EXISTE
-        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"DownloadPackage"\033[00;33m\n\n'
+         echo 'O DIRETÓRIO \033[32mDownloadPackage"\033[00m EXISTE
+        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"DownloadPackage"\033[00;00m\n\n'
         sleep 2
         cd DownloadPackage
-        Package
+        Packages
 
         else
-         echo -e 'O DIRETÓRIO \033[32m"DownloadPackage"\033[00m NÃO EXISTE
-        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"DownloadPackage"\033[00;33m\n\n'
+         echo 'O DIRETÓRIO \033[32m"DownloadPackage"\033[00m NÃO EXISTE
+        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"DownloadPackage"\033[00;00m\n\n'
         mkdir DownloadPackage
         cd DownloadPackage
         sleep 2
-        Package
+        Packages
         fi ;; 
     2) ;;
 
@@ -341,3 +343,4 @@ do
     *) echo "Opcao Invalida!" ;; 
     esac
 done
+
