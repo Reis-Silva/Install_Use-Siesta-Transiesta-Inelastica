@@ -1,6 +1,6 @@
 #!/bin/bash
 
-exec > teste.log
+sudo su
 
 Packages(){
 
@@ -38,6 +38,7 @@ echo "\n\n"
 
 # Instalando programas essenciais de instalação
 echo "Instalando programas essenciais de instalação\n\n"
+sudo apt install unzip -y
 sudo apt-get install wget -y #instalando para baixar direito de sites
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/w/wget/wget_1.20.3-1ubuntu1_amd64.deb
 sudo dpkg -i wget_1.20.3-1ubuntu1_amd64.deb
@@ -90,7 +91,7 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/i/ieee-data/ieee-data_2015053
 sudo dpkg -i ieee-data_20150531.1_all.deb
 python3 -m pip install netaddr
 wget -c https://github.com/netaddr/netaddr/archive/master.zip
-unzip master.zip
+unzip -o master.zip
 cd netaddr-master
 python3 setup.py install -y
 cd ..
@@ -314,12 +315,13 @@ sudo apt-get install guile-3.0 -y
 sudo apt-get install mpich -y
 sudo apt-get install libhdf5-serial-dev -y
 sudo apt-get install hdf5-tools -y
-sudo apt-get install meep h5utils -y
 sudo apt-get install libatlas-base-dev -y
 sudo apt install libatlas-ecmwf-utils -y
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
 sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
-echo -e "\n\n"
+wget http://mirrors.kernel.org/ubuntu/pool/universe/m/meep/meep_1.12.0-2build2_amd64.deb
+sudo dpkg -i meep_1.12.0-2build2_amd64.deb
+echo "\n\n"
 
 #Reatualização de repositorios e bibliotecas
 echo "Reatualização de repositorios e bibliotecas\n\n"
