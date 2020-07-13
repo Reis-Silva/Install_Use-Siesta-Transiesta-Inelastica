@@ -39,6 +39,9 @@ echo "Instalando programas essenciais de instalação\n\n"
 sudo apt-get install wget -y #instalando para baixar direito de sites
 wget http://mirrors.kernel.org/ubuntu/pool/main/w/wget/wget_1.20.3-1ubuntu1_amd64.deb
 sudo dpkg -i wget_1.20.3-1ubuntu1_amd64.deb
+
+wget http://mirrors.kernel.org/ubuntu/pool/main/p/python3-stdlib-extensions/python3-tk_3.8.2-1ubuntu1_amd64.deb
+sudo dpkg -i python3-tk_3.8.2-1ubuntu1_amd64.deb
 sudo apt-get install python3 python3-tk -y #instalando Python 3
 sudo apt install python3-pip -y #instalando pip-Python3/ Uso "sudo python3 -m pip"
 echo "\n\n"
@@ -189,6 +192,12 @@ echo "\n\n"
 
 ##DEPENDENCIA PYTHON3
 echo "##DEPENDENCIA PYTHON3\n\n"
+wget http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
+sudo dpkg -i libpython3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
+wget http://archive.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
+sudo dpkg -i python3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
+wget http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8_3.8.2-1ubuntu1.1_amd64.deb
+sudo dpkg -i python3.8_3.8.2-1ubuntu1.1_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-minimal_3.8.2-3_amd64.deb
 sudo dpkg -i python3-minimal_3.8.2-3_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-stdlib_3.8.2-3_amd64.deb
@@ -285,8 +294,8 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec0_1.0.4
 sudo dpkg -i libaec0_1.0.4-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libsz2_1.0.4-1_amd64.deb
 sudo dpkg -i libsz2_1.0.4-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-103_1.10.4+repack-10_amd64.deb
-sudo dpkg -i libhdf5-103_1.10.4+repack-10_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
+sudo dpkg -i libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/meep-lam4/libmeep-lam4-12_1.7.0-3_amd64.deb
 sudo dpkg -i libmeep-lam4-12_1.7.0-3_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-client_8.2p1-4_amd64.deb
