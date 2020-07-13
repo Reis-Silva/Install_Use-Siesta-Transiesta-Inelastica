@@ -117,18 +117,18 @@ echo -e "#PACOTE GPAW e suas dependencias\n\n"
 
 ##DEPENDENCIA libfftw3-dev
 echo -e "##DEPENDENCIA libfftw3-dev\n\n"
-wget -c http://mirrors.kernel.org/ubuntu/pool/main/f/fftw3/libfftw3-bin_3.3.7-1_amd64.deb
-sudo dpkg -i libfftw3-bin_3.3.7-1_amd64.deb
-wget -c http://archive.ubuntu.com/ubuntu/pool/main/f/fftw3/libfftw3-single3_3.3.7-1_amd64.deb
-sudo dpkg -i libfftw3-single3_3.3.7-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/main/f/fftw3/libfftw3-long3_3.3.7-1_amd64.deb
-sudo dpkg -i libfftw3-long3_3.3.7-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/main/f/fftw3/libfftw3-double3_3.3.7-1_amd64.deb
-sudo dpkg -i libfftw3-double3_3.3.7-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/main/f/fftw3/libfftw3-quad3_3.3.7-1_amd64.deb
-sudo dpkg -i libfftw3-quad3_3.3.7-1_amd64.deb
-wget -c http://archive.ubuntu.com/ubuntu/pool/main/f/fftw3/libfftw3-dev_3.3.7-1_amd64.deb
-sudo dpkg -i libfftw3-dev_3.3.7-1_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-bin_3.3.8-2_amd64.deb
+sudo dpkg -i libfftw3-bin_3.3.8-2_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-single3_3.3.8-2_amd64.deb
+sudo dpkg -i libfftw3-single3_3.3.8-2_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-long3_3.3.8-2_amd64.deb
+sudo dpkg -i libfftw3-long3_3.3.8-2_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-double3_3.3.8-2_amd64.deb
+sudo dpkg -i ibfftw3-double3_3.3.8-2_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-quad3_3.3.8-2_amd64.deb
+sudo dpkg -i libfftw3-quad3_3.3.8-2_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-dev_3.3.8-2_amd64.deb
+sudo dpkg -i libfftw3-dev_3.3.8-2_amd64.deb
 echo -e "\n\n"
 
 ##DEPENDENCIA openmpi-bin
