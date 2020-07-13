@@ -179,10 +179,21 @@ echo -e "\n\n"
 echo -e "##DEPEDENCIA libxc5\n\n"
 wget http://mirrors.kernel.org/ubuntu/pool/universe/libx/libxc/libxc5_4.3.4-1build1_amd64.deb
 sudo dpkg -i libxc5_4.3.4-1build1_amd64.deb
+echo -e "\n\n"
 
 ##DEPENDENCIA PYTHON3
 echo -e "##DEPENDENCIA PYTHON3\n\n"
-sudo apt install python3-dev libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
+wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-minimal_3.8.2-3_amd64.deb
+sudo dpkg -i python3-minimal_3.8.2-3_amd64.deb
+wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-stdlib_3.8.2-3_amd64.deb
+sudo dpkg -i libpython3-stdlib_3.8.2-3_amd64.deb
+wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3_3.8.2-3_amd64.deb
+sudo dpkg -i python3_3.8.2-3_amd64.deb
+wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-dev_3.8.2-3_amd64.deb
+sudo dpkg -i libpython3-dev_3.8.2-3_amd64.deb
+wget http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-dev_3.8.2-3_amd64.deb
+sudo dpkg -i python3-dev_3.8.2-3_amd64.deb
+sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
 sudo apt-get install python3-matplotlib -y
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/f/fonts-font-awesome/fonts-font-awesome_5.0.10+really4.7.0~dfsg-1_all.deb
 sudo dpkg -i fonts-font-awesome_5.0.10+really4.7.0~dfsg-1_all.deb
@@ -292,7 +303,7 @@ sudo apt-get install hdf5-tools -y
 sudo apt-get install meep h5utils -y
 sudo apt-get install libatlas-base-dev -y
 sudo apt install libatlas-ecmwf-utils -y
-wget -nc -i http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
 sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
 echo -e "\n\n"
 
