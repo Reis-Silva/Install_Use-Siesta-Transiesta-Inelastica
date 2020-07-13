@@ -3,7 +3,8 @@
 function Package{
 
 ####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####
-echo -e "\033[05;33m####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####\033[00;33m"
+echo -e '\033[05;33m####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####\033[00;33m'
+
 #### COMANDOS GERAIS #### 
 
 #sh InstaladorSiesta.sh     /Iniciar a instalação completa do Siesta/Transiesta
@@ -324,6 +325,7 @@ do
         sleep 2
         cd DownloadPackage
         Package
+
         else
          echo -e 'O DIRETÓRIO \033[32m"DownloadPackage"\033[00m NÃO EXISTE
         \n\n CRIANDO O DIRETÓRIO: \033[05;33m"DownloadPackage"\033[00;33m\n\n'
