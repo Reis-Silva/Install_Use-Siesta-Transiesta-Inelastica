@@ -547,6 +547,49 @@ echo "\n\n"
 cd ..
 }
 
+
+SiestaTransiesta(){
+
+
+    if [ -e "PackagesSIETRAN" ]; then
+         echo 'O DIRETÓRIO \033[32mPackagesSIETRAN"\033[00m EXISTE
+        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
+        sleep 2
+        cd PackagesSIETRAN
+        InstalacaoSiestaTransiesta
+
+        else
+         echo 'O DIRETÓRIO \033[32m"PackagesSIETRAN"\033[00m NÃO EXISTE
+        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
+        mkdir PackagesSIETRAN
+        cd PackagesSIETRAN
+        sleep 2
+        InstalacaoSiestaTransiesta
+
+    fi
+
+
+
+    cd 
+    
+
+
+}
+
+InstalacaoSiestaTransiesta(){
+
+    wget -c https://launchpad.net/siesta/4.1/4.1-b4/+download/siesta-4.1-b4.tar.gz
+    tar -vzxf siesta-4.1-b4.tar.gz
+    cd Siesta-4.1-b4/Docs
+    wget -c https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-1.8.21/src/hdf5-1.8.21.tar.bz2
+    wget -c https://distfiles.macports.org/netcdf/netcdf-c-4.6.1.tar.gz
+    wget -c https://distfiles.macports.org/netcdf-fortran/netcdf-fortran-4.4.4.tar.gz
+    wget -c https://pt.osdn.net/frs/g_redir.php?m=kent&f=libpng%2Fzlib%2F1.2.11%2Fzlib-1.2.11.tar.gz
+    ./install_netcdf4.bash
+
+}
+
+
 ####INICIANDO SISTEMA####
 echo  '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
 sleep 3
