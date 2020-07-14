@@ -127,9 +127,9 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/i/ieee-data/ieee-data_2015053
 sudo dpkg -i ieee-data_20150531.1_all.deb
 python3 -m pip install netaddr
 wget -c https://github.com/netaddr/netaddr/archive/master.zip
-unzip -o master.zip
+sudo unzip -o master.zip
 cd netaddr-master
-python3 setup.py install -y
+sudo python3 setup.py install
 cd ..
 echo "\n\n"
 
