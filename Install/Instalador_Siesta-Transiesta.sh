@@ -100,6 +100,10 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-9/gfortran-9_9.3.0-10ub
 sudo dpkg -i gfortran-9_9.3.0-10ubuntu2_amd64.deb
 wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-defaults/gfortran_9.3.0-1ubuntu2_amd64.deb
 sudo dpkg -i gfortran_9.3.0-1ubuntu2_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
+sudo dpkg -i gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
+sudo dpkg -i libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
 echo "\n\n"
 
 #PACOTE m4
@@ -151,21 +155,12 @@ wget -c http://ubuntu.mirrors.tds.net/ubuntu/pool/universe/l/looptools/fcc_2.8-1
 sudo dpkg -i fcc_2.8-1build3_amd64.deb
 echo "\n\n"
 
-#PACOTE abinit
-echo "#PACOTE abinit\n\n"
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
-sudo dpkg -i abinit-data_8.10.2-2_all.deb
-wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
-sudo dpkg -i abinit_8.10.2-2_amd64.deb
-echo "\n\n"
-
 #PACOTE GPAW e suas dependencias
 echo "#PACOTE GPAW e suas dependencias\n\n"
 
 ##DEPENDENCIA libfftw3-dev
 echo "##DEPENDENCIA libfftw3-dev\n\n"
-wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-bin_3.3.8-2_amd64.deb
-sudo dpkg -i libfftw3-bin_3.3.8-2_amd64.deb
+
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-single3_3.3.8-2_amd64.deb
 sudo dpkg -i libfftw3-single3_3.3.8-2_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-long3_3.3.8-2_amd64.deb
@@ -174,26 +169,31 @@ wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-double3_3.3.8
 sudo dpkg -i libfftw3-double3_3.3.8-2_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-quad3_3.3.8-2_amd64.deb
 sudo dpkg -i libfftw3-quad3_3.3.8-2_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-bin_3.3.8-2_amd64.deb
+sudo dpkg -i libfftw3-bin_3.3.8-2_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-dev_3.3.8-2_amd64.deb
 sudo dpkg -i libfftw3-dev_3.3.8-2_amd64.deb
 echo "\n\n"
 
-##DEPENDENCIA openmpi-bin
-echo "##DEPENDENCIA openmpi-bin\n\n"
-wget -c http://archive.ubuntu.com/ubuntu/pool/main/r/rdma-core/ibverbs-providers_28.0-1ubuntu1_amd64.deb
-sudo dpkg -i ibverbs-providers_28.0-1ubuntu1_amd64.deb
+
+##DEPENDENCIA libopenmpi3
+echo "##DEPENDENCIA libopenmpi3\n\n"
 wget -c http://archive.ubuntu.com/ubuntu/pool/main/libn/libnl3/libnl-3-dev_3.4.0-1_amd64.deb
 sudo dpkg -i libnl-3-dev_3.4.0-1_amd64.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/main/libn/libnl3/libnl-route-3-dev_3.4.0-1_amd64.deb
 sudo dpkg -i libnl-route-3-dev_3.4.0-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/librdmacm1_17.1-1_amd64.deb
-sudo dpkg -i librdmacm1_17.1-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libp/libpsm2/libpsm2-2_11.2.86-1_amd64.deb
+sudo dpkg -i libpsm2-2_11.2.86-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libfabric/libfabric1_1.5.3-1_amd64.deb
 sudo dpkg -i libfabric1_1.5.3-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/libhwloc5_1.11.9-1_amd64.deb
 sudo dpkg -i libhwloc5_1.11.9-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/libibverbs1_28.0-1ubuntu1_amd64.deb
 sudo dpkg -i libibverbs1_28.0-1ubuntu1_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/r/rdma-core/ibverbs-providers_28.0-1ubuntu1_amd64.deb
+sudo dpkg -i ibverbs-providers_28.0-1ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/librdmacm1_17.1-1_amd64.deb
+sudo dpkg -i librdmacm1_17.1-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/libibverbs-dev_28.0-1ubuntu1_amd64.deb
 sudo dpkg -i libibverbs-dev_28.0-1ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/i/infinipath-psm/libpsm-infinipath1_3.3+20.604758e7-5_amd64.deb
@@ -202,18 +202,13 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/ocl-icd/ocl-icd-libopencl1_
 sudo dpkg -i ocl-icd-libopencl1_2.2.11-1ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/libhwloc-plugins_1.11.9-1_amd64.deb
 sudo dpkg -i libhwloc-plugins_1.11.9-1_amd64.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/n/numactl/libnuma1_2.0.12-1+b1_amd64.deb
+sudo dpkg -i libnuma1_2.0.12-1+b1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libp/libpsm2/libpsm2-2_11.2.86-1_amd64.deb
+sudo dpkg -i libpsm2-2_11.2.86-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libfabric/libfabric1_1.5.3-1_amd64.deb
 sudo dpkg -i libfabric1_1.5.3-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/libopenmpi2_2.1.1-8_amd64.deb
-sudo dpkg -i libopenmpi2_2.1.1-8_amd64.deb
-wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_4.0.3-0ubuntu1_all.deb
-sudo dpkg -i openmpi-common_4.0.3-0ubuntu1_all.deb
-wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-bin_4.0.3-0ubuntu1_amd64.deb
-sudo dpkg -i openmpi-bin_4.0.3-0ubuntu1_amd64.deb
-echo "\n\n"
 
-##DEPENDENCIA libopenmpi3
-echo "##DEPENDENCIA libopenmpi3\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/libe/libevent/libevent-2.1-7_2.1.11-stable-1_amd64.deb
 sudo dpkg -i libevent-2.1-7_2.1.11-stable-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/libe/libevent/libevent-core-2.1-7_2.1.11-stable-1_amd64.deb
@@ -222,13 +217,23 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/libe/libevent/libevent-pthrea
 sudo dpkg -i libevent-pthreads-2.1-7_2.1.11-stable-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/pmix/libpmix2_3.1.5-1_amd64.deb
 sudo dpkg -i libpmix2_3.1.5-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libp/libpsm2/libpsm2-2_11.2.86-1_amd64.deb
-sudo dpkg -i libpsm2-2_11.2.86-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/libhwloc15_2.1.0+dfsg-4_amd64.deb
 sudo dpkg -i libhwloc15_2.1.0+dfsg-4_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/libopenmpi3_4.0.3-0ubuntu1_amd64.deb
 sudo dpkg -i libopenmpi3_4.0.3-0ubuntu1_amd64.deb libopenmpi3_4.0.3-0ubuntu1_amd64.deb
 echo "\n\n"
+
+##DEPENDENCIA openmpi-bin
+echo "##DEPENDENCIA openmpi-bin\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/libopenmpi2_2.1.1-8_amd64.deb
+sudo dpkg -i libopenmpi2_2.1.1-8_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_4.0.3-0ubuntu1_all.deb
+sudo dpkg -i openmpi-common_4.0.3-0ubuntu1_all.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-bin_4.0.3-0ubuntu1_amd64.deb
+sudo dpkg -i openmpi-bin_4.0.3-0ubuntu1_amd64.deb
+echo "\n\n"
+
+
 
 ##DEPEDENCIA libxc5
 echo "##DEPEDENCIA libxc5\n\n"
@@ -236,6 +241,7 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libx/libxc/libxc5_4.3.4-1
 sudo dpkg -i libxc5_4.3.4-1build1_amd64.deb
 echo "\n\n"
 
+##DEPEDENCIA python3-numpy
 echo "##DEPENDENCIA python3-numpy\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/l/lapack/libblas3_3.9.0-1build1_amd64.deb
 sudo dpkg -i libblas3_3.9.0-1build1_amd64.deb
@@ -245,6 +251,7 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/n/numpy/python3-numpy_1.17.4-
 sudo dpkg -i python3-numpy_1.17.4-5ubuntu3_amd64.deb #instalando numpy
 echo "\n\n"
 
+##DEPEDENCIA matplotlib
 echo "##DEPENDENCIA matplotlib\n\n"
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lyx/fonts-lyx_2.3.4.2-2_all.deb
 sudo dpkg -i fonts-lyx_2.3.4.2-2_all.deb
@@ -307,21 +314,44 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/t/twitter-bootstrap3/libj
 sudo dpkg -i libjs-bootstrap_3.4.1+dfsg-1_all.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/s/spglib/python3-spglib_1.14.1-5build2_amd64.deb
 sudo dpkg -i python3-spglib_1.14.1-5build2_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-ase/python3-ase_3.19.0-1_all.deb
-sudo dpkg -i python3-ase_3.19.0-1_all.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/c/cftime/python3-cftime_1.1.0+ds-1build1_amd64.deb
 sudo dpkg -i python3-cftime_1.1.0+ds-1build1_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
+sudo dpkg -i libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/n/netcdf/libnetcdf15_4.7.3-1_amd64.deb
 sudo dpkg -i libnetcdf15_4.7.3-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/n/netcdf4-python/python3-netcdf4_1.5.3-1build2_amd64.deb
 sudo dpkg -i python3-netcdf4_1.5.3-1build2_amd64.deb
-sudo apt-get install libnetcdf-dev libnetcdff-dev -y
+wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
+sudo dpkg -i libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-11_1.8.16+docs-4ubuntu1.1_amd64.deb
+sudo dpkg -i libhdf5-cpp-11_1.8.16+docs-4ubuntu1.1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
+sudo dpkg -i libhdf5-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/n/netcdf/libnetcdf11_4.4.0-2_amd64.deb
+sudo dpkg -i libnetcdf11_4.4.0-2_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/n/nettle/libnettle6_3.2-1ubuntu0.16.04.1_amd64.deb
+sudo dpkg -i libnettle6_3.2-1ubuntu0.16.04.1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/c/curl/libcurl3-gnutls_7.47.0-1ubuntu2.15_amd64.deb
+sudo dpkg -i libcurl3-gnutls_7.47.0-1ubuntu2.15_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/c/curl/libcurl4-gnutls-dev_7.47.0-1ubuntu2.15_amd64.deb
+sudo dpkg -i libcurl4-gnutls-dev_7.47.0-1ubuntu2.15_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/n/netcdf/libnetcdf-dev_4.4.0-2_amd64.deb
+sudo dpkg -i libnetcdf-dev_4.4.0-2_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/n/netcdf/libnetcdf15_4.7.3-1_amd64.deb
+sudo dpkg -i libnetcdf15_4.7.3-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/n/netcdf-fortran/libnetcdff7_4.5.2+ds-1build2_amd64.deb
+sudo dpkg -i libnetcdff7_4.5.2+ds-1build2_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/n/netcdf-fortran/libnetcdff-dev_4.5.2+ds-1build2_amd64.deb
+sudo dpkg -i libnetcdff-dev_4.5.2+ds-1build2_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/python-decorator/python3-decorator_4.4.2-0ubuntu1_all.deb
 sudo dpkg -i python3-decorator_4.4.2-0ubuntu1_all.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lbfgsb/liblbfgsb0_3.0+dfsg.3-7build1_amd64.deb
 sudo dpkg -i liblbfgsb0_3.0+dfsg.3-7build1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/s/scipy/python3-scipy_1.3.3-3build1_amd64.deb
 sudo dpkg -i python3-scipy_1.3.3-3build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-ase/python3-ase_3.19.0-1_all.deb
+sudo dpkg -i python3-ase_3.19.0-1_all.deb
 echo "\n\n"
 
 ###GPAW
@@ -330,6 +360,14 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gpaw-setups/gpaw-data_0
 sudo dpkg -i gpaw-data_0.9.20000-2_all.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gpaw/gpaw_20.1.0-2build1_amd64.deb
 sudo dpkg -i gpaw_20.1.0-2build1_amd64.deb
+echo "\n\n"
+
+#PACOTE abinit
+echo "#PACOTE abinit\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
+sudo dpkg -i abinit-data_8.10.2-2_all.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
+sudo dpkg -i abinit_8.10.2-2_amd64.deb
 echo "\n\n"
 
 #PACOTE quantum-espresso
@@ -364,7 +402,7 @@ echo "#PACOTE meep-lam4\n\n"
 echo "##DEPENDENCIAS\n\n"
 wget -c http://security.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
 sudo dpkg -i libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
-http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
 sudo dpkg -i libjpeg8-dev_8c-2ubuntu8_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg-dev_8c-2ubuntu8_amd64.deb
 sudo dpkg -i libjpeg-dev_8c-2ubuntu8_amd64.deb
@@ -388,8 +426,6 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgsl23_2.5+dfsg-6
 sudo dpkg -i libgsl23_2.5+dfsg-6_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/harminv/libharminv3_1.4.1-2_amd64.deb
 sudo dpkg -i libharminv3_1.4.1-2_amd64.deb
-wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
-sudo dpkg -i libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
 sudo dpkg -i libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/meep-lam4/libmeep-lam4-12_1.7.0-3_amd64.deb
