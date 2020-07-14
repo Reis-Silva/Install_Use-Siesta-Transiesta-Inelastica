@@ -35,33 +35,71 @@ sudo apt-get dist-upgrade -y
 echo "\n\n"
 
 # Instalando programas essenciais de instalação
-echo "Instalando programas essenciais de instalação\n\n"
+echo "#Instalando programas essenciais de instalação\n\n"
+
+echo "##unzip\n\n"
 sudo apt install unzip -y
+echo "\n\n"
+
+echo "##wget\n\n"
 sudo apt-get install wget -y #instalando para baixar direito de sites
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/w/wget/wget_1.20.3-1ubuntu1_amd64.deb
 sudo dpkg -i wget_1.20.3-1ubuntu1_amd64.deb
-
-wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/python3-stdlib-extensions/python3-tk_3.8.2-1ubuntu1_amd64.deb
-sudo dpkg -i python3-tk_3.8.2-1ubuntu1_amd64.deb
-sudo apt-get install python3 python3-tk -y #instalando Python 3
-sudo apt install python3-pip -y #instalando pip-Python3/ Uso "sudo python3 -m pip"
 echo "\n\n"
 
-#####PACOTES A SEREM INSTALADOS####
+echo "##python3-tk\n\n"
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/t/tcl8.6/libtcl8.6_8.6.10+dfsg-1_amd64.deb
+sudo dpkg -i libtcl8.6_8.6.10+dfsg-1_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/t/tk8.6/libtk8.6_8.6.10-1_amd64.deb
+sudo dpkg -i libtk8.6_8.6.10-1_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/b/blt/tk8.6-blt2.5_2.5.3+dfsg-4_amd64.deb
+sudo dpkg -i tk8.6-blt2.5_2.5.3+dfsg-4_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/b/blt/blt_2.5.3+dfsg-4_amd64.deb
+sudo dpkg -i blt_2.5.3+dfsg-4_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/python3-stdlib-extensions/python3-tk_3.8.2-1ubuntu1_amd64.deb
+sudo dpkg -i python3-tk_3.8.2-1ubuntu1_amd64.deb
+echo "\n\n"
+
+echo "##python3\n\n"
+sudo apt-get install python3 -y #instalando Python 3
+echo "\n\n"
+
+echo "##python3-pip\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/python3-stdlib-extensions/python3-distutils_3.8.2-1ubuntu1_all.deb
+sudo dpkg -i python3-distutils_3.8.2-1ubuntu1_all.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/s/setuptools/python3-pkg-resources_46.1.3-1_all.deb
+sudo dpkg -i python3-pkg-resources_46.1.3-1_all.deb
+wget -c http://ftp.us.debian.org/debian/pool/main/s/setuptools/python3-setuptools_46.1.3-1_all.deb
+sudo dpkg -i python3-setuptools_46.1.3-1_all.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/w/wheel/python3-wheel_0.34.2-1_all.deb
+sudo dpkg -i python3-wheel_0.34.2-1_all.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/universe/p/python-pip/python-pip-whl_20.0.2-5ubuntu1_all.deb
+sudo dpkg -i python-pip-whl_20.0.2-5ubuntu1_all.deb
+wget -c http://ports.ubuntu.com/pool/universe/p/python-pip/python3-pip_20.0.2-5ubuntu1_all.deb
+sudo dpkg -i python3-pip_20.0.2-5ubuntu1_all.deb
+echo "\n\n"
+
+####PACOTES A SEREM INSTALADOS####
 echo "#####PACOTES A SEREM INSTALADOS####\n\n"
 
 #PACOTE gfortran
 echo "#PACOTE gfortran\n\n"
-sudo apt-get install fort77 -y #77
-sudo apt-get install gfortran -y #90/95
-echo "\n\n"
-
-#PACOTE GaussSum
-echo "#PACOTE GaussSum\n\n"
-sudo apt-get install gnuplot -y #instalando GNUplot
-sudo apt-get install python3-numpy -y #instalando numpy
-sudo python3 -m pip install cclib --upgrade -y #instalando cclib
-sudo apt-get install gausssum -y
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libf2c2/libf2c2_20130926-3_amd64.deb
+sudo dpkg -i libf2c2_20130926-3_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libf2c2/libf2c2-dev_20130926-3_amd64.deb
+sudo dpkg -i libf2c2-dev_20130926-3_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/f/f2c/f2c_20160102-1_amd64.deb
+sudo dpkg -i f2c_20160102-1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/universe/f/fort77/fort77_1.15-11_all.deb
+sudo dpkg -i fort77_1.15-11_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-10/libgfortran5_10-20200411-0ubuntu1_amd64.deb
+sudo dpkg -i libgfortran5_10-20200411-0ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-9/libgfortran-9-dev_9.3.0-10ubuntu2_amd64.deb
+sudo dpkg -i libgfortran-9-dev_9.3.0-10ubuntu2_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-9/gfortran-9_9.3.0-10ubuntu2_amd64.deb
+sudo dpkg -i gfortran-9_9.3.0-10ubuntu2_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-defaults/gfortran_9.3.0-1ubuntu2_amd64.deb
+sudo dpkg -i gfortran_9.3.0-1ubuntu2_amd64.deb
 echo "\n\n"
 
 #PACOTE m4
@@ -89,7 +127,7 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/i/ieee-data/ieee-data_2015053
 sudo dpkg -i ieee-data_20150531.1_all.deb
 python3 -m pip install netaddr
 wget -c https://github.com/netaddr/netaddr/archive/master.zip
-unzip -n master.zip
+unzip -o master.zip
 cd netaddr-master
 python3 setup.py install -y
 cd ..
@@ -97,9 +135,7 @@ echo "\n\n"
 
 ###bcc
 echo "###bcc\n\n"
-sudo apt install bcc bpfcc-tools -y
-echo "deb [trusted=yes] https://repo.iovisor.org/apt/bionic bionic-nightly main" | sudo tee /etc/apt/sources.list.d/iovisor.list
-deb [trusted=yes] https://repo.iovisor.org/apt/bionic bionic-nightly main
+sudo apt-get install bcc bpfcc-tools -y
 echo "\n\n"
 
 #PACOTE CCCC
@@ -117,6 +153,8 @@ echo "\n\n"
 
 #PACOTE abinit
 echo "#PACOTE abinit\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
+sudo dpkg -i abinit-data_8.10.2-2_all.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
 sudo dpkg -i abinit_8.10.2-2_amd64.deb
 echo "\n\n"
@@ -142,6 +180,12 @@ echo "\n\n"
 
 ##DEPENDENCIA openmpi-bin
 echo "##DEPENDENCIA openmpi-bin\n\n"
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/r/rdma-core/ibverbs-providers_28.0-1ubuntu1_amd64.deb
+sudo dpkg -i ibverbs-providers_28.0-1ubuntu1_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/libn/libnl3/libnl-3-dev_3.4.0-1_amd64.deb
+sudo dpkg -i libnl-3-dev_3.4.0-1_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/libn/libnl3/libnl-route-3-dev_3.4.0-1_amd64.deb
+sudo dpkg -i libnl-route-3-dev_3.4.0-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/librdmacm1_17.1-1_amd64.deb
 sudo dpkg -i librdmacm1_17.1-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libfabric/libfabric1_1.5.3-1_amd64.deb
@@ -192,6 +236,38 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libx/libxc/libxc5_4.3.4-1
 sudo dpkg -i libxc5_4.3.4-1build1_amd64.deb
 echo "\n\n"
 
+echo "##DEPENDENCIA python3-numpy\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/l/lapack/libblas3_3.9.0-1build1_amd64.deb
+sudo dpkg -i libblas3_3.9.0-1build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/l/lapack/liblapack3_3.9.0-1build1_amd64.deb
+sudo dpkg -i liblapack3_3.9.0-1build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/n/numpy/python3-numpy_1.17.4-5ubuntu3_amd64.deb
+sudo dpkg -i python3-numpy_1.17.4-5ubuntu3_amd64.deb #instalando numpy
+echo "\n\n"
+
+echo "##DEPENDENCIA matplotlib\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lyx/fonts-lyx_2.3.4.2-2_all.deb
+sudo dpkg -i fonts-lyx_2.3.4.2-2_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/t/ttf-bitstream-vera/ttf-bitstream-vera_1.10-8_all.deb
+sudo dpkg -i ttf-bitstream-vera_1.10-8_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/matplotlib/python-matplotlib-data_3.1.2-1ubuntu4_all.deb
+sudo dpkg -i python-matplotlib-data_3.1.2-1ubuntu4_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/pyparsing/python3-pyparsing_2.4.6-1_all.deb
+sudo dpkg -i python3-pyparsing_2.4.6-1_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/j/jquery/libjs-jquery_3.3.1~dfsg-3_all.deb
+sudo dpkg -i libjs-jquery_3.3.1~dfsg-3_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/j/javascript-common/javascript-common_11_all.deb
+sudo dpkg -i libjs-jquery_3.3.1~dfsg-3_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/j/jqueryui/libjs-jquery-ui_1.12.1+dfsg-5_all.deb
+sudo dpkg -i libjs-jquery-ui_1.12.1+dfsg-5_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-cycler/python3-cycler_0.10.0-3_all.deb
+sudo dpkg -i python3-cycler_0.10.0-3_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/k/kiwisolver/python3-kiwisolver_1.0.1-3build1_amd64.deb
+sudo dpkg -i python3-kiwisolver_1.0.1-3build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/matplotlib/python3-matplotlib_3.1.2-1ubuntu4_amd64.deb
+sudo dpkg -i python3-matplotlib_3.1.2-1ubuntu4_amd64.deb
+echo "\n\n"
+
 ##DEPENDENCIA PYTHON3
 echo "##DEPENDENCIA PYTHON3\n\n"
 wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
@@ -206,12 +282,23 @@ wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-
 sudo dpkg -i libpython3-stdlib_3.8.2-3_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3_3.8.2-3_amd64.deb
 sudo dpkg -i python3_3.8.2-3_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/e/expat/libexpat1-dev_2.2.9-1build1_amd64.deb
+sudo dpkg -i libexpat1-dev_2.2.9-1build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/z/zlib/zlib1g-dev_1.2.11.dfsg-2ubuntu1_amd64.deb
+sudo dpkg -i zlib1g-dev_1.2.11.dfsg-2ubuntu1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8-stdlib_3.8.2-1ubuntu1.1_amd64.deb
+sudo dpkg -i libpython3.8-stdlib_3.8.2-1ubuntu1.1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8_3.8.2-1ubuntu1.1_amd64.deb
+sudo dpkg -i libpython3.8_3.8.2-1ubuntu1.1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8-dev_3.8.2-1ubuntu1.1_amd64.deb
+sudo dpkg -i libpython3.8-dev_3.8.2-1ubuntu1.1_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-dev_3.8.2-3_amd64.deb
 sudo dpkg -i libpython3-dev_3.8.2-3_amd64.deb
+wget http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8-dev_3.8.2-1ubuntu1.1_amd64.deb
+sudo dpkg -i python3.8-dev_3.8.2-1ubuntu1.1_amd64.deb
 wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-dev_3.8.2-3_amd64.deb
 sudo dpkg -i python3-dev_3.8.2-3_amd64.deb
-sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev -y
-sudo apt-get install python3-matplotlib -y
+sudo apt-get install libopenblas-dev libxc-dev libscalapack-mpi-dev -y
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/f/fonts-font-awesome/fonts-font-awesome_5.0.10+really4.7.0~dfsg-1_all.deb
 sudo dpkg -i fonts-font-awesome_5.0.10+really4.7.0~dfsg-1_all.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/t/twitter-bootstrap3/fonts-glyphicons-halflings_1.009~3.4.1+dfsg-1_all.deb
@@ -243,7 +330,6 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gpaw-setups/gpaw-data_0
 sudo dpkg -i gpaw-data_0.9.20000-2_all.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gpaw/gpaw_20.1.0-2build1_amd64.deb
 sudo dpkg -i gpaw_20.1.0-2build1_amd64.deb
-python3 -m pip install --upgrade --user numpy scipy matplotlib -y
 echo "\n\n"
 
 #PACOTE quantum-espresso
@@ -276,6 +362,20 @@ echo "#PACOTE meep-lam4\n\n"
 
 ##DEPENDENCIAS
 echo "##DEPENDENCIAS\n\n"
+wget -c http://security.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
+sudo dpkg -i libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
+http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
+sudo dpkg -i libjpeg8-dev_8c-2ubuntu8_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg-dev_8c-2ubuntu8_amd64.deb
+sudo dpkg -i libjpeg-dev_8c-2ubuntu8_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec0_1.0.4-1_amd64.deb
+sudo dpkg -i libaec0_1.0.4-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libsz2_1.0.4-1_amd64.deb
+sudo dpkg -i libsz2_1.0.4-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec-dev_1.0.4-1_amd64.deb
+sudo dpkg -i libaec-dev_1.0.4-1_amd64.deb 
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
+sudo dpkg -i hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libc/libctl/libctl7_4.4.0-3_amd64.deb
 sudo dpkg -i libctl7_4.4.0-3_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/liblam4_7.1.4-6build1_amd64.deb
@@ -288,12 +388,10 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgsl23_2.5+dfsg-6
 sudo dpkg -i libgsl23_2.5+dfsg-6_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/harminv/libharminv3_1.4.1-2_amd64.deb
 sudo dpkg -i libharminv3_1.4.1-2_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec0_1.0.4-1_amd64.deb
-sudo dpkg -i libaec0_1.0.4-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libsz2_1.0.4-1_amd64.deb
-sudo dpkg -i libsz2_1.0.4-1_amd64.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
 sudo dpkg -i libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
+sudo dpkg -i libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/meep-lam4/libmeep-lam4-12_1.7.0-3_amd64.deb
 sudo dpkg -i libmeep-lam4-12_1.7.0-3_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-client_8.2p1-4_amd64.deb
@@ -309,6 +407,8 @@ echo "\n\n"
 ###meep-lam4
 echo "###meep-lam4\n\n"
 sudo apt-get install libblas-dev liblapack-dev -y
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/guile-3.0/guile-3.0-libs_3.0.1+1-2_amd64.deb
+sudo dpkg -i guile-3.0-libs_3.0.1+1-2_amd64.deb
 sudo apt-get install guile-3.0 -y
 sudo apt-get install mpich -y
 sudo apt-get install libhdf5-serial-dev -y
@@ -317,6 +417,59 @@ sudo apt-get install libatlas-base-dev -y
 sudo apt install libatlas-ecmwf-utils -y
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
 sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
+echo "\n\n"
+
+#PACOTE GaussSum e suas dependencias
+echo "#PACOTE GaussSum e suas dependencias\n\n"
+
+##DEPENDENCIAS 
+echo "##DEPENDENCIA gnuplot\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/aglfn/aglfn_1.7+git20191031.4036a9c-2_all.deb
+sudo dpkg -i aglfn_1.7+git20191031.4036a9c-2_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-data_5.2.8+dfsg1-2_all.deb
+sudo dpkg -i gnuplot-data_5.2.8+dfsg1-2_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/d/double-conversion/libdouble-conversion3_3.1.5-4ubuntu1_amd64.deb
+sudo dpkg -i libdouble-conversion3_3.1.5-4ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/pcre2/libpcre2-16-0_10.34-7_amd64.deb
+sudo dpkg -i libpcre2-16-0_10.34-7_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5core5a_5.12.8+dfsg-0ubuntu1_amd64.deb
+sudo dpkg -i libqt5core5a_5.12.8+dfsg-0ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5dbus5_5.12.8+dfsg-0ubuntu1_amd64.deb
+sudo dpkg -i libqt5dbus5_5.12.8+dfsg-0ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5network5_5.12.8+dfsg-0ubuntu1_amd64.deb
+sudo dpkg -i libqt5network5_5.12.8+dfsg-0ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/libx/libxcb/libxcb-xinerama0_1.14-2_amd64.deb
+sudo dpkg -i libxcb-xinerama0_1.14-2_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/libx/libxcb/libxcb-xinput0_1.14-2_amd64.deb
+sudo dpkg -i libxcb-xinput0_1.14-2_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5gui5_5.12.8+dfsg-0ubuntu1_amd64.deb
+sudo dpkg -i libqt5gui5_5.12.8+dfsg-0ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5widgets5_5.12.8+dfsg-0ubuntu1_amd64.deb
+sudo dpkg -i libqt5widgets5_5.12.8+dfsg-0ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5printsupport5_5.12.8+dfsg-0ubuntu1_amd64.deb
+sudo dpkg -i libqt5printsupport5_5.12.8+dfsg-0ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtsvg-opensource-src/libqt5svg5_5.12.8-0ubuntu1_amd64.deb
+sudo dpkg -i libqt5svg5_5.12.8-0ubuntu1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/w/wxwidgets3.0/libwxbase3.0-0v5_3.0.4+dfsg-15build1_amd64.deb
+sudo dpkg -i libwxbase3.0-0v5_3.0.4+dfsg-15build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/w/wxwidgets3.0/libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
+sudo dpkg -i libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
+sudo dpkg -i gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot_5.2.8+dfsg1-2_all.deb #instalando GNUplot
+sudo dpkg -i gnuplot_5.2.8+dfsg1-2_all.deb
+echo "\n\n"
+
+##DEPENDENCIA cclib
+echo "##DEPENDENCIA cclib\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/c/cclib/python3-cclib_1.6.2-2_all.deb
+sudo dpkg -i python3-cclib_1.6.2-2_all.deb #instalando cclib
+echo "\n\n"
+
+###gausssum
+echo "###gausssum\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gausssum/gausssum_3.0.2-2_all.deb
+sudo dpkg -i gausssum_3.0.2-2_all.deb
 echo "\n\n"
 
 #Reatualização de repositorios e bibliotecas
