@@ -37,14 +37,15 @@ echo "\n\n"
 # Instalando programas essenciais de instalação
 echo "#Instalando programas essenciais de instalação\n\n"
 
-echo "##unzip\n\n"
-sudo apt install unzip -y
-echo "\n\n"
-
 echo "##wget\n\n"
 sudo apt-get install wget -y #instalando para baixar direito de sites
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/w/wget/wget_1.20.3-1ubuntu1_amd64.deb
 sudo dpkg -i wget_1.20.3-1ubuntu1_amd64.deb
+echo "\n\n"
+
+echo "##unzip\n\n"
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/u/unzip/unzip_6.0-25ubuntu1_amd64.deb
+sudo dpkg -i unzip_6.0-25ubuntu1_amd64.deb
 echo "\n\n"
 
 echo "##python3-tk\n\n"
@@ -184,8 +185,6 @@ wget -c http://archive.ubuntu.com/ubuntu/pool/main/libn/libnl3/libnl-route-3-dev
 sudo dpkg -i libnl-route-3-dev_3.4.0-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libp/libpsm2/libpsm2-2_11.2.86-1_amd64.deb
 sudo dpkg -i libpsm2-2_11.2.86-1_amd64.deb
-wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libfabric/libfabric1_1.5.3-1_amd64.deb
-sudo dpkg -i libfabric1_1.5.3-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/libhwloc5_1.11.9-1_amd64.deb
 sudo dpkg -i libhwloc5_1.11.9-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/r/rdma-core/libibverbs1_28.0-1ubuntu1_amd64.deb
@@ -315,6 +314,10 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/universe/s/spglib/python3-spglib_1
 sudo dpkg -i python3-spglib_1.14.1-5build2_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/c/cftime/python3-cftime_1.1.0+ds-1build1_amd64.deb
 sudo dpkg -i python3-cftime_1.1.0+ds-1build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec0_1.0.4-1_amd64.deb
+sudo dpkg -i libaec0_1.0.4-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libsz2_1.0.4-1_amd64.deb
+sudo dpkg -i libsz2_1.0.4-1_amd64.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
 sudo dpkg -i libhdf5-103_1.10.4+repack-11ubuntu1_amd64.deb
 wget -c http://archive.ubuntu.com/ubuntu/pool/universe/n/netcdf/libnetcdf15_4.7.3-1_amd64.deb
@@ -325,6 +328,20 @@ wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-10_1.8.16
 sudo dpkg -i libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
 wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-11_1.8.16+docs-4ubuntu1.1_amd64.deb
 sudo dpkg -i libhdf5-cpp-11_1.8.16+docs-4ubuntu1.1_amd64.deb
+wget -c http://security.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
+sudo dpkg -i libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
+sudo dpkg -i libjpeg8-dev_8c-2ubuntu8_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg-dev_8c-2ubuntu8_amd64.deb
+sudo dpkg -i libjpeg-dev_8c-2ubuntu8_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec0_1.0.4-1_amd64.deb
+sudo dpkg -i libaec0_1.0.4-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libsz2_1.0.4-1_amd64.deb
+sudo dpkg -i libsz2_1.0.4-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec-dev_1.0.4-1_amd64.deb
+sudo dpkg -i libaec-dev_1.0.4-1_amd64.deb 
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
+sudo dpkg -i hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
 wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
 sudo dpkg -i libhdf5-dev_1.8.16+docs-4ubuntu1.1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/n/netcdf/libnetcdf11_4.4.0-2_amd64.deb
