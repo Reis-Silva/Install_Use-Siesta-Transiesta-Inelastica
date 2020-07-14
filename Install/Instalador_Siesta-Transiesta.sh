@@ -202,13 +202,12 @@ wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/ocl-icd/ocl-icd-libopencl1_
 sudo dpkg -i ocl-icd-libopencl1_2.2.11-1ubuntu1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/libhwloc-plugins_1.11.9-1_amd64.deb
 sudo dpkg -i libhwloc-plugins_1.11.9-1_amd64.deb
-wget -c http://ftp.us.debian.org/debian/pool/main/n/numactl/libnuma1_2.0.12-1+b1_amd64.deb
-sudo dpkg -i libnuma1_2.0.12-1+b1_amd64.deb
+wget -c http://archive.ubuntu.com/ubuntu/pool/main/n/numactl/libnuma1_2.0.12-1_amd64.deb
+sudo dpkg -i libnuma1_2.0.12-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libp/libpsm2/libpsm2-2_11.2.86-1_amd64.deb
 sudo dpkg -i libpsm2-2_11.2.86-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libfabric/libfabric1_1.5.3-1_amd64.deb
 sudo dpkg -i libfabric1_1.5.3-1_amd64.deb
-
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/libe/libevent/libevent-2.1-7_2.1.11-stable-1_amd64.deb
 sudo dpkg -i libevent-2.1-7_2.1.11-stable-1_amd64.deb
 wget -c http://mirrors.kernel.org/ubuntu/pool/main/libe/libevent/libevent-core-2.1-7_2.1.11-stable-1_amd64.deb
@@ -446,7 +445,21 @@ sudo apt-get install libblas-dev liblapack-dev -y
 wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/guile-3.0/guile-3.0-libs_3.0.1+1-2_amd64.deb
 sudo dpkg -i guile-3.0-libs_3.0.1+1-2_amd64.deb
 sudo apt-get install guile-3.0 -y
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/hwloc-nox_2.1.0+dfsg-4_amd64.deb
+sudo dpkg -i hwloc-nox_2.1.0+dfsg-4_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mpich/libmpich12_3.3.2-2build1_amd64.deb
+sudo dpkg -i libmpich12_3.3.2-2build1_amd64.deb
 sudo apt-get install mpich -y
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/x/xxhash/libxxhash0_0.7.3-1_amd64.deb
+sudo dpkg -i libxxhash0_0.7.3-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/e/eckit/libeckit0d_1.4.7-7build1_amd64.deb
+sudo dpkg -i libeckit0d_1.4.7-7build1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/proj/proj-data_6.3.1-1_all.deb
+sudo dpkg -i proj-data_6.3.1-1_all.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/proj/libproj15_6.3.1-1_amd64.deb
+sudo dpkg -i libproj15_6.3.1-1_amd64.deb
+wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/atlas-ecmwf/libatlas-ecmwf-0_0.19.0-8build1_amd64.deb
+sudo dpkg -i libatlas-ecmwf-0_0.19.0-8build1_amd64.deb
 sudo apt-get install libhdf5-serial-dev -y
 sudo apt-get install hdf5-tools -y
 sudo apt-get install libatlas-base-dev -y
