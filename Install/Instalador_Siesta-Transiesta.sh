@@ -547,6 +547,97 @@ echo "\n\n"
 cd ..
 }
 
+arch_make(){
+
+cat 
+"
+.SUFFIXES:\n
+.SUFFIXES: .f .F .o .c .a .f90 .F90\n\n
+
+SIESTA_ARCH = X86_64-unknown-linux\n\n
+
+
+CPP = gcc -E -P -x c\n\n
+
+FPP = $(FC) -E -P -x c\n
+FC = mpif90\n
+FC_SERIAL = gfortran\n\n
+
+FFLAGS=-g -O2  $(INCFLAGS) $(NETCDF_INCFLAGS)  #OBS: $(INCFLAGS) $(NETCDF_INCFLAGS)  para compilar o tbtrans\n\n
+
+AR = ar\n
+RANLIB = ranlib\n\n
+
+SYS = nag\n\n
+
+SP_KIND = 4\n
+DP_KIND = 8\n
+KINDS = $(SP_KIND) $(DP_KIND)\n\n
+
+LDFLAGS =\n\n
+
+COMP_LIBS= libncdf.a libfdict.a\n\n
+
+BLAS_LIBS=-lblas\n
+LAPACK_LIBS=-llapack\n
+BLACS_LIBS=/usr/lib/libblacs-openmpi.so /usr/lib/libblacsF77init-openmpi.so /usr/lib/libblacsCinit-openmpi.so\n
+SCALAPACK_LIBS=/usr/lib/libscalapack-openmpi.so\n\n
+
+# For netCDF support\n\n
+
+NETCDF_LIBS = -L/home/mayra/SIESTA/siesta-4.1-b3/Docs/build/netcdf/4.4.1.1/lib -lnetcdff -lnetcdf \n
+NETCDF_INCFLAGS = -I/home/mayra/SIESTA/siesta-4.1-b3/Docs/build/netcdf/4.4.1.1/include\n
+#NETCDF_INTERFACE=libnetcdf_f90.so\n\n
+
+# HDF-5.\n\n
+
+HDF5_LIBS= -L/home/mayra/SIESTA/siesta-4.1-b3/Docs/build/hdf5/1.8.18/lib -lhdf5_hl -lhdf5 \n
+HDF5_INCFLAGS= -I/home/mayra/SIESTA/siesta-4.1-b3/Docs/build/hdf5/1.8.18/include\n\n
+
+# Other libs.\n\n
+
+OTHER_LIBS = -L/home/mayra/SIESTA/siesta-4.1-b3/Docs/build/zlib/1.2.11/lib -lz\n\n
+
+# CDF and MPI are self-explanatory.\n\n
+
+FPPFLAGS_CDF = -DCDF -DNCDF -DNCDF_4\n\n
+
+# Other definitions might be needed to work around some glitch in the\n
+# compiler. For old versions of gfortran, add -DGFORTRAN.\n
+#FPPFLAGS = $(FPPFLAGS_MPI) -DUSE_GEMM3M\n\n\n  
+
+
+FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF)  -DTRANSIESTA # #-DUSE_GEMM3M\n\n
+
+LIBS =  $(COMP_LIBS) $(BLACS_LIBS)  $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS)  $(NETCDF_LIBS) $(HDF5_LIBS) $(OTHER_LIBS)\n\n\n 
+
+
+MPI_INTERFACE=libmpi_f90.a\n
+MPI_INCLUDE=.\n\n
+
+# Dependency rules ---------\n\n
+
+#FFLAGS_DEBUG = -g -O2   # your appropriate flags here...\n\n
+
+# The atom.f code is very vulnerable. Particularly the Intel compiler\n
+# will make an erroneous compilation of atom.f with high optimization\n
+# levels.\n
+atom.o: atom.F\n
+	$(FC) -c $(FFLAGS_DEBUG) $(INCFLAGS) $(FPPFLAGS) $(FPPFLAGS_fixed_F) $<\n
+.c.o:\n
+	$(CC) -c $(CFLAGS) $(INCFLAGS) $(CPPFLAGS) $<\n 
+.F.o:\n
+	$(FC) -c $(FFLAGS) $(INCFLAGS) $(FPPFLAGS) $(FPPFLAGS_fixed_F)  $<\n 
+.F90.o:\n
+	$(FC) -c $(FFLAGS) $(INCFLAGS) $(FPPFLAGS) $(FPPFLAGS_free_F90) $<\n 
+.f.o:\n
+	$(FC) -c $(FFLAGS) $(INCFLAGS) $(FCFLAGS_fixed_f)  $<\n
+.f90.o:\n
+	$(FC) -c $(FFLAGS) $(INCFLAGS) $(FCFLAGS_free_f90)  $<\n
+" > arch_make
+
+}
+
 
 SiestaTransiesta(){
 
@@ -567,24 +658,18 @@ SiestaTransiesta(){
         InstalacaoSiestaTransiesta
 
     fi
-
-
-
-    cd 
     
-
-
 }
 
 InstalacaoSiestaTransiesta(){
 
     wget -c https://launchpad.net/siesta/4.1/4.1-b4/+download/siesta-4.1-b4.tar.gz
     tar -vzxf siesta-4.1-b4.tar.gz
-    cd Siesta-4.1-b4/Docs
+    cd siesta-4.1-b4/Docs
     wget -c https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-1.8.21/src/hdf5-1.8.21.tar.bz2
     wget -c https://distfiles.macports.org/netcdf/netcdf-c-4.6.1.tar.gz
     wget -c https://distfiles.macports.org/netcdf-fortran/netcdf-fortran-4.4.4.tar.gz
-    wget -c https://pt.osdn.net/frs/g_redir.php?m=kent&f=libpng%2Fzlib%2F1.2.11%2Fzlib-1.2.11.tar.gz
+    wget -c https://zlib.net/zlib-1.2.11.tar.gz
     ./install_netcdf4.bash
 
 }
@@ -621,7 +706,7 @@ do
         sleep 2
         Packages
         fi ;; 
-        
+
     2) SiestaTransiesta;;
 
     3) exit;;
