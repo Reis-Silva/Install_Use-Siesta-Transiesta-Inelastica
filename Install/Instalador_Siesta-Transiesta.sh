@@ -546,34 +546,44 @@ Packages() {
 
 arch_make() {
 
-    cd PackagesSIETRAN/siesta-master/Src
+    cd PackagesSIETRAN
+
+    # Reescrevendo arquivo gfortran
+    echo "# Reescrevendo arquivo gfortran\n\n"
+    tar vxf siesta-master.tar.gz -C ${HOME}/Documentos/PackagesSIETRAN siesta-master/Obj/gfortran.make 
+
+    #Instalando dependencias do ATOM
+    echo "#Instalando dependencias do ATOM\n\n"
+    wget -c https://launchpad.net/libgridxc/trunk/0.8/+download/libgridxc-0.8.5.tgz
+    tar -xvzf libgridxc-0.8.5.tgz
+    wget -c https://launchpad.net/xmlf90/trunk/1.5/+download/xmlf90-1.5.4.tar.gz
+    tar -xvf xmlf90-1.5.4.tar.gz
+
+    cd siesta-master/Src
     #sh obj_setup.sh
     cd ..
-    cd siesta-master/Obj
+    cd Obj
 
     #CONSTRUINDO O ARCH_MAKE DO GFORTRAN
     echo "#CONSTRUINDO O ARCH_MAKE DO GFORTRAN\n\n"
 
     var="$(uname -mrs)"
     sed -i '18s, unknown, SIESTA 4.1 - '"$var"',' gfortran.make
-    sed -i '20s, CC = gcc, CPP = gcc -E -P -x c,' gfortran.make
+    sed -i "20s/CC = gcc/CPP = gcc -E -P -x c/" gfortran.make
     sed -i '22s, gfortran, mpif90,' gfortran.make
     sed -i "24s/^/INCFLAGS += -I\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/include/g" gfortran.make
     sed -i '25s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS=-g -O2 $(INCFLAGS)/' gfortran.make
-    sed -i "36s/LDFLAGS =/LDFLAGS=-L\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib -Wl, -rpath=\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib," gfortran.make
-    sed -i '38s, COMP_LIBS= libncdf.a libfdict.a, COMP_LIBS= libncdf.a libfdict.a libsiestaLAPACK.a libsiestaBLAS.a\n\n\n\n\n,' gfortran.make
-    sed -i '40s, gfortran, mpif90,' gfortran.make
-    sed -i '41s, gfortran, mpif90,' gfortran.make
-    sed -i '42s, gfortran, mpif90,' gfortran.make
-    sed -i '43s, , BLAS_LIBS=-lblas,' gfortran.make
-    sed -i '43s, , LAPACK_LIBS=-llapack,' gfortran.make
-    sed -i '43s, , BLACS_LIBS=/usr/lib/X86_64-linux-gnu/libblacs-openmpi.so /usr/liblib/X86_64-linux-gnu/libblacsF77init-openmpi.so /usr/liblib/X86_64-linux-gnu/libblacsCinit-openmpi.so,' gfortran.make
-    sed -i '43s, , SCALAPACK_LIBS=/usr/liblib/X86_64-linux-gnu/libscalapack-openmpi.so,' gfortran.make
-    sed -i '45s, FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT, FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA,' gfortran.make
-    sed -i '47s, LIBS =, LIBS =  $(COMP_LIBS) $(BLACS_LIBS)  $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n,' gfortran.make
-    sed -i '49s, , MPI_INTERFACE=libmpi_f90.a,' gfortran.make
-    sed -i '50s, , MPI_INCLUDE=.,' gfortran.make
-    sed -i '54s, FFLAGS_DEBUG = -g -O1, #FFLAGS_DEBUG = -g -O1,' gfortran.make
+    sed -i '36s/LDFLAGS =/LDFLAGS=-L\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib -Wl, -rpath=\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib/' gfortran.make
+    sed -i "38s/COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a/COMP_LIBS= libncdf.a libfdict.a libsiestaLAPACK.a libsiestaBLAS.a\n\n\n\n\n/" gfortran.make
+    sed -i "40s/^/BLAS_LIBS=-lblas/" gfortran.make
+    sed -i "41s/^/LAPACK_LIBS=-llapack/" gfortran.make
+    sed -i "42s/^/BLACS_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libblacs-openmpi.so \/usr\/liblib\/X86_64-linux-gnu\/libblacsF77init-openmpi.so \/usr\/liblib\/X86_64-linux-gnu\/libblacsCinit-openmpi.so/" gfortran.make
+    sed -i "43s/^/SCALAPACK_LIBS=\/usr\/liblib\/X86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
+    sed -i '45s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
+    sed -i '47s/LIBS =/LIBS =  $(COMP_LIBS) $(BLACS_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
+    sed -i "49s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
+    sed -i "50s/^/MPI_INCLUDE=./" gfortran.make
+    sed -i "54s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
     
     ##EXECUTANDO O ARCH_MAKE DO GFORTRAN
     echo "#EXECUTANDO O ARCH_MAKE DO GFORTRAN\n\n"
@@ -601,6 +611,7 @@ SiestaTransiesta() {
     fi
 
 }
+
 
 InstalacaoSiestaTransiesta() {
 
