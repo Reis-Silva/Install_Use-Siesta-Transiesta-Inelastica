@@ -548,16 +548,34 @@ arch_make() {
 
     cd PackagesSIETRAN
 
-    # Reescrevendo arquivo gfortran
-    echo "# Reescrevendo arquivo gfortran\n\n"
+    # Reescrevendo arquivo gfortran.makemake
+    echo "# Reescrevendo arquivo gfortran.make\n\n"
     tar vxf siesta-master.tar.gz -C ${HOME}/Documentos/PackagesSIETRAN siesta-master/Obj/gfortran.make 
+    echo "\n\n"
 
-    #Instalando dependencias do ATOM
+    #Instalando pacote ATOM e suas dependencias
     echo "#Instalando dependencias do ATOM\n\n"
+    echo "\n\n"
+
+    ##DEPENDENCIA libgridxc
+    echo "##DEPENDENCIA libgridxc\n\n"
     wget -c https://launchpad.net/libgridxc/trunk/0.8/+download/libgridxc-0.8.5.tgz
     tar -xvzf libgridxc-0.8.5.tgz
+    cd xmlf90-1.5.4
+    ./configure
+    make
+    make install
+    echo "\n\n"
+    
+    ##DEPENDENCIA xmlf90
+    echo "##DEPENDENCIA xmlf90"
     wget -c https://launchpad.net/xmlf90/trunk/1.5/+download/xmlf90-1.5.4.tar.gz
     tar -xvf xmlf90-1.5.4.tar.gz
+
+    ###ATOM
+    echo "###ATOM"
+    wget -c https://departments.icmab.es/leem/SIESTA_MATERIAL/Pseudos/Code/atom-4.2.7-100.tgz
+    tar -xvf atom-4.2.7-100.tgz
 
     cd siesta-master/Src
     #sh obj_setup.sh
