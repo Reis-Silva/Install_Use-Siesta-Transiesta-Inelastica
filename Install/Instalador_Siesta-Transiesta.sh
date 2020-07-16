@@ -547,8 +547,9 @@ Packages() {
 arch_make() {
 
     cd PackagesSIETRAN/siesta-master/Src
-    sh obj_setup.sh
-    cd PackagesSIETRAN/siesta-master/Obj
+    #sh obj_setup.sh
+    cd ..
+    cd siesta-master/Obj
 
     #CONSTRUINDO O ARCH_MAKE DO GFORTRAN
     echo "#CONSTRUINDO O ARCH_MAKE DO GFORTRAN\n\n"
@@ -557,10 +558,9 @@ arch_make() {
     sed -i '18s, unknown, SIESTA 4.1 - '"$var"',' gfortran.make
     sed -i '20s, CC = gcc, CPP = gcc -E -P -x c,' gfortran.make
     sed -i '22s, gfortran, mpif90,' gfortran.make
-    INCFLAGS+="-I/home/brainiac/Documentos/PackagesSIETRAN/siesta-master/Docs/build/include"
-    sed -i '25s, FFLAGS = -O2 -fPIC -ftree-vectorize, FFLAGS=-g -O2 '"$INCFLAGS"',' gfortran.make
-    sed -i '36s, LDFLAGS =, LDFLAGS+=-L/home/brainiac/Documentos/PackagesSIETRAN/siesta-master/Docs/build/lib -Wl,
-    -rpath=/home/brainiac/Documentos/PackagesSIETRAN/siesta-master/Docs/build/lib,' gfortran.make
+    sed -i "24s/^/INCFLAGS += -I\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/include/g" gfortran.make
+    sed -i '25s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS=-g -O2 $(INCFLAGS)/' gfortran.make
+    sed -i "36s/LDFLAGS =/LDFLAGS=-L\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib -Wl, -rpath=\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib," gfortran.make
     sed -i '38s, COMP_LIBS= libncdf.a libfdict.a, COMP_LIBS= libncdf.a libfdict.a libsiestaLAPACK.a libsiestaBLAS.a\n\n\n\n\n,' gfortran.make
     sed -i '40s, gfortran, mpif90,' gfortran.make
     sed -i '41s, gfortran, mpif90,' gfortran.make
