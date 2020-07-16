@@ -546,46 +546,13 @@ Packages() {
 
 arch_make() {
 
-    cd PackagesSIETRAN
-
-    # Reescrevendo arquivo gfortran.makemake
-    echo "# Reescrevendo arquivo gfortran.make\n\n"
-    tar vxf siesta-master.tar.gz -C ${HOME}/Documentos/PackagesSIETRAN siesta-master/Obj/gfortran.make 
-    echo "\n\n"
-
-    #Instalando pacote ATOM e suas dependencias
-    echo "#Instalando dependencias do ATOM\n\n"
-    echo "\n\n"
-
-    ##DEPENDENCIA libgridxc
-    echo "##DEPENDENCIA libgridxc\n\n"
-    wget -c https://launchpad.net/libgridxc/trunk/0.8/+download/libgridxc-0.8.5.tgz
-    tar -xvzf libgridxc-0.8.5.tgz
-    cd xmlf90-1.5.4
-    ./configure
-    make
-    make install
-    echo "\n\n"
+    rm arch.make
+    cp gfortran.make gfortran.bkp
     
-    ##DEPENDENCIA xmlf90
-    echo "##DEPENDENCIA xmlf90"
-    wget -c https://launchpad.net/xmlf90/trunk/1.5/+download/xmlf90-1.5.4.tar.gz
-    tar -xvf xmlf90-1.5.4.tar.gz
-
-    ###ATOM
-    echo "###ATOM"
-    wget -c https://departments.icmab.es/leem/SIESTA_MATERIAL/Pseudos/Code/atom-4.2.7-100.tgz
-    tar -xvf atom-4.2.7-100.tgz
-
-    cd siesta-master/Src
-    #sh obj_setup.sh
-    cd ..
-    cd Obj
-
     #CONSTRUINDO O ARCH_MAKE DO GFORTRAN
     echo "#CONSTRUINDO O ARCH_MAKE DO GFORTRAN\n\n"
 
-    var="$(uname -mrs)"
+    var2="$(uname -mrs)"
     sed -i '18s, unknown, SIESTA 4.1 - '"$var"',' gfortran.make
     sed -i "20s/CC = gcc/CPP = gcc -E -P -x c/" gfortran.make
     sed -i '22s, gfortran, mpif90,' gfortran.make
@@ -597,16 +564,46 @@ arch_make() {
     sed -i "41s/^/LAPACK_LIBS=-llapack/" gfortran.make
     sed -i "42s/^/BLACS_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libblacs-openmpi.so \/usr\/liblib\/X86_64-linux-gnu\/libblacsF77init-openmpi.so \/usr\/liblib\/X86_64-linux-gnu\/libblacsCinit-openmpi.so/" gfortran.make
     sed -i "43s/^/SCALAPACK_LIBS=\/usr\/liblib\/X86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
-    sed -i '45s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
+    sed -i '45s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) #-DTRANSIESTA/' gfortran.make
     sed -i '47s/LIBS =/LIBS =  $(COMP_LIBS) $(BLACS_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
     sed -i "49s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
     sed -i "50s/^/MPI_INCLUDE=./" gfortran.make
     sed -i "54s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
     
+    cp gfortran.make arch.make
+    rm gfortran.make
+    cp gfortran.bkp gfortran.make
+    rm gfortran.bkp
+
     ##EXECUTANDO O ARCH_MAKE DO GFORTRAN
     echo "#EXECUTANDO O ARCH_MAKE DO GFORTRAN\n\n"
-    
-    make -f gfortran.make
+    make 
+}
+
+InstalacaoSiestaTransiesta() {
+
+    wget -c https://gitlab.com/siesta-project/siesta/-/archive/master/siesta-master.tar.gz
+    tar -vzxf siesta-master.tar.gz
+
+    #Escrevendo arquivo gfortran.make
+    echo "#Escrevendo arquivo gfortran.make\n\n"
+    tar vxf siesta-master.tar.gz -C $(pwd) siesta-master/Obj/gfortran.make 
+    echo "\n\n"
+
+    #./install_netcdf4.bash
+    echo "#./install_netcdf4.bash\n\n"
+    cd siesta-master/Docs
+    wget -c https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1.12.0/src/hdf5-1.12.0.tar.bz2
+    wget -c https://github.com/Unidata/netcdf-c/archive/v4.7.2.tar.gz
+    wget -c https://github.com/Unidata/netcdf-fortran/archive/v4.5.2.tar.gz
+    wget -c https://zlib.net/zlib-1.2.11.tar.gz
+    ./install_netcdf4.bash
+    echo "\n\n"
+
+    cd ..
+    cd Obj
+    sh ../Src/obj_setup.sh
+    arch_make
 }
 
 SiestaTransiesta() {
@@ -630,19 +627,6 @@ SiestaTransiesta() {
 
 }
 
-
-InstalacaoSiestaTransiesta() {
-
-    wget -c https://gitlab.com/siesta-project/siesta/-/archive/master/siesta-master.tar.gz
-    tar -vzxf siesta-master.tar.gz
-    cd siesta-master/Docs
-    wget -c https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1.12.0/src/hdf5-1.12.0.tar.bz2
-    wget -c https://github.com/Unidata/netcdf-c/archive/v4.7.2.tar.gz
-    wget -c https://github.com/Unidata/netcdf-fortran/archive/v4.5.2.tar.gz
-    wget -c https://zlib.net/zlib-1.2.11.tar.gz
-    ./install_netcdf4.bash
-
-}
 
 ####INICIANDO SISTEMA####
 echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
