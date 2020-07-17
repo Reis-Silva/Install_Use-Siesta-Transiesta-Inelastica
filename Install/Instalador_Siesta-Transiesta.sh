@@ -559,25 +559,30 @@ arch_make() {
     sed -i "24s/^/INCFLAGS += -I\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/include/g" gfortran.make
     sed -i '25s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS=-g -O2 $(INCFLAGS)/' gfortran.make
     sed -i '36s/LDFLAGS =/LDFLAGS=-L\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib -Wl, -rpath=\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib/' gfortran.make
-    sed -i "38s/COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a/COMP_LIBS= libncdf.a libfdict.a libsiestaLAPACK.a libsiestaBLAS.a\n\n\n\n\n/" gfortran.make
+    sed -i "38s/COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a/COMP_LIBS= libncdf.a libfdict.a libsiestaLAPACK.a libsiestaBLAS.a\n\n\n\n/" gfortran.make
     sed -i "40s/^/BLAS_LIBS=-lblas/" gfortran.make
     sed -i "41s/^/LAPACK_LIBS=-llapack/" gfortran.make
-    sed -i "42s/^/BLACS_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libblacs-openmpi.so \/usr\/lib\/X86_64-linux-gnu\/libblacsF77init-openmpi.so \/usr\/lib\/X86_64-linux-gnu\/libblacsCinit-openmpi.so/" gfortran.make
-    sed -i "43s/^/SCALAPACK_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
-    sed -i '45s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) #-DTRANSIESTA/' gfortran.make
-    sed -i '47s/LIBS =/LIBS =  $(COMP_LIBS) $(BLACS_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
-    sed -i "49s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
-    sed -i "50s/^/MPI_INCLUDE=./" gfortran.make
-    sed -i "54s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
+    sed -i "42s/^/SCALAPACK_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
+    sed -i '44s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
+    sed -i '46s/LIBS =/LIBS =  $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
+    sed -i "48s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
+    sed -i "49s/^/MPI_INCLUDE=./" gfortran.make
+    sed -i "53s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
     
     cp gfortran.make arch.make
     rm gfortran.make
     cp gfortran.bkp gfortran.make
     rm gfortran.bkp
 
-    ##EXECUTANDO O ARCH_MAKE DO GFORTRAN
-    echo "#EXECUTANDO O ARCH_MAKE DO GFORTRAN\n\n"
-    make 
+    ###ARCH_MAKE DO GFORTRAN CRIADO
+    echo "##ARCH_MAKE DO GFORTRAN CRIADO\n\n"
+
+    ######iNSTALANDO SIESTA4.1
+    echo "###iNSTALANDO SIESTA4.1\n\n"
+    make
+    sudo cp siesta SIESTA4.1
+    sudo mv SIESTA4.1 /usr/local/bin
+    echo "\n\n"
 }
 
 InstalacaoSiestaTransiesta() {
