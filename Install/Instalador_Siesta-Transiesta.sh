@@ -592,7 +592,7 @@ InstalacaoSiestaTransiesta() {
 
     #Escrevendo arquivo gfortran.make
     echo "#Escrevendo arquivo gfortran.make\n\n"
-    tar vxf siesta-master.tar.gz -C $(pwd)/siesta-master/Obj/gfortran.make 
+    tar vxf siesta-master.tar.gz -C $(pwd) siesta-master/Obj/gfortran.make 
     echo "\n\n"
 
     #./install_netcdf4.bash
@@ -614,7 +614,7 @@ InstalacaoSiestaTransiesta() {
     echo "###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA\n\n"
     cd ..
     cd ..
-    tar vxf siesta-master.tar.gz -C $(pwd)/siesta-master/Util/Gen-basis/Makefile
+    tar vxf siesta-master.tar.gz -C $(pwd) siesta-master/Util/Gen-basis/Makefile
     cd siesta-master/Util/Gen-basis
     sed -i "103s/^/ \t/" Makefile
     cd ..
