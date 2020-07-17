@@ -560,6 +560,7 @@ arch_make() {
     sed -i '25s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS=-g -O2 $(INCFLAGS)/' gfortran.make
     sed -i '36s/LDFLAGS =/LDFLAGS=-L\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib -Wl, -rpath=\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib/' gfortran.make
     sed -i "38s/COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a/COMP_LIBS= libncdf.a libfdict.a libsiestaLAPACK.a libsiestaBLAS.a\n\n\n\n/" gfortran.make
+    sed -i "38s/COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a/COMP_LIBS=\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Obj\/ncdf\/obj\/libncdf.a \/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Obj\/fdict/obj/libfdict.a \/home/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Obj\/libsiestaLAPACK.a \/home/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Obj\/libsiestaBLAS.a \/usr\/lib\/x86_64-linux-gnu\/libfftw3f.a \/usr\/lib\/x86_64-linux-gnu\/libfftw3.a\n\n\n\n/" gfortran.make
     sed -i "40s/^/BLAS_LIBS=-lblas/" gfortran.make
     sed -i "41s/^/LAPACK_LIBS=-llapack/" gfortran.make
     sed -i "42s/^/SCALAPACK_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
@@ -580,8 +581,7 @@ arch_make() {
     ######iNSTALANDO SIESTA4.1
     echo "###iNSTALANDO SIESTA4.1\n\n"
     make
-    sudo cp siesta SIESTA4.1
-    sudo mv SIESTA4.1 /usr/local/bin
+    sudo cp siesta /usr/local/bin/siesta
     echo "\n\n"
 }
 
@@ -592,7 +592,7 @@ InstalacaoSiestaTransiesta() {
 
     #Escrevendo arquivo gfortran.make
     echo "#Escrevendo arquivo gfortran.make\n\n"
-    tar vxf siesta-master.tar.gz -C $(pwd) siesta-master/Obj/gfortran.make 
+    tar vxf siesta-master.tar.gz -C $(pwd)/siesta-master/Obj/gfortran.make 
     echo "\n\n"
 
     #./install_netcdf4.bash
@@ -609,6 +609,24 @@ InstalacaoSiestaTransiesta() {
     cd Obj
     sh ../Src/obj_setup.sh
     arch_make
+
+    ###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA
+    echo "###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA\n\n"
+    cd ..
+    cd ..
+    tar vxf siesta-master.tar.gz -C $(pwd)/siesta-master/Util/Gen-basis/Makefile
+    cd siesta-master/Util/Gen-basis
+    sed -i "103s/^/ \t/" Makefile
+    cd ..
+    sh build_all.sh
+    echo "\n\n"
+
+    ###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA
+    echo "###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA"
+    sudo cp tbtrans /usr/local/bin/tbtrans
+    echo "TERMÍNO DAS COPIAS\n\n"
+
+
 }
 
 SiestaTransiesta() {
