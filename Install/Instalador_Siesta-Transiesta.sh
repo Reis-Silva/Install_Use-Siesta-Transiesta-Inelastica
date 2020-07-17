@@ -562,8 +562,8 @@ arch_make() {
     sed -i "38s/COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a/COMP_LIBS= libncdf.a libfdict.a libsiestaLAPACK.a libsiestaBLAS.a\n\n\n\n\n/" gfortran.make
     sed -i "40s/^/BLAS_LIBS=-lblas/" gfortran.make
     sed -i "41s/^/LAPACK_LIBS=-llapack/" gfortran.make
-    sed -i "42s/^/BLACS_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libblacs-openmpi.so \/usr\/liblib\/X86_64-linux-gnu\/libblacsF77init-openmpi.so \/usr\/liblib\/X86_64-linux-gnu\/libblacsCinit-openmpi.so/" gfortran.make
-    sed -i "43s/^/SCALAPACK_LIBS=\/usr\/liblib\/X86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
+    sed -i "42s/^/BLACS_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libblacs-openmpi.so \/usr\/lib\/X86_64-linux-gnu\/libblacsF77init-openmpi.so \/usr\/lib\/X86_64-linux-gnu\/libblacsCinit-openmpi.so/" gfortran.make
+    sed -i "43s/^/SCALAPACK_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
     sed -i '45s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) #-DTRANSIESTA/' gfortran.make
     sed -i '47s/LIBS =/LIBS =  $(COMP_LIBS) $(BLACS_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
     sed -i "49s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
