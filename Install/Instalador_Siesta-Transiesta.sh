@@ -548,19 +548,18 @@ arch_make() {
 
     rm arch.make
     cp gfortran.make gfortran.bkp
-    
+
     #CONSTRUINDO O ARCH_MAKE DO GFORTRAN
     echo "#CONSTRUINDO O ARCH_MAKE DO GFORTRAN\n\n"
 
     var2="$(uname -mrs)"
-    sed -i '18s, unknown, SIESTA 4.1 - '"$var"',' gfortran.make
+    sed -i '18s, unknown, SIESTA 4.1 - '"$var2"',' gfortran.make
     sed -i "20s/CC = gcc/CPP = gcc -E -P -x c/" gfortran.make
     sed -i '22s, gfortran, mpif90,' gfortran.make
-    sed -i "24s/^/INCFLAGS += -I\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/include/g" gfortran.make
+    sed -i "24s,^,INCFLAGS += -I"$var"\/siesta-master\/Docs\/build\/include,g" gfortran.make
     sed -i '25s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS=-g -O2 $(INCFLAGS)/' gfortran.make
-    sed -i '36s/LDFLAGS =/LDFLAGS=-L\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib -Wl, -rpath=\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Docs\/build\/lib/' gfortran.make
-    sed -i "38s/COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a/COMP_LIBS= libncdf.a libfdict.a libsiestaLAPACK.a libsiestaBLAS.a\n\n\n\n/" gfortran.make
-    sed -i "38s/COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a/COMP_LIBS=\/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Obj\/ncdf\/obj\/libncdf.a \/home\/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Obj\/fdict/obj/libfdict.a \/home/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Obj\/libsiestaLAPACK.a \/home/brainiac\/Documentos\/PackagesSIETRAN\/siesta-master\/Obj\/libsiestaBLAS.a \/usr\/lib\/x86_64-linux-gnu\/libfftw3f.a \/usr\/lib\/x86_64-linux-gnu\/libfftw3.a\n\n\n\n/" gfortran.make
+    sed -i '36s|LDFLAGS =|LDFLAGS=-L'"$var"'\/siesta-master\/Docs\/build\/lib -wl,-rpath='"$var"'\/siesta-master\/Docs\/build\/lib|' gfortran.make
+    sed -i "38s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS="$var"\/siesta-master\/Obj\/ncdf\/obj\/libncdf.a "$var"\/siesta-master\/Obj\/fdict/obj/libfdict.a "$var"\/siesta-master\/Obj\/libsiestaLAPACK.a "$var"\/siesta-master\/Obj\/libsiestaBLAS.a \/usr\/lib\/x86_64-linux-gnu\/libfftw3f.a \/usr\/lib\/x86_64-linux-gnu\/libfftw3.a\n\n\n\n/," gfortran.make
     sed -i "40s/^/BLAS_LIBS=-lblas/" gfortran.make
     sed -i "41s/^/LAPACK_LIBS=-llapack/" gfortran.make
     sed -i "42s/^/SCALAPACK_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
@@ -569,7 +568,7 @@ arch_make() {
     sed -i "48s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
     sed -i "49s/^/MPI_INCLUDE=./" gfortran.make
     sed -i "53s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
-    
+
     cp gfortran.make arch.make
     rm gfortran.make
     cp gfortran.bkp gfortran.make
@@ -589,10 +588,11 @@ InstalacaoSiestaTransiesta() {
 
     wget -c https://gitlab.com/siesta-project/siesta/-/archive/master/siesta-master.tar.gz
     tar -vzxf siesta-master.tar.gz
-
+    var="$(pwd)"
     #Escrevendo arquivo gfortran.make
     echo "#Escrevendo arquivo gfortran.make\n\n"
-    tar vxf siesta-master.tar.gz -C $(pwd) siesta-master/Obj/gfortran.make 
+
+    tar vxf siesta-master.tar.gz -C $var/siesta-master/Obj siesta-master/Obj/gfortran.make
     echo "\n\n"
 
     #./install_netcdf4.bash
@@ -614,7 +614,7 @@ InstalacaoSiestaTransiesta() {
     echo "###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA\n\n"
     cd ..
     cd ..
-    tar vxf siesta-master.tar.gz -C $(pwd) siesta-master/Util/Gen-basis/Makefile
+    tar vxf siesta-master.tar.gz -C $var/siesta-master/Util/Gen-basis siesta-master/Util/Gen-basis
     cd siesta-master/Util/Gen-basis
     sed -i "103s/^/ \t/" Makefile
     cd ..
@@ -624,32 +624,162 @@ InstalacaoSiestaTransiesta() {
     ###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA
     echo "###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA"
     sudo cp tbtrans /usr/local/bin/tbtrans
+    sudo cp ts2ts /usr/local/bin/ts2ts
+    sudo cp tshs2tshs /usr/local/bin/tshs2tshs
     echo "TERMÍNO DAS COPIAS\n\n"
 
-
+    #Voltando para Pasta PackagesSIETRANINEL
+    cd ..
+    cd ..
 }
 
-SiestaTransiesta() {
+Inelastica() {
 
-    if [ -e "PackagesSIETRAN" ]; then
+    ###INSTALAÇÃO DO INELASTICA 446
+    echo "###INSTALAÇÃO DO INELASTICA 446\n\n"
+    
+    
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+    sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+    sudo dpkg -i python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-minimal_2.7.16-1_amd64.deb
+    sudo dpkg -i python2-minimal_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-minimal_2.7.16-1_amd64.deb
+    sudo dpkg -i python-minimal_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi6_3.2.1-9_amd64.deb
+    sudo dpkg -i libffi6_3.2.1-9_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/r/readline/libreadline7_7.0-5_amd64.deb
+    sudo dpkg -i libreadline7_7.0-5_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
+    sudo dpkg -i libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7_2.7.16-2+deb10u1_amd64.deb
+    sudo dpkg -i python2.7_2.7.16-2+deb10u1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-stdlib_2.7.16-1_amd64.deb
+    sudo dpkg -i libpython2-stdlib_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-stdlib_2.7.16-1_amd64.deb
+    sudo dpkg -i libpython-stdlib_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2_2.7.16-1_amd64.deb
+    sudo dpkg -i python2_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python_2.7.16-1_amd64.deb
+    sudo dpkg -i python_2.7.16-1_amd64.deb
+
+
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/gcc-7-base_7.5.0-6ubuntu2_amd64.deb
+    sudo dpkg -i gcc-7-base_7.5.0-6ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/cpp-7_7.5.0-6ubuntu2_amd64.deb
+    sudo dpkg -i cpp-7_7.5.0-6ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libasan4_7.5.0-6ubuntu2_amd64.deb
+    sudo dpkg -i libasan4_7.5.0-6ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libubsan0_7.5.0-6ubuntu2_amd64.deb
+    sudo dpkg -i libubsan0_7.5.0-6ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libcilkrts5_7.5.0-6ubuntu2_amd64.deb
+    sudo dpkg -i libcilkrts5_7.5.0-6ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-8/gcc-8-base_8.4.0-3ubuntu2_amd64.deb
+    sudo dpkg -i gcc-8-base_8.4.0-3ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-8/libmpx2_8.4.0-3ubuntu2_amd64.deb
+    sudo dpkg -i libmpx2_8.4.0-3ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libgcc-7-dev_7.5.0-6ubuntu2_amd64.deb
+    sudo dpkg -i libgcc-7-dev_7.5.0-6ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/gcc-7_7.5.0-6ubuntu2_amd64.deb
+    sudo dpkg -i gcc-7_7.5.0-6ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libgfortran-7-dev_7.5.0-6ubuntu2_amd64.deb
+    sudo dpkg -i libgfortran-7-dev_7.5.0-6ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/gfortran-7_7.5.0-6ubuntu2_amd64.deb
+    sudo dpkg -i gfortran-7_7.5.0-6ubuntu2_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/e/elpa/libelpa-dev_2016.05.001-6build1_amd64.deb
+    sudo dpkg -i libelpa-dev_2016.05.001-6build1_amd64.deb
+
+
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_40.8.0-1_all.deb
+    sudo dpkg -i python-pkg-resources_40.8.0-1_all.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy_1.16.2-1_amd64.deb
+    sudo dpkg -i python-numpy_1.16.2-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/u/underscore/libjs-underscore_1.9.1~dfsg-1_all.deb
+    sudo dpkg -i libjs-underscore_1.9.1~dfsg-1_all.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/s/sphinx/libjs-sphinxdoc_1.8.4-1_all.deb
+    sudo dpkg -i libjs-sphinxdoc_1.8.4-1_all.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-doc_1.16.2-1_all.deb
+    sudo dpkg -i python-numpy-doc_1.16.2-1_all.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+    sudo dpkg -i libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dbg_2.7.16-1_amd64.deb
+    sudo dpkg -i libpython2-dbg_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dbg_2.7.16-1_amd64.deb
+    sudo dpkg -i libpython-dbg_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+    sudo dpkg -i python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dbg_2.7.16-1_amd64.deb
+    sudo dpkg -i python2-dbg_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dbg_2.7.16-1_amd64.deb
+    sudo dpkg -i python-dbg_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-dbg_1.16.2-1_amd64.deb
+    sudo dpkg -i python-numpy-dbg_1.16.2-1_amd64.deb
+
+
+
+    wget -c ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-3.6.3.tar.gz
+    tar vxf netcdf-3.6.3.tar.gz
+    cd netcdf-3.6.3
+    ./configure
+    make check
+    make install
+
+
+    ##Dependencias
+
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python-h5py_2.9.0-7_amd64.deb
+    sudo dpkg -i python-h5py_2.9.0-7_amd64.deb
+
+
+    wget -c https://files.pythonhosted.org/packages/5f/97/a58afbcf40e8abecededd9512978b4e4915374e5b80049af082f49cebe9a/h5py-2.10.0.tar.gz
+    tar vxf h5py-2.10.0.tar.gz
+    cd h5py-2.10.0
+
+    cd ..
+
+    wget -c https://github.com/Unidata/netcdf4-python/archive/master.zip
+    sudo unzip -o master.zip
+    cd netcdf4-python-master
+    sudo python setup.py build
+    sudo python setup.py install
+    cd test && python run_all.py
+
+    cd ..
+
+
+    wget -c https://sourceforge.net/projects/inelastica/files/inelastica-code-446.zip/download
+    sudo unzip -o download
+    cd inelastica-code-446 
+    rm -r build
+    sudo python setup.py build --fcompiler=gfortran
+    sudo python3 setup.py install 
+    
+    chmod -R go+rx /usr/lib/python3.8/site-packages/Inelastica
+    echo "TERMÍNO DA INSTALAÇÃO DO INELASTICA 446\n\n"
+}
+
+SiestaTransiestaInelastica() {
+
+    if [ -e "PackagesSIETRANINEL" ]; then
         echo 'O DIRETÓRIO \033[32mPackagesSIETRAN"\033[00m EXISTE
         \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
         sleep 2
-        cd PackagesSIETRAN
+        cd PackagesSIETRANINEL
         InstalacaoSiestaTransiesta
+        Inelastica
 
     else
         echo 'O DIRETÓRIO \033[32m"PackagesSIETRAN"\033[00m NÃO EXISTE
         \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
-        mkdir PackagesSIETRAN
-        cd PackagesSIETRAN
+        mkdir PackagesSIETRANINEL
+        cd PackagesSIETRANINEL
         sleep 2
         InstalacaoSiestaTransiesta
-
+        Inelastica
     fi
 
 }
-
 
 ####INICIANDO SISTEMA####
 echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
@@ -659,7 +789,7 @@ while :; do
 
     echo '\033[05;37m                     ####ESCOLHA A OPÇÃO####\033[00;00m
     \n\033[01;36m 1 - INSTALAR OS PACOTES INICIAIS PARA SIESTA/TRANSIESTA\033[00;00m
-    \n\033[01;32m 2 - INSTALAR SIESTA/TRANSIESTA\033[00;00m
+    \n\033[01;32m 2 - INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA\033[00;00m
     \n\033[01;31m 3 - EXIT\033[00;00m
     \n\nDIGITE A NUMERAÇÃO: '
 
@@ -682,7 +812,7 @@ while :; do
         Packages
     fi ;;
 
-    2) SiestaTransiesta ;;
+    2) SiestaTransiestaInelastica ;;
 
     3) exit ;;
 
