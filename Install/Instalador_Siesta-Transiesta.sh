@@ -751,18 +751,27 @@ InstalacaoSiestaTransiesta() {
     echo "\n\n"
 
     ###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA
-    echo "###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA"
+    echo "###COMPIANDO O PROGRAMA TBtrans DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA\n\n"
+    echo '#OBS: Se quiser copiar Outros software utilize entre na pasta do programa e utilize o comando\033[05;33m"sudo cp NomeDoPrograma /usr/local/bin/NomeDoPrograma"\033[00;00m\n\n'
+    sleep 3
+
+    #PASTA TBtrans
+    echo "#PASTA TBtrans\n\n"
+    cd Util/TS/TBtrans
     sudo cp tbtrans /usr/local/bin/tbtrans
-    sudo cp ts2ts /usr/local/bin/ts2ts
-    sudo cp tshs2tshs /usr/local/bin/tshs2tshs
+   
     echo "TERMÍNO DAS COPIAS\n\n"
+
+    #TERMÍNO DA INSTALAÇÃO DO INELASTICA 446  
+    echo "#TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA\n\n"
+    sleep 3
 
     #Voltando para Pasta PackagesSIETRANINEL
     cd ..
     cd ..
+    cd ..
+    cd ..
 }
-
-#ORGANIZAR COPIA DOS PROGRAMAS SIESTA | TROCA DE PASTAS E .BASH DO INELASTICA | VISUALIZAÇÃO GERAL DO PROGRAMA SHELL
 
 InstalacaoInelastica() {
 
