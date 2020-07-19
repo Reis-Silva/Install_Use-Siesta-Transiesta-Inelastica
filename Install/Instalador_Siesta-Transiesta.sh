@@ -715,26 +715,44 @@ Inelastica() {
     sudo dpkg -i python-dbg_2.7.16-1_amd64.deb
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-dbg_1.16.2-1_amd64.deb
     sudo dpkg -i python-numpy-dbg_1.16.2-1_amd64.deb
-
-
-
-    wget -c ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-3.6.3.tar.gz
-    tar vxf netcdf-3.6.3.tar.gz
-    cd netcdf-3.6.3
-    ./configure
-    make check
-    make install
-
-
-    ##Dependencias
-
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/six/python-six_1.12.0-2_all.deb
+    sudo dpkg -i python-six_1.12.0-2_all.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
+    sudo dpkg -i libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python-mpi4py_3.0.2-13_amd64.deb
+    sudo dpkg -i python-mpi4py_3.0.2-13_amd64.deb
     wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python-h5py_2.9.0-7_amd64.deb
     sudo dpkg -i python-h5py_2.9.0-7_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_44.0.0-3_all.deb
+    sudo dpkg -i python-pkg-resources_44.0.0-3_all.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-setuptools_44.0.0-3_all.deb
+    sudo dpkg -i python-setuptools_44.0.0-3_all.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7_2.7.16-2+deb10u1_amd64.deb
+    sudo dpkg -i libpython2.7_2.7.16-2+deb10u1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
+    sudo dpkg -i libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dev_2.7.16-1_amd64.deb
+    sudo dpkg -i libpython2-dev_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dev_2.7.16-1_amd64.deb
+    sudo dpkg -i libpython-dev_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dev_2.7.16-2+deb10u1_amd64.deb
+    sudo dpkg -i python2.7-dev_2.7.16-2+deb10u1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dev_2.7.16-1_amd64.deb
+    sudo dpkg -i python2-dev_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dev_2.7.16-1_amd64.deb
+    sudo dpkg -i python-dev_2.7.16-1_amd64.deb
+    wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.2.1-9_amd64.deb
+    sudo dpkg -i libffi-dev_3.2.1-9_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/c/cython/cython_0.29.14-0.1ubuntu3_amd64.deb
+    sudo dpkg -i cython_0.29.14-0.1ubuntu3_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/n/netcdf/libnetcdf13_4.6.2-1build1_amd64.deb
+    sudo dpkg -i libnetcdf13_4.6.2-1build1_amd64.deb
+    wget -c http://ftp.br.debian.org/debian/pool/main/c/cftime/python-cftime_1.0.3.4-1_amd64.deb
+    sudo dpkg -i python-cftime_1.0.3.4-1_amd64.deb
+    wget -c http://ftp.br.debian.org/debian/pool/main/n/netcdf4-python/python-netcdf4_1.4.2-1+b1_amd64.deb
+    sudo dpkg -i python-netcdf4_1.4.2-1+b1_amd64.deb
 
-
-    wget -c https://files.pythonhosted.org/packages/5f/97/a58afbcf40e8abecededd9512978b4e4915374e5b80049af082f49cebe9a/h5py-2.10.0.tar.gz
-    tar vxf h5py-2.10.0.tar.gz
-    cd h5py-2.10.0
+    # instalar destino de inelastica | reinstalar python3-netcdf4 |
 
     cd ..
 
@@ -747,7 +765,11 @@ Inelastica() {
 
     cd ..
 
+    wget -c https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/netcdf4-python/1.5.3-1build4/netcdf4-python_1.5.3.orig.tar.gz
+    tar vxf netcdf4-python_1.5.3.orig.tar.gz
 
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-100_1.10.0-patch1+docs-4_amd64.deb
+    sudo dpkg -i libhdf5-100_1.10.0-patch1+docs-4_amd64.deb
     wget -c https://sourceforge.net/projects/inelastica/files/inelastica-code-446.zip/download
     sudo unzip -o download
     cd inelastica-code-446 
