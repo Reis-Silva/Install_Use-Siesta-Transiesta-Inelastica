@@ -666,8 +666,8 @@ Packages() {
     sudo apt-get dist-upgrade -y
     echo "\n\n"
 
-    ##FIM DAS INSTALAÇÕES DOS PACOTES
-    echo '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES"\033[00;00m\n\n'
+    ##FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS
+    echo '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS"\033[00;00m\n\n'
     sleep 3
 
     cd ..
@@ -764,59 +764,65 @@ InstalacaoSiestaTransiesta() {
 
 #ORGANIZAR COPIA DOS PROGRAMAS SIESTA | TROCA DE PASTAS E .BASH DO INELASTICA | VISUALIZAÇÃO GERAL DO PROGRAMA SHELL
 
-Inelastica() {
+InstalacaoInelastica() {
 
     ###INSTALAÇÃO DO INELASTICA 446
     echo "###INSTALAÇÃO DO INELASTICA 446\n\n"
     
-    # instalar destino de inelastica |
+    # instalar destino de inelastica 
+    wget -c https://sourceforge.net/projects/inelastica/files/latest/download
+    sudo unzip -o download.zip
     cd inelastica-code-446 
     rm -r build
     sudo python setup.py build --fcompiler=gfortran
-    sudo python3 setup.py install 
-    
-    chmod -R go+rx /usr/lib/python3.8/site-packages/Inelastica
-    echo "TERMÍNO DA INSTALAÇÃO DO INELASTICA 446\n\n"
+    var3="/usr/local/software/Inelastica446"
+    sudo python setup.py install --prefix=$var3
+    cd ${HOME}
+    sed -i '$ { s/^.*$/&\n\n#INELASTICA446/ }' .bashrc
+    sed -i '$ { s|^.*$|&\nPYTHONPATH=$PYTHONPATH:'"$var3"'/lib/python2.7/site-packages\nexport PYTHONPATH| }' .bashrc
+    sed -i '$ { s|^.*$|&\nPATH=$PATH:'"$var3"'/bin\nexport PATH| }' .bashrc
+
+    #TERMÍNO DA INSTALAÇÃO DO INELASTICA 446  
+    echo "#TERMÍNO DA INSTALAÇÃO DO INELASTICA 446\n\n"
+
+    echo '\033[05;33m"#TERMÍNO DAS INSTALAÇÕES SIESTA/TRANSIESTA E INELASTICA"\033[00;00m\n\n'
+    sleep 3
+
+    cd raizInstalacao
 }
 
-SiestaTransiestaInelastica() {
+IntalacaoSiestaTransiestaInelastica() {
 
     if [ -e "PackagesSIETRANINEL" ]; then
         echo 'O DIRETÓRIO \033[32mPackagesSIETRAN"\033[00m EXISTE
         \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
+
         sleep 2
+        
         cd PackagesSIETRANINEL
         InstalacaoSiestaTransiesta
-        Inelastica
+
+        InstalacaoInelastica
 
     else
         echo 'O DIRETÓRIO \033[32m"PackagesSIETRAN"\033[00m NÃO EXISTE
         \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
-        mkdir PackagesSIETRANINEL
-        cd PackagesSIETRANINEL
+
         sleep 2
+        mkdir PackagesSIETRANINEL
+
+        cd PackagesSIETRANINEL
         InstalacaoSiestaTransiesta
-        Inelastica
+
+        InstalacaoInelastica
+
     fi
 
 }
 
-####INICIANDO SISTEMA####
-echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
-sleep 3
+InstalaçãoPacotesEssenciais(){
 
-while :; do
-
-    echo '\033[05;37m                     ####ESCOLHA A OPÇÃO####\033[00;00m
-    \n\033[01;36m 1 - INSTALAR OS PACOTES INICIAIS PARA SIESTA/TRANSIESTA\033[00;00m
-    \n\033[01;32m 2 - INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA\033[00;00m
-    \n\033[01;31m 3 - EXIT\033[00;00m
-    \n\nDIGITE A NUMERAÇÃO: '
-
-    read input
-    case $input in
-
-    1) if [ -e "DownloadPackage" ]; then
+    if [ -e "DownloadPackage" ]; then
         echo 'O DIRETÓRIO \033[32mDownloadPackage"\033[00m EXISTE
         \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"DownloadPackage"\033[00;00m\n\n'
         sleep 2
@@ -830,9 +836,29 @@ while :; do
         cd DownloadPackage
         sleep 2
         Packages
-    fi ;;
+    fi
+}
 
-    2) SiestaTransiestaInelastica ;;
+####INICIANDO SISTEMA####
+echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
+sleep 3
+
+raizInstalacao="$(pwd)"
+
+while :; do
+
+    echo '\033[05;37m                     ####ESCOLHA A OPÇÃO####\033[00;00m
+    \n\033[01;36m [1] - INSTALAR OS PACOTES INICIAIS PARA SIESTA/TRANSIESTA\033[00;00m
+    \n\033[01;32m [2] - INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA\033[00;00m
+    \n\033[01;31m [3] - EXIT\033[00;00m
+    \n\nDIGITE A NUMERAÇÃO E PRESSIONE ENTER: '
+
+    read input
+    case $input in
+
+    1) InstalaçãoPacotesEssenciais ;;
+
+    2) IntalacaoSiestaTransiestaInelastica ;;
 
     3) exit ;;
 
