@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt install yad
+
 Packages() {
 
     clear
@@ -752,7 +754,7 @@ InstalacaoSiestaTransiesta() {
 
     ###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA
     echo "###COMPIANDO O PROGRAMA TBtrans DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA\n\n"
-    echo '#OBS: Se quiser copiar Outros software utilize entre na pasta do programa e utilize o comando\033[05;33m"sudo cp NomeDoPrograma /usr/local/bin/NomeDoPrograma"\033[00;00m\n\n'
+    echo '#OBS: Para outros software da pasta "UTILS" entre na pasta do programa e utilize o comando\033[05;33m"sudo cp NomeDoPrograma /usr/local/bin/NomeDoPrograma"\033[00;00m\n\n'
     sleep 3
 
     #PASTA TBtrans
