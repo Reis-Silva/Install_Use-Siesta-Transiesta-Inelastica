@@ -850,6 +850,38 @@ InstalaçãoPacotesEssenciais(){
     fi
 }
 
+github=$( yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0	\
+	--image IronGit.png --image-on-top	\
+	--text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
+	Page: https://github.com/Reis-Silva/Install-Use-Siesta-Transiesta" --text-align=center	\
+	)
+
+instalacao=$(yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" --buttons-layout=end --button=gtk-cancel:1 --button=gtk-yes:0\
+    	--image SIESTA_INELASTICA.png --image-on-top	\
+    	--text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
+    	\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center	\
+   	 --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK 	true \
+    	 --field="INSTALAÇÃO - SIESTA/TRANSIESTA/INELASTICA":CHK  true \ 	
+   	 )
+   	 
+op=$(echo "$instalacao" | cut -d "|" -f 1)
+op2=$(echo "$instalacao" | cut -d "|" -f 2)
+
+if [ "$op" = "TRUE" ] && [ "$op2" = "TRUE" ]; then
+
+	echo "Verdade"
+	
+elif [ "$op" = "TRUE" ] && [ "$op2" = "FALSE" ]; then
+
+	echo "PSEUDO-FALSO1"
+	
+elif [ "$op" = "FALSE" ] && [ "$op2" = "TRUE" ]; then
+
+	echo "PSEUDO-FALSO2"
+else
+	echo ""
+fi
+
 ####INICIANDO SISTEMA####
 echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
 sleep 3
