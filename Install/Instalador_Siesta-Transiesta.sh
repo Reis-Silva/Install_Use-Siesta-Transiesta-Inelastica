@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install yad
+sudo apt install yad -y
 
 Packages() {
 
@@ -537,7 +537,6 @@ Packages() {
     sudo dpkg -i gausssum_3.0.2-2_all.deb
     echo "\n\n"
 
-
     #Pacotes para o INELASTICA
     echo "#Pacotes para o INELASTICA\n\n"
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
@@ -761,10 +760,10 @@ InstalacaoSiestaTransiesta() {
     echo "#PASTA TBtrans\n\n"
     cd Util/TS/TBtrans
     sudo cp tbtrans /usr/local/bin/tbtrans
-   
+
     echo "TERMÍNO DAS COPIAS\n\n"
 
-    #TERMÍNO DA INSTALAÇÃO DO INELASTICA 446  
+    #TERMÍNO DA INSTALAÇÃO DO INELASTICA 446
     echo "#TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA\n\n"
     sleep 3
 
@@ -779,11 +778,11 @@ InstalacaoInelastica() {
 
     ###INSTALAÇÃO DO INELASTICA 446
     echo "###INSTALAÇÃO DO INELASTICA 446\n\n"
-    
-    # instalar destino de inelastica 
+
+    # instalar destino de inelastica
     wget -c https://sourceforge.net/projects/inelastica/files/latest/download
     sudo unzip -o download.zip
-    cd inelastica-code-446 
+    cd inelastica-code-446
     rm -r build
     sudo python setup.py build --fcompiler=gfortran
     var3="/usr/local/software/Inelastica446"
@@ -793,7 +792,7 @@ InstalacaoInelastica() {
     sed -i '$ { s|^.*$|&\nPYTHONPATH=$PYTHONPATH:'"$var3"'/lib/python2.7/site-packages\nexport PYTHONPATH| }' .bashrc
     sed -i '$ { s|^.*$|&\nPATH=$PATH:'"$var3"'/bin\nexport PATH| }' .bashrc
 
-    #TERMÍNO DA INSTALAÇÃO DO INELASTICA 446  
+    #TERMÍNO DA INSTALAÇÃO DO INELASTICA 446
     echo "#TERMÍNO DA INSTALAÇÃO DO INELASTICA 446\n\n"
 
     echo '\033[05;33m"#TERMÍNO DAS INSTALAÇÕES SIESTA/TRANSIESTA E INELASTICA"\033[00;00m\n\n'
@@ -809,7 +808,7 @@ IntalacaoSiestaTransiestaInelastica() {
         \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
 
         sleep 2
-        
+
         cd PackagesSIETRANINEL
         InstalacaoSiestaTransiesta
 
@@ -831,7 +830,7 @@ IntalacaoSiestaTransiestaInelastica() {
 
 }
 
-InstalaçãoPacotesEssenciais(){
+InstalaçãoPacotesEssenciais() {
 
     if [ -e "DownloadPackage" ]; then
         echo 'O DIRETÓRIO \033[32mDownloadPackage"\033[00m EXISTE
@@ -850,61 +849,48 @@ InstalaçãoPacotesEssenciais(){
     fi
 }
 
-github=$( yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0	\
-	--image IronGit.png --image-on-top	\
-	--text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
-	Page: https://github.com/Reis-Silva/Install-Use-Siesta-Transiesta" --text-align=center	\
-	)
 
-instalacao=$(yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" --buttons-layout=end --button=gtk-cancel:1 --button=gtk-yes:0\
-    	--image SIESTA_INELASTICA.png --image-on-top	\
-    	--text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
-    	\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center	\
-   	 --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK 	true \
-    	 --field="INSTALAÇÃO - SIESTA/TRANSIESTA/INELASTICA":CHK  true \ 	
-   	 )
-   	 
-op=$(echo "$instalacao" | cut -d "|" -f 1)
-op2=$(echo "$instalacao" | cut -d "|" -f 2)
-
-if [ "$op" = "TRUE" ] && [ "$op2" = "TRUE" ]; then
-
-	echo "Verdade"
-	
-elif [ "$op" = "TRUE" ] && [ "$op2" = "FALSE" ]; then
-
-	echo "PSEUDO-FALSO1"
-	
-elif [ "$op" = "FALSE" ] && [ "$op2" = "TRUE" ]; then
-
-	echo "PSEUDO-FALSO2"
-else
-	echo ""
-fi
-
-####INICIANDO SISTEMA####
-echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
-sleep 3
-
-raizInstalacao="$(pwd)"
 
 while :; do
 
-    echo '\033[05;37m                     ####ESCOLHA A OPÇÃO####\033[00;00m
-    \n\033[01;36m [1] - INSTALAR OS PACOTES INICIAIS PARA SIESTA/TRANSIESTA\033[00;00m
-    \n\033[01;32m [2] - INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA\033[00;00m
-    \n\033[01;31m [3] - EXIT\033[00;00m
-    \n\nDIGITE A NUMERAÇÃO E PRESSIONE ENTER: '
+    ####INICIANDO SISTEMA####
+    echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
+    sleep 3
 
-    read input
-    case $input in
+    raizInstalacao="$(pwd)"
+    github=$(
+        yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
+            --image IronGit.png --image-on-top \
+            --text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
+	    Page: https://github.com/Reis-Silva/Install-Use-Siesta-Transiesta" --text-align=center
+    )
 
-    1) InstalaçãoPacotesEssenciais ;;
+    instalacao=$(
+        yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" --buttons-layout=end --button=gtk-cancel:1 --button=gtk-yes:0 --image SIESTA_INELASTICA.png --image-on-top \
+            --text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
+    	\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center \
+            --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK true \
+            --field="INSTALAÇÃO - SIESTA/TRANSIESTA/INELASTICA":CHK true \ 
+    )
 
-    2) IntalacaoSiestaTransiestaInelastica ;;
+    op=$(echo "$instalacao" | cut -d "|" -f 1)
+    op2=$(echo "$instalacao" | cut -d "|" -f 2)
 
-    3) exit ;;
+    if [ "$op" = "TRUE" ] && [ "$op2" = "TRUE" ]; then
 
-    *) echo "Opcao Invalida!" ;;
-    esac
+        InstalaçãoPacotesEssenciais
+
+        IntalacaoSiestaTransiestaInelastica
+
+    elif [ "$op" = "TRUE" ] && [ "$op2" = "FALSE" ]; then
+
+        InstalaçãoPacotesEssenciais
+
+    elif [ "$op" = "FALSE" ] && [ "$op2" = "TRUE" ]; then
+
+        IntalacaoSiestaTransiestaInelastica
+    else
+        exit
+    fi
+
 done
