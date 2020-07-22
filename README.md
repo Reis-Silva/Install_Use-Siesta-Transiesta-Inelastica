@@ -23,7 +23,7 @@ OBS2: Instalação efetuada com todas as opções, sendo o sistema no inicio ape
 
 
 
-############################################################################################################################################################
+########################################################################################################################################################################################################
 # Install-Use-Siesta-Transiesta-Inelastica
 
 ## Siesta / Transiesta / Inelastica software installation:
@@ -44,4 +44,4 @@ OBS2: Installation performed with all options, with the system at the beginning 
 
 ### Leave comments and Likes to start the installers upgrade operation.
 
-### []s
+### []'s
