@@ -850,35 +850,37 @@ InstalacaoPacotesEssenciais() {
 }
 
 
-    
-    github=$(
-            yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
+    ####INICIANDO SISTEMA####
+    echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
+
+    sleep 3
+
+    github=$(yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
             --image="img/IronGit.png" --image-on-top \
             --text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
 	        Page: https://github.com/Reis-Silva/Install-Use-Siesta-Transiesta" --text-align=center
+
 while :; do
 
-    ####INICIANDO SISTEMA####
-    echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
-    sleep 3
     raizInstalacao="$(pwd)"
-
-    )
-
-    instalacao=$(
-        yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" --buttons-layout=end --button=gtk-cancel:1 --button=gtk-yes:0 --image="img/SIESTA_INELASTICA.png" --image-on-top \
-            --text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
-    	\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center \
-            --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK   \
-            --field="INSTALAÇÃO - SIESTA/TRANSIESTA/INELASTICA":CHK \ 
-    )
-
+    instalacao=$(yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" \
+    		--image="img/SIESTA_INELASTICA.png" --image-on-top \
+            	--text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
+    		\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center \
+            --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK  \
+            --field="INSTALAÇÃO - SIESTA/TRANSIESTA/INELASTICA":CHK   \
+            --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2  \
+            
+    		)		
+    
+    escolha=$(echo $?)
     op=$(echo "$instalacao" | cut -d "|" -f 1)
     op2=$(echo "$instalacao" | cut -d "|" -f 2)
+    
 
     if [ "$op" = "TRUE" ] && [ "$op2" = "TRUE" ]; then
 
-        InstalacaoPacotesEssenciais
+        InstalacaoPacotesEssenciais 
 
         IntalacaoSiestaTransiestaInelastica
 
@@ -889,8 +891,12 @@ while :; do
     elif [ "$op" = "FALSE" ] && [ "$op2" = "TRUE" ]; then
 
         IntalacaoSiestaTransiestaInelastica
+    elif [ "$escolha" = 1 ] || [ "$escolha" = 252 ]; then
+    
+    	exit
+    
     else
-        exit
-    fi
-
+        yad --width 325 --height 50 --title "ERROR" --image=dialog-question --buttons-layout=center --button=OK:0 --text="ESCOLHA UMA OPÇÃO DE INSTALAÇÃO" 
+    fi    
+    
 done
