@@ -688,13 +688,13 @@ arch_make() {
     sed -i '22s, gfortran, mpif90,' gfortran.make
     sed -i "24s,^,INCFLAGS += -I"$var"\/siesta-master\/Docs\/build\/include,g" gfortran.make
     sed -i '25s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS=-g -O2 $(INCFLAGS)/' gfortran.make
-    sed -i '36s|LDFLAGS =|LDFLAGS=-L'"$var"'\/siesta-master\/Docs\/build\/lib -wl,-rpath='"$var"'\/siesta-master\/Docs\/build\/lib|' gfortran.make
-    sed -i "38s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS="$var"\/siesta-master\/Obj\/ncdf\/obj\/libncdf.a "$var"\/siesta-master\/Obj\/fdict/obj/libfdict.a "$var"\/siesta-master\/Obj\/libsiestaLAPACK.a "$var"\/siesta-master\/Obj\/libsiestaBLAS.a \/usr\/lib\/x86_64-linux-gnu\/libfftw3f.a \/usr\/lib\/x86_64-linux-gnu\/libfftw3.a\n\n\n\n/," gfortran.make
-    sed -i "40s/^/BLAS_LIBS=-lblas/" gfortran.make
-    sed -i "41s/^/LAPACK_LIBS=-llapack/" gfortran.make
-    sed -i "42s/^/SCALAPACK_LIBS=\/usr\/lib\/X86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
+    sed -i '36s|LDFLAGS =|LDFLAGS += -L'"$var"'\/siesta-master\/Docs\/build\/lib -Wl,-rpath,'"$var"'\/siesta-master\/Docs\/build\/lib|' gfortran.make
+    sed -i "38s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS += libsiestaLAPACK.a libsiestaBLAS.a libncdf.a libfdict.a\n\n\n\n/," gfortran.make
+    sed -i "40s/^/BLAS_LIBS += -lblas/" gfortran.make
+    sed -i "41s/^/LAPACK_LIBS += -llapack/" gfortran.make
+    sed -i "42s/^/SCALAPACK_LIBS += \/usr\/lib\/x86_64-linux-gnu\/libscalapack-openmpi.so" gfortran.make
     sed -i '44s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
-    sed -i '46s/LIBS =/LIBS =  $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
+    sed -i '46s/LIBS =/LIBS += -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
     sed -i "48s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
     sed -i "49s/^/MPI_INCLUDE=./" gfortran.make
     sed -i "53s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
@@ -710,7 +710,7 @@ arch_make() {
     ######iNSTALANDO SIESTA4.1
     echo "###iNSTALANDO SIESTA4.1\n\n"
     make
-    sudo cp siesta /usr/local/bin/siesta
+    sudo cp siesta /usr/local/bin/siesta -y
     echo "\n\n"
 }
 
@@ -728,10 +728,6 @@ InstalacaoSiestaTransiesta() {
     #./install_netcdf4.bash
     echo "#./install_netcdf4.bash\n\n"
     cd siesta-master/Docs
-    wget -c https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1.12.0/src/hdf5-1.12.0.tar.bz2
-    wget -c https://github.com/Unidata/netcdf-c/archive/v4.7.2.tar.gz
-    wget -c https://github.com/Unidata/netcdf-fortran/archive/v4.5.2.tar.gz
-    wget -c https://zlib.net/zlib-1.2.11.tar.gz
     ./install_netcdf4.bash
     echo "\n\n"
 
@@ -858,7 +854,7 @@ InstalacaoPacotesEssenciais() {
     github=$(yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
             --image="img/IronGit.png" --image-on-top \
             --text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
-	        Page: https://github.com/Reis-Silva/Install-Use-Siesta-Transiesta" --text-align=center
+	        Page: https://github.com/Reis-Silva/Install-Use-Siesta-Transiesta" --text-align=center)
 
 while :; do
 
@@ -870,7 +866,6 @@ while :; do
             --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK  \
             --field="INSTALAÇÃO - SIESTA/TRANSIESTA/INELASTICA":CHK   \
             --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2  \
-            
     		)		
     
     escolha=$(echo $?)
