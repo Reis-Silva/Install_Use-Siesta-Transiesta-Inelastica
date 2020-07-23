@@ -563,28 +563,6 @@ Packages() {
     sudo dpkg -i python2_2.7.16-1_amd64.deb
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python_2.7.16-1_amd64.deb
     sudo dpkg -i python_2.7.16-1_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/gcc-7-base_7.5.0-6ubuntu2_amd64.deb
-    sudo dpkg -i gcc-7-base_7.5.0-6ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/cpp-7_7.5.0-6ubuntu2_amd64.deb
-    sudo dpkg -i cpp-7_7.5.0-6ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libasan4_7.5.0-6ubuntu2_amd64.deb
-    sudo dpkg -i libasan4_7.5.0-6ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libubsan0_7.5.0-6ubuntu2_amd64.deb
-    sudo dpkg -i libubsan0_7.5.0-6ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libcilkrts5_7.5.0-6ubuntu2_amd64.deb
-    sudo dpkg -i libcilkrts5_7.5.0-6ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-8/gcc-8-base_8.4.0-3ubuntu2_amd64.deb
-    sudo dpkg -i gcc-8-base_8.4.0-3ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-8/libmpx2_8.4.0-3ubuntu2_amd64.deb
-    sudo dpkg -i libmpx2_8.4.0-3ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libgcc-7-dev_7.5.0-6ubuntu2_amd64.deb
-    sudo dpkg -i libgcc-7-dev_7.5.0-6ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/gcc-7_7.5.0-6ubuntu2_amd64.deb
-    sudo dpkg -i gcc-7_7.5.0-6ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/libgfortran-7-dev_7.5.0-6ubuntu2_amd64.deb
-    sudo dpkg -i libgfortran-7-dev_7.5.0-6ubuntu2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gcc-7/gfortran-7_7.5.0-6ubuntu2_amd64.deb
-    sudo dpkg -i gfortran-7_7.5.0-6ubuntu2_amd64.deb
     wget -c http://archive.ubuntu.com/ubuntu/pool/universe/e/elpa/libelpa-dev_2016.05.001-6build1_amd64.deb
     sudo dpkg -i libelpa-dev_2016.05.001-6build1_amd64.deb
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_40.8.0-1_all.deb
