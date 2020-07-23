@@ -670,8 +670,8 @@ arch_make() {
     sed -i "38s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS += libsiestaLAPACK.a libsiestaBLAS.a libncdf.a libfdict.a\n\n\n\n/," gfortran.make
     sed -i "40s/^/BLAS_LIBS += -lblas/" gfortran.make
     sed -i "41s/^/LAPACK_LIBS += -llapack/" gfortran.make
-    sed -i "42s/^/SCALAPACK_LIBS += \/usr\/lib\/x86_64-linux-gnu\/libscalapack-openmpi.so" gfortran.make
-    sed -i '44s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DFC_HAVE_ABORT -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
+    sed -i "42s/^/SCALAPACK_LIBS += \/usr\/lib\/x86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
+    sed -i '44s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX)-DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
     sed -i '46s/LIBS =/LIBS += -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
     sed -i "48s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
     sed -i "49s/^/MPI_INCLUDE=./" gfortran.make
@@ -688,8 +688,21 @@ arch_make() {
     ######iNSTALANDO SIESTA4.1
     echo "###iNSTALANDO SIESTA4.1\n\n"
     make
-    sudo cp siesta /usr/local/bin/siesta -y
+    sudo cp siesta /usr/local/bin/siesta 
     echo "\n\n"
+}
+
+arch_make_UTILS(){
+
+    cp arch.make archSIESTAORIGINAL.bkp
+
+    #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
+    echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
+
+    sed -i '24cINCFLAGS += -I'"$var"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' gfortran.make
+    sed -i '38cCOMP_LIBS=/home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/ncdf/obj/libncdf.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libfdict.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaBLAS.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a' gfortran.make
+    sed -i '46cLIBS += $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' gfortran.make
+
 }
 
 InstalacaoSiestaTransiesta() {
@@ -716,6 +729,9 @@ InstalacaoSiestaTransiesta() {
 
     ###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA
     echo "###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA\n\n"
+
+    arch_make_UTILS
+    
     cd ..
     cd ..
     tar vxf siesta-master.tar.gz -C $var/siesta-master/Util/Gen-basis siesta-master/Util/Gen-basis
