@@ -816,7 +816,6 @@ Instalacao_Inelastica() {
     #TERMÍNO DA INSTALAÇÃO DO INELASTICA 
     echo "#TERMÍNO DA INSTALAÇÃO DO INELASTICA\n\n"
 
-    echo '\033[05;33m"#TERMÍNO DAS INSTALAÇÕES SIESTA/TRANSIESTA E INELASTICA"\033[00;00m\n\n'
     sleep 3
 
     cd raizInstalacao
@@ -868,7 +867,7 @@ while :; do
             	--text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
     		\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center \
             --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK  \
-            --field="INSTALAÇÃO - SIESTA/TRANSIESTA/INELASTICA":CHK   \
+            --field="INSTALAÇÃO - SIESTA/TRANSIESTA":CHK   \
             --field="INSTALAÇÃO - INELASTICA":CHK   \
             --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2  \
     		)		
