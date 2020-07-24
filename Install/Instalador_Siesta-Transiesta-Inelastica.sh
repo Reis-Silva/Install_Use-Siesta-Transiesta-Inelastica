@@ -806,15 +806,15 @@ Instalacao_Inelastica() {
     cd inelastica-code-446
     rm -r build
     sudo python setup.py build --fcompiler=gfortran
-    var3="/usr/local/software/Inelastica446"
+    var3="/usr/local/software/Inelastica"
     sudo python setup.py install --prefix=$var3
     cd ${HOME}
     sed -i '$ { s/^.*$/&\n\n#INELASTICA446/ }' .bashrc
     sed -i '$ { s|^.*$|&\nPYTHONPATH=$PYTHONPATH:'"$var3"'/lib/python2.7/site-packages\nexport PYTHONPATH| }' .bashrc
     sed -i '$ { s|^.*$|&\nPATH=$PATH:'"$var3"'/bin\nexport PATH| }' .bashrc
 
-    #TERMÍNO DA INSTALAÇÃO DO INELASTICA 446
-    echo "#TERMÍNO DA INSTALAÇÃO DO INELASTICA 446\n\n"
+    #TERMÍNO DA INSTALAÇÃO DO INELASTICA 
+    echo "#TERMÍNO DA INSTALAÇÃO DO INELASTICA\n\n"
 
     echo '\033[05;33m"#TERMÍNO DAS INSTALAÇÕES SIESTA/TRANSIESTA E INELASTICA"\033[00;00m\n\n'
     sleep 3
