@@ -633,6 +633,26 @@ Packages() {
     cd ..
 }
 
+InstalacaoPacotesEssenciais() {
+
+    if [ -e "DownloadPackage" ]; then
+        echo 'O DIRETÓRIO \033[32mDownloadPackage"\033[00m EXISTE
+        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"DownloadPackage"\033[00;00m\n\n'
+        sleep 2
+        cd DownloadPackage
+        Packages
+
+    else
+        echo 'O DIRETÓRIO \033[32m"DownloadPackage"\033[00m NÃO EXISTE
+        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"DownloadPackage"\033[00;00m\n\n'
+        mkdir DownloadPackage
+        cd DownloadPackage
+        sleep 2
+        Packages
+    fi
+}
+
+
 arch_make() {
 
     rm arch.make
@@ -686,7 +706,7 @@ arch_make_UTILS(){
 
 }
 
-InstalacaoSiestaTransiesta() {
+Instalacao_SiestaTransiesta() {
 
     wget -c https://gitlab.com/siesta-project/siesta/-/archive/master/siesta-master.tar.gz
     tar -vzxf siesta-master.tar.gz
@@ -734,18 +754,48 @@ InstalacaoSiestaTransiesta() {
 
     echo "TERMÍNO DAS COPIAS\n\n"
 
-    #TERMÍNO DA INSTALAÇÃO DO INELASTICA 446
+    ##TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA
     echo "#TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA\n\n"
     sleep 3
 
-    #Voltando para Pasta PackagesSIETRANINEL
+    #Voltando para Pasta principal
+    cd ..
     cd ..
     cd ..
     cd ..
     cd ..
 }
 
-InstalacaoInelastica() {
+IntalacaoSiestaTransiesta() {
+
+    if [ -e "PackagesSIETRANINEL" ]; then
+        echo 'O DIRETÓRIO \033[32mPackagesSIETRAN"\033[00m EXISTE
+        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
+
+        sleep 2
+
+        cd PackagesSIETRANINEL
+        Instalacao_SiestaTransiesta
+
+        
+
+    else
+        echo 'O DIRETÓRIO \033[32m"PackagesSIETRAN"\033[00m NÃO EXISTE
+        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
+
+        sleep 2
+        mkdir PackagesSIETRANINEL
+
+        cd PackagesSIETRANINEL
+        Instalacao_SiestaTransiesta
+
+        
+
+    fi
+
+}
+
+Instalacao_Inelastica() {
 
     ###INSTALAÇÃO DO INELASTICA 446
     echo "###INSTALAÇÃO DO INELASTICA 446\n\n"
@@ -772,52 +822,31 @@ InstalacaoInelastica() {
     cd raizInstalacao
 }
 
-IntalacaoSiestaTransiestaInelastica() {
+IntalacaoInelastica() {
 
-    if [ -e "PackagesSIETRANINEL" ]; then
-        echo 'O DIRETÓRIO \033[32mPackagesSIETRAN"\033[00m EXISTE
-        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
+    if [ -e "PackagesINELASTICA" ]; then
+        echo 'O DIRETÓRIO \033[32mPackagesINELASTICA"\033[00m EXISTE
+        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesINELASTICA"\033[00;00m\n\n'
 
         sleep 2
 
-        cd PackagesSIETRANINEL
-        InstalacaoSiestaTransiesta
+        cd PackagesINELASTICA
+        Instalacao_Inelastica
 
-        InstalacaoInelastica
+        
 
     else
-        echo 'O DIRETÓRIO \033[32m"PackagesSIETRAN"\033[00m NÃO EXISTE
-        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
+        echo 'O DIRETÓRIO \033[32m"PackagesINELASTICA"\033[00m NÃO EXISTE
+        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesINELASTICA"\033[00;00m\n\n'
 
         sleep 2
-        mkdir PackagesSIETRANINEL
+        mkdir PackagesINELASTICA
 
-        cd PackagesSIETRANINEL
-        InstalacaoSiestaTransiesta
-
-        InstalacaoInelastica
+        cd PackagesINELASTICA
+        Instalacao_Inelastica
 
     fi
 
-}
-
-InstalacaoPacotesEssenciais() {
-
-    if [ -e "DownloadPackage" ]; then
-        echo 'O DIRETÓRIO \033[32mDownloadPackage"\033[00m EXISTE
-        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"DownloadPackage"\033[00;00m\n\n'
-        sleep 2
-        cd DownloadPackage
-        Packages
-
-    else
-        echo 'O DIRETÓRIO \033[32m"DownloadPackage"\033[00m NÃO EXISTE
-        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"DownloadPackage"\033[00;00m\n\n'
-        mkdir DownloadPackage
-        cd DownloadPackage
-        sleep 2
-        Packages
-    fi
 }
 
 
@@ -840,33 +869,51 @@ while :; do
     		\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center \
             --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK  \
             --field="INSTALAÇÃO - SIESTA/TRANSIESTA/INELASTICA":CHK   \
+            --field="INSTALAÇÃO - INELASTICA":CHK   \
             --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2  \
     		)		
     
     escolha=$(echo $?)
     op=$(echo "$instalacao" | cut -d "|" -f 1)
     op2=$(echo "$instalacao" | cut -d "|" -f 2)
-    
+    op3=$(echo "$instalacao" | cut -d "|" -f 3)
 
-    if [ "$op" = "TRUE" ] && [ "$op2" = "TRUE" ]; then
+    if [ "$op" = "TRUE" ]; then
 
         InstalacaoPacotesEssenciais 
 
-        IntalacaoSiestaTransiestaInelastica
+    else
+        echo ""
+    fi
 
-    elif [ "$op" = "TRUE" ] && [ "$op2" = "FALSE" ]; then
-
-        InstalacaoPacotesEssenciais
-
-    elif [ "$op" = "FALSE" ] && [ "$op2" = "TRUE" ]; then
+    if [ "$op2" = "TRUE" ]; then
 
         IntalacaoSiestaTransiestaInelastica
-    elif [ "$escolha" = 1 ] || [ "$escolha" = 252 ]; then
+
+    else
+        echo ""
+    fi    
+
+    if [ "$op3" = "TRUE" ]; then
+
+        InstalacaoInelastica
+
+    else
+        echo ""
+    fi 
+
+    if [ "$escolha" = 1 ] || [ "$escolha" = 252 ]; then
     
     	exit
     
     else
-        yad --width 325 --height 50 --title "ERROR" --image=dialog-question --buttons-layout=center --button=OK:0 --text="ESCOLHA UMA OPÇÃO DE INSTALAÇÃO" 
+        echo ""
+    fi 
+
+    if [ "$op" = "FALSE" ] && [ "$op2" = "FALSE" ] && [ "$op3" = "FALSE" ]; then 
+    yad --width 325 --height 50 --title "ERROR" --image=dialog-question --buttons-layout=center --button=OK:0 --text="ESCOLHA UMA OPÇÃO DE INSTALAÇÃO" 
+    else
+        echo ""
     fi    
     
 done
