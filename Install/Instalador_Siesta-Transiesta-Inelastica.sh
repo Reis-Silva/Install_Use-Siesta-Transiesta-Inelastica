@@ -27,7 +27,7 @@ Packages() {
 
     #Ativando repositorio canoninal e adicionando repositorios
     echo "ativando repositorio canoninal e adicionando repositorios\n\n"
-    sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list -y
+    sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
     echo "\n\n"
 
     #Atualização de repositorios e bibliotecas
@@ -731,7 +731,7 @@ InstalacaoSiestaTransiesta() {
     echo "###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA\n\n"
 
     arch_make_UTILS
-    
+
     cd ..
     cd ..
     tar vxf siesta-master.tar.gz -C $var/siesta-master/Util/Gen-basis siesta-master/Util/Gen-basis
