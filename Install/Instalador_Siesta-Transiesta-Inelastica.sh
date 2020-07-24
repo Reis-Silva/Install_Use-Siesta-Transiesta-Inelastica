@@ -888,7 +888,7 @@ while :; do
 
     if [ "$op2" = "TRUE" ]; then
 
-        IntalacaoSiestaTransiestaInelastica
+        IntalacaoSiestaTransiesta
 
     else
         echo ""
