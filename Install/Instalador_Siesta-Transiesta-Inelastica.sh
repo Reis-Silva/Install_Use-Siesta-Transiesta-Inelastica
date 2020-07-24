@@ -274,34 +274,15 @@ Packages() {
 
     ##DEPENDENCIA PYTHON3
     echo "##DEPENDENCIA PYTHON3\n\n"
-    wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
-    sudo dpkg -i libpython3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
-    sudo dpkg -i python3.8-minimal_3.8.2-1ubuntu1.1_amd64.deb
-    wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8_3.8.2-1ubuntu1.1_amd64.deb
-    sudo dpkg -i python3.8_3.8.2-1ubuntu1.1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-minimal_3.8.2-3_amd64.deb
-    sudo dpkg -i python3-minimal_3.8.2-3_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-stdlib_3.8.2-3_amd64.deb
-    sudo dpkg -i libpython3-stdlib_3.8.2-3_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3_3.8.2-3_amd64.deb
-    sudo dpkg -i python3_3.8.2-3_amd64.deb
+
+    wget -c http://archive.ubuntu.com/ubuntu/pool/main/e/expat/libexpat1_2.2.9-1build1_amd64.deb
+    sudo dpkg -i libexpat1_2.2.9-1build1_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/e/expat/libexpat1-dev_2.2.9-1build1_amd64.deb
     sudo dpkg -i libexpat1-dev_2.2.9-1build1_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/main/z/zlib/zlib1g_1.2.11.dfsg-2ubuntu1_amd64.deb
+    sudo dpkg -i zlib1g_1.2.11.dfsg-2ubuntu1_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/z/zlib/zlib1g-dev_1.2.11.dfsg-2ubuntu1_amd64.deb
-    sudo dpkg -i zlib1g-dev_1.2.11.dfsg-2ubuntu1_amd64.deb
-    wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8-stdlib_3.8.2-1ubuntu1.1_amd64.deb
-    sudo dpkg -i libpython3.8-stdlib_3.8.2-1ubuntu1.1_amd64.deb
-    wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8_3.8.2-1ubuntu1.1_amd64.deb
-    sudo dpkg -i libpython3.8_3.8.2-1ubuntu1.1_amd64.deb
-    wget -c http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/libpython3.8-dev_3.8.2-1ubuntu1.1_amd64.deb
-    sudo dpkg -i libpython3.8-dev_3.8.2-1ubuntu1.1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/libpython3-dev_3.8.2-3_amd64.deb
-    sudo dpkg -i libpython3-dev_3.8.2-3_amd64.deb
-    wget http://security.ubuntu.com/ubuntu/pool/main/p/python3.8/python3.8-dev_3.8.2-1ubuntu1.1_amd64.deb
-    sudo dpkg -i python3.8-dev_3.8.2-1ubuntu1.1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python3-defaults/python3-dev_3.8.2-3_amd64.deb
-    sudo dpkg -i python3-dev_3.8.2-3_amd64.deb
+    sudo dpkg -i zlib1g-dev_1.2.11.dfsg-2ubuntu1_amd64.deb 
     sudo apt-get install libopenblas-dev libxc-dev libscalapack-mpi-dev -y
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/f/fonts-font-awesome/fonts-font-awesome_5.0.10+really4.7.0~dfsg-1_all.deb
     sudo dpkg -i fonts-font-awesome_5.0.10+really4.7.0~dfsg-1_all.deb
@@ -670,7 +651,7 @@ arch_make() {
     sed -i "38s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS += libsiestaLAPACK.a libsiestaBLAS.a libncdf.a libfdict.a\n\n\n\n/," gfortran.make
     sed -i "40s/^/BLAS_LIBS += -lblas/" gfortran.make
     sed -i "41s/^/LAPACK_LIBS += -llapack/" gfortran.make
-    sed -i "42s/^/SCALAPACK_LIBS += \/usr\/lib\/x86_64-linux-gnu\/libscalapack-openmpi.so/" gfortran.make
+    sed -i "42s/^/SCALAPACK_LIBS += \/usr\/lib\/x86_64-linux-gnu\/libscalapack-openmpi.so" gfortran.make
     sed -i '44s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX)-DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
     sed -i '46s/LIBS =/LIBS += -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
     sed -i "48s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
@@ -688,7 +669,7 @@ arch_make() {
     ######iNSTALANDO SIESTA4.1
     echo "###iNSTALANDO SIESTA4.1\n\n"
     make
-    sudo cp siesta /usr/local/bin/siesta 
+    sudo  cp -rf siesta /usr/local/bin/siesta 
     echo "\n\n"
 }
 
@@ -699,9 +680,9 @@ arch_make_UTILS(){
     #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
     echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
 
-    sed -i '24cINCFLAGS += -I'"$var"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' gfortran.make
-    sed -i '38cCOMP_LIBS=/home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/ncdf/obj/libncdf.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libfdict.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaBLAS.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a' gfortran.make
-    sed -i '46cLIBS += $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' gfortran.make
+    sed -i '24cINCFLAGS += -I'"$var"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' arch.make
+    sed -i '38cCOMP_LIBS=/home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/ncdf/obj/libncdf.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libfdict.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaBLAS.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a' arch.make
+    sed -i '46cLIBS += $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' arch.make
 
 }
 
