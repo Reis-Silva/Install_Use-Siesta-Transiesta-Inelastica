@@ -628,8 +628,18 @@ Packages() {
     sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/h5utils/h5utils_1.12.1-4_amd64.deb
     sudo dpkg -i h5utils_1.12.1-4_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/sip4/python3-sip_4.19.21+dfsg-1build1_amd64.deb
+    sudo dpkg -i python3-sip_4.19.21+dfsg-1build1_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/w/wxpython4.0/python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
+    sudo dpkg -i python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python3-mpi4py_3.0.3-4build2_amd64.deb
+    sudo dpkg -i python3-mpi4py_3.0.3-4build2_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python3-h5py_2.10.0-2build2_amd64.deb
+    sudo dpkg -i python3-h5py_2.10.0-2build2_amd64.deb
+    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf-compass/python3-hdf-compass_0.7~b8-2_all.deb
+    sudo dpkg -i python3-hdf-compass_0.7~b8-2_all.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass_0.7~b8-2_all.deb
-    sudo dpkg -i h5utils_1.12.1-4_amd64.deb
+    sudo dpkg -i hdf-compass_0.7~b8-2_all.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass-doc_0.7~b8-2_all.deb
     sudo dpkg -i hdf-compass-doc_0.7~b8-2_all.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
@@ -640,6 +650,11 @@ Packages() {
     sudo dpkg -i libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
     sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-doc_1.10.0-patch1+docs-4_all.deb
+    sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+    sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+
     echo "\n\n"
 
     #Reatualização de repositorios e bibliotecas
@@ -733,6 +748,7 @@ Instalacao_SiestaTransiesta() {
 
     wget -c https://gitlab.com/siesta-project/siesta/-/archive/master/siesta-master.tar.gz
     tar -vzxf siesta-master.tar.gz
+    chmod -R o=rx siesta-master/
     var="$(pwd)"
     #Escrevendo arquivo gfortran.make
     echo "#Escrevendo arquivo gfortran.make\n\n"
