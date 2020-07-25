@@ -678,6 +678,7 @@ InstalacaoPacotesEssenciais() {
 arch_make() {
 
     rm arch.make
+    make clean
     cp gfortran.make gfortran.bkp
 
     #CONSTRUINDO O ARCH_MAKE DO GFORTRAN
