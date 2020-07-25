@@ -759,6 +759,7 @@ Instalacao_SiestaTransiesta() {
     #./install_netcdf4.bash
     echo "#./install_netcdf4.bash\n\n"
     cd siesta-master/Docs
+    chmod 777 install_netcdf4.bash
     ./install_netcdf4.bash
     echo "\n\n"
 
