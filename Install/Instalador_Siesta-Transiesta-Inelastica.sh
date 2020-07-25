@@ -518,8 +518,8 @@ Packages() {
     sudo dpkg -i gausssum_3.0.2-2_all.deb
     echo "\n\n"
 
-    #Pacotes para o INELASTICA
-    echo "#Pacotes para o INELASTICA\n\n"
+    #Pacotes para o INELASTICA/SIESTA
+    echo "#Pacotes para o INELASTICA/SIESTA\n\n"
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
     sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
@@ -618,6 +618,28 @@ Packages() {
     sudo dpkg -i libjs-mathjax_2.7.4+dfsg-1_all.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-doc_1.2.2-4_all.deb
     sudo dpkg -i python-scipy-doc_1.2.2-4_all.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libh/libhdf4/libhdf4-0_4.2.10-3.2_amd64.deb
+    sudo dpkg -i libhdf4-0_4.2.10-3.2_amd64.deb
+    wget -c http://security.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.23-0ubuntu11.2_amd64.deb
+    sudo dpkg -i multiarch-support_2.23-0ubuntu11.2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libm/libmatheval/libmatheval1_1.1.11+dfsg-2_amd64.deb
+    sudo dpkg -i libmatheval1_1.1.11+dfsg-2_amd64.deb
+    wget -c http://ppa.launchpad.net/linuxuprising/libpng12/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+    sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/h5utils/h5utils_1.12.1-4_amd64.deb
+    sudo dpkg -i h5utils_1.12.1-4_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass_0.7~b8-2_all.deb
+    sudo dpkg -i h5utils_1.12.1-4_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass-doc_0.7~b8-2_all.deb
+    sudo dpkg -i hdf-compass-doc_0.7~b8-2_all.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+    sudo dpkg -i libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+    sudo dpkg -i libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
+    sudo dpkg -i libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+    sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
     echo "\n\n"
 
     #Reatualização de repositorios e bibliotecas
@@ -665,17 +687,17 @@ arch_make() {
     sed -i '18s, unknown, SIESTA 4.1 - '"$var2"',' gfortran.make
     sed -i "20s/CC = gcc/CPP = gcc -E -P -x c/" gfortran.make
     sed -i '22s, gfortran, mpif90,' gfortran.make
-    sed -i "24s,^,INCFLAGS += -I"$var"\/siesta-master\/Docs\/build\/include,g" gfortran.make
+    sed -i "24s,^,INCFLAGS = -I"$var"\/siesta-master\/Docs\/build\/include,g" gfortran.make
     sed -i '25s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS=-g -O2 $(INCFLAGS)/' gfortran.make
-    sed -i '36s|LDFLAGS =|LDFLAGS += -L'"$var"'\/siesta-master\/Docs\/build\/lib -Wl,-rpath,'"$var"'\/siesta-master\/Docs\/build\/lib|' gfortran.make
-    sed -i "38s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS += libsiestaLAPACK.a libsiestaBLAS.a libncdf.a libfdict.a\n\n\n\n/," gfortran.make
-    sed -i "40s/^/BLAS_LIBS += -lblas/" gfortran.make
-    sed -i "41s/^/LAPACK_LIBS += -llapack/" gfortran.make
-    sed -i "42s|^|SCALAPACK_LIBS += \/usr\/lib\/x86_64-linux-gnu\/libscalapack-openmpi.so|" gfortran.make
+    sed -i '36s|LDFLAGS =|LDFLAGS = -L'"$var"'\/siesta-master\/Docs\/build\/lib -Wl,-rpath,'"$var"'\/siesta-master\/Docs\/build\/lib|' gfortran.make
+    sed -i "38s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a libncdf.a libfdict.a\n\n\n\n/," gfortran.make
+    sed -i "40s/^/BLAS_LIBS = -lblas/" gfortran.make
+    sed -i "41s/^/LAPACK_LIBS = -llapack/" gfortran.make
+    sed -i "42s|^|SCALAPACK_LIBS = \/usr\/lib\/x86_64-linux-gnu\/libscalapack-openmpi.so|" gfortran.make
     sed -i '44s/FPPFLAGS = $(DEFS_PREFIX) -DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
-    sed -i '46s/LIBS =/LIBS += -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
-    sed -i "48s/^/MPI_INTERFACE=libmpi_f90.a/" gfortran.make
-    sed -i "49s/^/MPI_INCLUDE=./" gfortran.make
+    sed -i '46s/LIBS =/LIBS = -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
+    sed -i "48s/^/MPI_INTERFACE = libmpi_f90.a/" gfortran.make
+    sed -i "49s/^/MPI_INCLUDE = ./" gfortran.make
     sed -i "53s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
 
     cp gfortran.make arch.make
@@ -700,8 +722,8 @@ arch_make_UTILS(){
     #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
     echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
 
-    sed -i '24cINCFLAGS += -I'"$var"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' arch.make
-    sed -i '38cCOMP_LIBS=/home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/ncdf/obj/libncdf.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libfdict.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaBLAS.a /home/braniac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a' arch.make
+    sed -i '24cINCFLAGS = -I'"$var"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' arch.make
+    sed -i '38cCOMP_LIBS = '"$var"'/siesta-master/Obj/ncdf/obj/libncdf.a '"$var"'/siesta-master/Obj/fdict/obj/libfdict.a '"$var"'/siesta-master/Obj/libsiestaBLAS.a '"$var"'/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a' arch.make
     sed -i '46cLIBS += $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' arch.make
 
 }
@@ -714,7 +736,7 @@ Instalacao_SiestaTransiesta() {
     #Escrevendo arquivo gfortran.make
     echo "#Escrevendo arquivo gfortran.make\n\n"
 
-    tar vxf siesta-master.tar.gz -C $var/siesta-master/Obj siesta-master/Obj/gfortran.make
+    tar vxf siesta-master.tar.gz -C $var siesta-master/Obj/gfortran.make
     echo "\n\n"
 
     #./install_netcdf4.bash
@@ -735,7 +757,7 @@ Instalacao_SiestaTransiesta() {
 
     cd ..
     cd ..
-    tar vxf siesta-master.tar.gz -C $var/siesta-master/Util/Gen-basis siesta-master/Util/Gen-basis
+    tar vxf siesta-master.tar.gz -C $var siesta-master/Util/Gen-basis
     cd siesta-master/Util/Gen-basis
     sed -i "103s/^/ \t/" Makefile
     cd ..
