@@ -709,7 +709,7 @@ arch_make() {
     sed -i "40s/^/BLAS_LIBS = -lblas/" gfortran.make
     sed -i "41s/^/LAPACK_LIBS = -llapack/" gfortran.make
     sed -i "42cSCALAPACK_LIBS = /usr/lib/x86_64-linux-gnu/libscalapack-openmpi.so" gfortran.make
-    sed -i '44s/FPPFLAGS = $(DEFS_PREFIX) -DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
+    sed -i '44s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
     sed -i '46s/LIBS =/LIBS = -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
     sed -i "48s/^/MPI_INTERFACE = libmpi_f90.a/" gfortran.make
     sed -i "49s/^/MPI_INCLUDE = ./" gfortran.make
@@ -805,7 +805,7 @@ Instalacao_SiestaTransiesta() {
     cd ..
 }
 
-IntalacaoSiestaTransiesta() {
+InstalacaoSiestaTransiesta() {
 
     if [ -e "PackagesSIETRANINEL" ]; then
         echo 'O DIRETÓRIO \033[32mPackagesSIETRAN"\033[00m EXISTE
@@ -857,7 +857,7 @@ Instalacao_Inelastica() {
     cd raizInstalacao
 }
 
-IntalacaoInelastica() {
+InstalacaoInelastica() {
 
     if [ -e "PackagesINELASTICA" ]; then
         echo 'O DIRETÓRIO \033[32mPackagesINELASTICA"\033[00m EXISTE
@@ -922,7 +922,7 @@ while :; do
 
     if [ "$op2" = "TRUE" ]; then
 
-        IntalacaoSiestaTransiesta
+        InstalacaoSiestaTransiesta
 
     else
         echo ""
