@@ -888,6 +888,8 @@ echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;
 
 sleep 3
 
+raizInstalacao="$(pwd)"
+
 github=$(yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
     --image="img/IronGit.png" --image-on-top \
     --text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
@@ -895,7 +897,7 @@ github=$(yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0
 
 while :; do
 
-    raizInstalacao="$(pwd)"
+    
     instalacao=$(
         yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" \
             --image="img/SIESTA_INELASTICA.png" --image-on-top \
