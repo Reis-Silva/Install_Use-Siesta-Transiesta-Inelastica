@@ -2,7 +2,7 @@
 
 sudo apt install yad -y
 
-Packages() {
+Instalacao_PacotesEssenciais() {
 
     clear
     ####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####
@@ -672,20 +672,20 @@ Packages() {
 
 InstalacaoPacotesEssenciais() {
 
-    if [ -e "DownloadPackage" ]; then
-        echo 'O DIRETÓRIO \033[32mDownloadPackage"\033[00m EXISTE
-        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"DownloadPackage"\033[00;00m\n\n'
+    if [ -e "PackagesESSENCIAIS" ]; then
+        echo 'O DIRETÓRIO \033[32mPackagesESSENCIAIS"\033[00m EXISTE
+        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesESSENCIAIS"\033[00;00m\n\n'
         sleep 2
-        cd DownloadPackage
-        Packages
+        cd PackagesESSENCIAIS
+        Instalacao_PacotesEssenciais
 
     else
-        echo 'O DIRETÓRIO \033[32m"DownloadPackage"\033[00m NÃO EXISTE
-        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"DownloadPackage"\033[00;00m\n\n'
-        mkdir DownloadPackage
-        cd DownloadPackage
+        echo 'O DIRETÓRIO \033[32m"PackagesESSENCIAIS"\033[00m NÃO EXISTE
+        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesESSENCIAIS"\033[00;00m\n\n'
+        mkdir PackagesESSENCIAIS
+        cd PackagesESSENCIAIS
         sleep 2
-        Packages
+        Instalacao_PacotesEssenciais
     fi
 }
 
@@ -834,11 +834,11 @@ InstalacaoSiestaTransiesta() {
 Instalacao_Inelastica() {
 
     ###INSTALAÇÃO DO INELASTICA 446
-    echo "###INSTALAÇÃO DO INELASTICA 446\n\n"
+    echo "###INSTALAÇÃO DO INELASTICA\n\n"
 
     # instalar destino de inelastica
     wget -c https://sourceforge.net/projects/inelastica/files/latest/download
-    sudo unzip -o download.zip
+    sudo unzip -o download
     cd inelastica-code-446
     rm -r build
     sudo python setup.py build --fcompiler=gfortran
