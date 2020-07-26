@@ -788,9 +788,9 @@ Instalacao_SiestaTransiesta() {
 
     #PASTA TBtrans
     echo "#PASTA TBtrans\n\n"
-    cd Util/TS/TBtrans
-    sudo cp tbtrans /usr/local/bin/tbtrans
-
+    cd TS/TBtrans
+    sudo cp -rf tbtrans /usr/local/bin/tbtrans
+    
     echo "TERMÍNO DAS COPIAS\n\n"
 
     ##TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA
@@ -798,11 +798,7 @@ Instalacao_SiestaTransiesta() {
     sleep 3
 
     #Voltando para Pasta principal
-    cd ..
-    cd ..
-    cd ..
-    cd ..
-    cd ..
+    cd raizInstalacao
 }
 
 InstalacaoSiestaTransiesta() {
