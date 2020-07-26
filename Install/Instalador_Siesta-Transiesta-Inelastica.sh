@@ -740,7 +740,6 @@ arch_make_UTILS() {
     sed -i '24cINCFLAGS = -I'"$var"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' arch.make
     sed -i '38cCOMP_LIBS = '"$var"'/siesta-master/Obj/ncdf/obj/libncdf.a '"$var"'/siesta-master/Obj/fdict/obj/libfdict.a '"$var"'/siesta-master/Obj/libsiestaBLAS.a '"$var"'/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a' arch.make
     sed -i '46cLIBS += $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' arch.make
-
 }
 
 Instalacao_SiestaTransiesta() {
@@ -758,9 +757,9 @@ Instalacao_SiestaTransiesta() {
     #./install_netcdf4.bash
     echo "#./install_netcdf4.bash\n\n"
     cd siesta-master/Docs
-    chmod 777 install_netcdf4.bash
-    sudo rm -rf /var/lib/apt/lists/lock
-    exit && ./install_netcdf4.bash
+    sed -i '213c\ ' install_netcdf4.bash
+    sed -i '214c\ ' install_netcdf4.bash
+    ./install_netcdf4.bash
     echo "\n\n"
 
     cd ..
