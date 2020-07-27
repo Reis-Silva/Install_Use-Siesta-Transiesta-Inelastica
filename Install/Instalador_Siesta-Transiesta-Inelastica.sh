@@ -4,7 +4,7 @@ sudo apt install yad -y
 
 Instalacao_PacotesEssenciais() {
 
-    clear
+    
     ####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####
     echo '\033[05;33m####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####\033[00;00m'
 
@@ -667,7 +667,7 @@ Instalacao_PacotesEssenciais() {
     echo '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS"\033[00;00m\n\n'
     sleep 3
 
-    cd ..
+    cd raizInstalacao
 }
 
 InstalacaoPacotesEssenciais() {
@@ -689,6 +689,18 @@ InstalacaoPacotesEssenciais() {
     fi
 }
 
+arch_make_UTILS() {
+
+    cp arch.make archSIESTAORIGINAL.bkp
+
+    #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
+    echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
+
+    sed -i '24cINCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' arch.make
+    sed -i '38cCOMP_LIBS = '"$pathSIESTA"'/siesta-master/Obj/ncdf/obj/libncdf.a '"$pathSIESTA"'/siesta-master/Obj/fdict/obj/libfdict.a '"$pathSIESTA"'/siesta-master/Obj/libsiestaBLAS.a '"$pathSIESTA"'/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a' arch.make
+    sed -i '46cLIBS += $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' arch.make
+}
+
 arch_make() {
 
     rm arch.make
@@ -698,13 +710,13 @@ arch_make() {
     #CONSTRUINDO O ARCH_MAKE DO GFORTRAN
     echo "#CONSTRUINDO O ARCH_MAKE DO GFORTRAN\n\n"
 
-    var2="$(uname -mrs)"
-    sed -i '18s, unknown, SIESTA 4.1 - '"$var2"',' gfortran.make
+    versionSistema="$(uname -mrs)"
+    sed -i '18s, unknown, SIESTA 4.1 - '"$versionSistema"',' gfortran.make
     sed -i "20s/CC = gcc/CPP = gcc -E -P -x c/" gfortran.make
     sed -i '22s, gfortran, mpif90,' gfortran.make
-    sed -i "24s,^,INCFLAGS = -I"$var"\/siesta-master\/Docs\/build\/include,g" gfortran.make
+    sed -i "24s,^,INCFLAGS = -I"$pathSIESTA"\/siesta-master\/Docs\/build\/include,g" gfortran.make
     sed -i '25s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS=-g -O2 $(INCFLAGS)/' gfortran.make
-    sed -i '36s|LDFLAGS =|LDFLAGS = -L'"$var"'\/siesta-master\/Docs\/build\/lib -Wl,-rpath,'"$var"'\/siesta-master\/Docs\/build\/lib|' gfortran.make
+    sed -i '36s|LDFLAGS =|LDFLAGS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -Wl,-rpath,'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib|' gfortran.make
     sed -i "38s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a libncdf.a libfdict.a\n\n\n\n/," gfortran.make
     sed -i "40s/^/BLAS_LIBS = -lblas/" gfortran.make
     sed -i "41s/^/LAPACK_LIBS = -llapack/" gfortran.make
@@ -730,28 +742,16 @@ arch_make() {
     echo "\n\n"
 }
 
-arch_make_UTILS() {
-
-    cp arch.make archSIESTAORIGINAL.bkp
-
-    #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
-    echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
-
-    sed -i '24cINCFLAGS = -I'"$var"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' arch.make
-    sed -i '38cCOMP_LIBS = '"$var"'/siesta-master/Obj/ncdf/obj/libncdf.a '"$var"'/siesta-master/Obj/fdict/obj/libfdict.a '"$var"'/siesta-master/Obj/libsiestaBLAS.a '"$var"'/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a' arch.make
-    sed -i '46cLIBS += $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' arch.make
-}
-
 Instalacao_SiestaTransiesta() {
 
     wget -c https://gitlab.com/siesta-project/siesta/-/archive/master/siesta-master.tar.gz
     tar -vzxf siesta-master.tar.gz
     chmod -R o=rx siesta-master/
-    var="$(pwd)"
+    pathSIESTA="$(pwd)"
     #Escrevendo arquivo gfortran.make
     echo "#Escrevendo arquivo gfortran.make\n\n"
 
-    tar vxf siesta-master.tar.gz -C $var siesta-master/Obj/gfortran.make
+    tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Obj/gfortran.make
     echo "\n\n"
 
     #./install_netcdf4.bash
@@ -774,7 +774,7 @@ Instalacao_SiestaTransiesta() {
 
     cd ..
     cd ..
-    tar vxf siesta-master.tar.gz -C $var siesta-master/Util/Gen-basis
+    tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Util/Gen-basis
     cd siesta-master/Util/Gen-basis
     sed -i "103s/^/ \t/" Makefile
     cd ..
@@ -790,7 +790,7 @@ Instalacao_SiestaTransiesta() {
     echo "#PASTA TBtrans\n\n"
     cd TS/TBtrans
     sudo cp -rf tbtrans /usr/local/bin/tbtrans
-    
+
     echo "TERMÍNO DAS COPIAS\n\n"
 
     ##TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA
@@ -838,12 +838,18 @@ Instalacao_Inelastica() {
     cd inelastica-code-446
     rm -r build
     sudo python setup.py build --fcompiler=gfortran
-    var3="/usr/local/software/Inelastica"
-    sudo python setup.py install --prefix=$var3
+    pathInelastica="/usr/local/software/Inelastica"
+    sudo python setup.py install --prefix=$pathInelastica
+
     cd ${HOME}
-    sed -i '$ { s/^.*$/&\n\n#INELASTICA446/ }' .bashrc
-    sed -i '$ { s|^.*$|&\nPYTHONPATH=$PYTHONPATH:'"$var3"'/lib/python2.7/site-packages\nexport PYTHONPATH| }' .bashrc
-    sed -i '$ { s|^.*$|&\nPATH=$PATH:'"$var3"'/bin\nexport PATH| }' .bashrc
+    sudo sed -i '$ { s/^.*$/&\n\n#INELASTICA446/ }' ~/.bashrc
+    sudo sed -i '$ { s|^.*$|&\nPYTHONPATH=$PYTHONPATH:'"$pathInelastica"'/lib/python2.7/site-packages\nexport PYTHONPATH| }' ~/.bashrc
+    sudo sed -i '$ { s|^.*$|&\nPATH=$PATH:'"$pathInelastica"'/bin\nexport PATH| }' ~/.bashrc
+    
+    cd /home/$(users)
+    sudo sed -i '$ { s/^.*$/&\n\n#INELASTICA446/ }' .bashrc
+    sudo sed -i '$ { s|^.*$|&\nPYTHONPATH=$PYTHONPATH:'"$pathInelastica"'/lib/python2.7/site-packages\nexport PYTHONPATH| }' .bashrc
+    sudo sed -i '$ { s|^.*$|&\nPATH=$PATH:'"$pathInelastica"'/bin\nexport PATH| }' .bashrc
 
     #TERMÍNO DA INSTALAÇÃO DO INELASTICA
     echo "#TERMÍNO DA INSTALAÇÃO DO INELASTICA\n\n"
@@ -879,73 +885,78 @@ InstalacaoInelastica() {
 
 }
 
-####INICIANDO SISTEMA####
-echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
+Main() {
 
-sleep 3
+    ####INICIANDO SISTEMA####
+    echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
 
-raizInstalacao="$(pwd)"
+    sleep 3
 
-github=$(yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
-    --image="img/IronGit.png" --image-on-top \
-    --text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
+    raizInstalacao="$(pwd)"
+
+    github=$(yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
+        --image="$raizInstalacao/img/IronGit.png" --image-on-top \
+        --text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
 	        Page: https://github.com/Reis-Silva/Install-Use-Siesta-Transiesta" --text-align=center)
 
-while :; do
+    while :; do
 
-    
-    instalacao=$(
-        yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" \
-            --image="img/SIESTA_INELASTICA.png" --image-on-top \
-            --text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
+        instalacao=$(
+            yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" \
+                --image="$raizInstalacao/img/SIESTA_INELASTICA.png" --image-on-top \
+                --text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
     		\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center \
-            --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK \
-            --field="INSTALAÇÃO - SIESTA/TRANSIESTA":CHK \
-            --field="INSTALAÇÃO - INELASTICA":CHK \
-            --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2
-    )
+                --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK \
+                --field="INSTALAÇÃO - SIESTA/TRANSIESTA":CHK \
+                --field="INSTALAÇÃO - INELASTICA":CHK \
+                --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2
+        )
 
-    escolha=$(echo $?)
-    op=$(echo "$instalacao" | cut -d "|" -f 1)
-    op2=$(echo "$instalacao" | cut -d "|" -f 2)
-    op3=$(echo "$instalacao" | cut -d "|" -f 3)
+        escolha=$(echo $?)
+        op=$(echo "$instalacao" | cut -d "|" -f 1)
+        op2=$(echo "$instalacao" | cut -d "|" -f 2)
+        op3=$(echo "$instalacao" | cut -d "|" -f 3)
 
-    if [ "$op" = "TRUE" ]; then
+        if [ "$op" = "TRUE" ]; then
 
-        InstalacaoPacotesEssenciais
+            InstalacaoPacotesEssenciais
 
-    else
-        echo ""
-    fi
+        else
+            echo ""
+        fi
 
-    if [ "$op2" = "TRUE" ]; then
+        if [ "$op2" = "TRUE" ]; then
 
-        InstalacaoSiestaTransiesta
+            InstalacaoSiestaTransiesta
 
-    else
-        echo ""
-    fi
+        else
+            echo ""
+        fi
 
-    if [ "$op3" = "TRUE" ]; then
+        if [ "$op3" = "TRUE" ]; then
 
-        InstalacaoInelastica
+            InstalacaoInelastica
 
-    else
-        echo ""
-    fi
+        else
+            echo ""
+        fi
 
-    if [ "$escolha" = 1 ] || [ "$escolha" = 252 ]; then
+        if [ "$escolha" = 1 ] || [ "$escolha" = 252 ]; then
 
-        exit
+            exit
 
-    else
-        echo ""
-    fi
+        else
+            echo ""
+        fi
 
-    if [ "$op" = "FALSE" ] && [ "$op2" = "FALSE" ] && [ "$op3" = "FALSE" ]; then
-        yad --width 325 --height 50 --title "ERROR" --image=dialog-question --buttons-layout=center --button=OK:0 --text="ESCOLHA UMA OPÇÃO DE INSTALAÇÃO"
-    else
-        echo ""
-    fi
+        if [ "$op" = "FALSE" ] && [ "$op2" = "FALSE" ] && [ "$op3" = "FALSE" ]; then
+            yad --width 325 --height 50 --title "ERROR" --image=dialog-question --buttons-layout=center --button=OK:0 --text="ESCOLHA UMA OPÇÃO DE INSTALAÇÃO"
+        else
+            echo ""
+        fi
 
-done
+    done
+
+}
+
+Main
