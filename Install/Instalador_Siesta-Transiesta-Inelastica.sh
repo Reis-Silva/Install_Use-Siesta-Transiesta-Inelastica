@@ -940,7 +940,7 @@ Main() {
             echo ""
         fi
 
-        if [ "$op" = "TRUE" ] || if [ "$op2" = "TRUE" ] || if [ "$op3" = "TRUE" ]; then
+        if [ "$op" = "TRUE" ] || [ "$op2" = "TRUE" ] || [ "$op3" = "TRUE" ]; then
 
             exit
 
