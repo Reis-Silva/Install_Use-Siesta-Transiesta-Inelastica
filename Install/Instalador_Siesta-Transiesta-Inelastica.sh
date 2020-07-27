@@ -946,7 +946,7 @@ Main() {
 
         else
             echo ""
-        if
+        fi
 
         if [ "$escolha" = 1 ] || [ "$escolha" = 252 ]; then
 
