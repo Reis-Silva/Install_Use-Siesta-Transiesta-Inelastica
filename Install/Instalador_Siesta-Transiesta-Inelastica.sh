@@ -896,7 +896,7 @@ Main() {
     github=$(yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
         --image="$raizInstalacao/img/IronGit.png" --image-on-top \
         --text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
-	        Page: https://github.com/Reis-Silva/Install-Use-Siesta-Transiesta" --text-align=center)
+	        Page: https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica" --text-align=center)
 
     while :; do
 
