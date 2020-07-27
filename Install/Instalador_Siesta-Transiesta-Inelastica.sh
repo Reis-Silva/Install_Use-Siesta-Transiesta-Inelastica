@@ -654,7 +654,7 @@ Instalacao_PacotesEssenciais() {
     sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
     sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
-
+    apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
     echo "\n\n"
 
     #Reatualização de repositorios e bibliotecas
@@ -918,7 +918,7 @@ Main() {
 
         if [ "$op" = "TRUE" ]; then
 
-            InstalacaoPacotesEssenciais
+            InstalacaoPacotesEssenciais yad --progress --title "INSTALANDO PACOTES ESSENCIAIS" --width="300" --pulsate --auto-close
             
         else
             echo ""
@@ -926,7 +926,7 @@ Main() {
 
         if [ "$op2" = "TRUE" ]; then
 
-            InstalacaoSiestaTransiesta
+            InstalacaoSiestaTransiesta yad --progress --title "INSTALANDO PACOTE SIESTA" --width="300" --pulsate --auto-close
 
         else
             echo ""
@@ -934,7 +934,7 @@ Main() {
 
         if [ "$op3" = "TRUE" ]; then
 
-            InstalacaoInelastica
+            InstalacaoInelastica yad --progress --title "INSTALANDO PACOTE INELASTICA" --width="300" --pulsate --auto-close
 
         else
             echo ""
@@ -943,7 +943,7 @@ Main() {
         if [ "$op" = "TRUE" ] || if [ "$op2" = "TRUE" ] || if [ "$op3" = "TRUE" ]; then
 
             exit
-            
+
         else
             echo ""
         if
