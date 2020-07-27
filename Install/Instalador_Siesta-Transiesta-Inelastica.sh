@@ -86,7 +86,7 @@ Instalacao_PacotesEssenciais() {
     echo "#####PACOTES A SEREM INSTALADOS####\n\n"
 
     #PACOTE gfortran
-    echo "#PACOTE gfortran\n\n"
+    echo "#PACOTE gfortran - 1 de 11\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libf2c2/libf2c2_20130926-3_amd64.deb
     sudo dpkg -i libf2c2_20130926-3_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libf2c2/libf2c2-dev_20130926-3_amd64.deb
@@ -110,7 +110,7 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     #PACOTE m4
-    echo "#PACOTE m4"
+    echo "#PACOTE m4 - 2 de 11"
     wget -c http://ftp.us.debian.org/debian/pool/main/libs/libsigsegv/libsigsegv2_2.12-2_amd64.deb
     sudo dpkg -i libsigsegv2_2.12-2_amd64.deb
     wget -c http://archive.ubuntu.com/ubuntu/pool/main/m/m4/m4_1.4.18-4_amd64.deb
@@ -118,10 +118,9 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     #PACOTE bcc
-    echo "#PACOTE bcc\n\n"
+    echo "#PACOTE bcc - 3 de 11\n\n"
 
     ##DEPENDENCIAS
-    echo "##DEPENDENCIAS\n\n"
     wget -c http://archive.ubuntu.com/ubuntu/pool/universe/l/linux86/bin86_0.16.17-3.3_amd64.deb
     sudo dpkg -i bin86_0.16.17-3.3_amd64.deb
     wget -c http://archive.ubuntu.com/ubuntu/pool/universe/l/linux86/elks-libc_0.16.17-3.3_all.deb
@@ -141,29 +140,26 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ###bcc
-    echo "###bcc\n\n"
     sudo apt-get install bcc bpfcc-tools -y
     echo "\n\n"
 
     #PACOTE CCCC
-    echo "#PACOTE CCCC\n\n"
+    echo "#PACOTE CCCC - 4 de 11\n\n"
     sudo apt-get install cccc -y
     wget -c http://archive.ubuntu.com/ubuntu/pool/universe/c/cccc/cccc_3.1.4-12_amd64.deb
     sudo dpkg -i cccc_3.1.4-12_amd64.deb
     echo "\n\n"
 
     #PACOTE fcc
-    echo "#PACOTE fcc\n\n"
+    echo "#PACOTE fcc - 5 de 11\n\n"
     wget -c http://ubuntu.mirrors.tds.net/ubuntu/pool/universe/l/looptools/fcc_2.8-1build3_amd64.deb
     sudo dpkg -i fcc_2.8-1build3_amd64.deb
     echo "\n\n"
 
     #PACOTE GPAW e suas dependencias
-    echo "#PACOTE GPAW e suas dependencias\n\n"
+    echo "#PACOTE GPAW e suas dependencias - 6 de 11\n\n"
 
     ##DEPENDENCIA libfftw3-dev
-    echo "##DEPENDENCIA libfftw3-dev\n\n"
-
     wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-single3_3.3.8-2_amd64.deb
     sudo dpkg -i libfftw3-single3_3.3.8-2_amd64.deb
     wget -c http://ftp.us.debian.org/debian/pool/main/f/fftw3/libfftw3-long3_3.3.8-2_amd64.deb
@@ -179,7 +175,6 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ##DEPENDENCIA libopenmpi3
-    echo "##DEPENDENCIA libopenmpi3\n\n"
     wget -c http://archive.ubuntu.com/ubuntu/pool/main/libn/libnl3/libnl-3-dev_3.4.0-1_amd64.deb
     sudo dpkg -i libnl-3-dev_3.4.0-1_amd64.deb
     wget -c http://archive.ubuntu.com/ubuntu/pool/main/libn/libnl3/libnl-route-3-dev_3.4.0-1_amd64.deb
@@ -223,7 +218,6 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ##DEPENDENCIA openmpi-bin
-    echo "##DEPENDENCIA openmpi-bin\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/o/openmpi/libopenmpi2_2.1.1-8_amd64.deb
     sudo dpkg -i libopenmpi2_2.1.1-8_amd64.deb
     wget -c http://archive.ubuntu.com/ubuntu/pool/universe/o/openmpi/openmpi-common_4.0.3-0ubuntu1_all.deb
@@ -233,13 +227,11 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ##DEPEDENCIA libxc5
-    echo "##DEPEDENCIA libxc5\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libx/libxc/libxc5_4.3.4-1build1_amd64.deb
     sudo dpkg -i libxc5_4.3.4-1build1_amd64.deb
     echo "\n\n"
 
     ##DEPEDENCIA python3-numpy
-    echo "##DEPENDENCIA python3-numpy\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/l/lapack/libblas3_3.9.0-1build1_amd64.deb
     sudo dpkg -i libblas3_3.9.0-1build1_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/l/lapack/liblapack3_3.9.0-1build1_amd64.deb
@@ -249,7 +241,6 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ##DEPEDENCIA matplotlib
-    echo "##DEPENDENCIA matplotlib\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lyx/fonts-lyx_2.3.4.2-2_all.deb
     sudo dpkg -i fonts-lyx_2.3.4.2-2_all.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/t/ttf-bitstream-vera/ttf-bitstream-vera_1.10-8_all.deb
@@ -273,8 +264,6 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ##DEPENDENCIA PYTHON3
-    echo "##DEPENDENCIA PYTHON3\n\n"
-
     wget -c http://archive.ubuntu.com/ubuntu/pool/main/e/expat/libexpat1_2.2.9-1build1_amd64.deb
     sudo dpkg -i libexpat1_2.2.9-1build1_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/e/expat/libexpat1-dev_2.2.9-1build1_amd64.deb
@@ -351,7 +340,6 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ###GPAW
-    echo "###GPAW\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gpaw-setups/gpaw-data_0.9.20000-2_all.deb
     sudo dpkg -i gpaw-data_0.9.20000-2_all.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gpaw/gpaw_20.1.0-2build1_amd64.deb
@@ -359,7 +347,7 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     #PACOTE abinit
-    echo "#PACOTE abinit\n\n"
+    echo "#PACOTE abinit - 7 de 11\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
     sudo dpkg -i abinit-data_8.10.2-2_all.deb
     wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
@@ -367,10 +355,9 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     #PACOTE quantum-espresso
-    echo "#PACOTE quantum-espresso\n\n"
+    echo "#PACOTE quantum-espresso - 8 de 11\n\n"
 
     ##DEPENDENCIAS
-    echo "##DEPENDENCIAS\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/e/elpa/libelpa4_2016.05.001-6build1_amd64.deb
     sudo dpkg -i libelpa4_2016.05.001-6build1_amd64.deb
     wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-7/gcc-7-base_7.5.0-3ubuntu1~18.04_amd64.deb
@@ -384,7 +371,6 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ###quantum-espresso
-    echo "###quantum-espresso\n\n"
     wget -c http://ftp.us.debian.org/debian/pool/main/e/espresso/quantum-espresso_6.3-4_amd64.deb
     sudo dpkg -i quantum-espresso_6.3-4_amd64.deb
     wget -c http://ftp.us.debian.org/debian/pool/main/e/espresso/quantum-espresso-data_6.3-4_all.deb
@@ -392,10 +378,9 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     #PACOTE meep-lam4
-    echo "#PACOTE meep-lam4\n\n"
+    echo "#PACOTE meep-lam4 - 9 de 11\n\n"
 
     ##DEPENDENCIAS
-    echo "##DEPENDENCIAS\n\n"
     wget -c http://security.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
     sudo dpkg -i libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
@@ -437,7 +422,6 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ###meep-lam4
-    echo "###meep-lam4\n\n"
     sudo apt-get install libblas-dev liblapack-dev -y
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/guile-3.0/guile-3.0-libs_3.0.1+1-2_amd64.deb
     sudo dpkg -i guile-3.0-libs_3.0.1+1-2_amd64.deb
@@ -466,10 +450,9 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     #PACOTE GaussSum e suas dependencias
-    echo "#PACOTE GaussSum e suas dependencias\n\n"
+    echo "#PACOTE GaussSum e suas dependencias - 10 de 11\n\n"
 
     ##DEPENDENCIAS
-    echo "##DEPENDENCIA gnuplot\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/aglfn/aglfn_1.7+git20191031.4036a9c-2_all.deb
     sudo dpkg -i aglfn_1.7+git20191031.4036a9c-2_all.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-data_5.2.8+dfsg1-2_all.deb
@@ -507,19 +490,17 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     ##DEPENDENCIA cclib
-    echo "##DEPENDENCIA cclib\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/c/cclib/python3-cclib_1.6.2-2_all.deb
     sudo dpkg -i python3-cclib_1.6.2-2_all.deb #instalando cclib
     echo "\n\n"
 
     ###gausssum
-    echo "###gausssum\n\n"
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gausssum/gausssum_3.0.2-2_all.deb
     sudo dpkg -i gausssum_3.0.2-2_all.deb
     echo "\n\n"
 
     #Pacotes para o INELASTICA/SIESTA
-    echo "#Pacotes para o INELASTICA/SIESTA\n\n"
+    echo "#Pacotes para o INELASTICA - 11 de 11\n\n"
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
     sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
