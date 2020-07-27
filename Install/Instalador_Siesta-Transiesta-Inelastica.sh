@@ -918,7 +918,7 @@ Main() {
 
         if [ "$op" = "TRUE" ]; then
 
-            InstalacaoPacotesEssenciais yad --progress --title "INSTALANDO PACOTES ESSENCIAIS" --width="300" --pulsate --no-buttons --auto-close
+            InstalacaoPacotesEssenciais | yad --progress --title "INSTALANDO PACOTES ESSENCIAIS" --width="300" --pulsate --no-buttons --auto-close
             
         else
             echo ""
@@ -926,7 +926,7 @@ Main() {
 
         if [ "$op2" = "TRUE" ]; then
 
-            InstalacaoSiestaTransiesta yad --progress --title "INSTALANDO PACOTE SIESTA" --width="300" --pulsate --no-buttons --auto-close
+            InstalacaoSiestaTransiesta | yad --progress --title "INSTALANDO PACOTE SIESTA" --width="300" --pulsate --no-buttons --auto-close
 
         else
             echo ""
@@ -934,7 +934,7 @@ Main() {
 
         if [ "$op3" = "TRUE" ]; then
 
-            InstalacaoInelastica yad --progress --title "INSTALANDO PACOTE INELASTICA" --width="300" --pulsate --no-buttons --auto-close
+            InstalacaoInelastica | yad --progress --title "INSTALANDO PACOTE INELASTICA" --width="300" --pulsate --no-buttons --auto-close
 
         else
             echo ""
