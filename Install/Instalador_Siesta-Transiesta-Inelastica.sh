@@ -667,7 +667,7 @@ Instalacao_PacotesEssenciais() {
     echo '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS"\033[00;00m\n\n'
     sleep 3
 
-    cd raizInstalacao
+    cd $raizInstalacao
 }
 
 InstalacaoPacotesEssenciais() {
@@ -797,8 +797,7 @@ Instalacao_SiestaTransiesta() {
     echo "#TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA\n\n"
     sleep 3
 
-    #Voltando para Pasta principal
-    cd raizInstalacao
+    cd $raizInstalacao
 }
 
 InstalacaoSiestaTransiesta() {
@@ -856,7 +855,7 @@ Instalacao_Inelastica() {
 
     sleep 3
 
-    cd raizInstalacao
+    cd $raizInstalacao
 }
 
 InstalacaoInelastica() {
@@ -920,7 +919,7 @@ Main() {
         if [ "$op" = "TRUE" ]; then
 
             InstalacaoPacotesEssenciais
-
+            
         else
             echo ""
         fi
@@ -940,6 +939,14 @@ Main() {
         else
             echo ""
         fi
+
+        if [ "$op" = "TRUE" ] || if [ "$op2" = "TRUE" ] || if [ "$op3" = "TRUE" ]; then
+
+            exit
+            
+        else
+            echo ""
+        if
 
         if [ "$escolha" = 1 ] || [ "$escolha" = 252 ]; then
 
