@@ -639,7 +639,7 @@ Instalacao_PacotesEssenciais() {
     echo "\n\n"
 
     #Reatualização de repositorios e bibliotecas
-    echo "Reatualização de repositorios e bibliotecas\n\n"
+    echo "#Reatualização de repositorios e bibliotecas\n\n"
     sudo apt-get update -y
     sudo apt-get dist-upgrade -y
     echo "\n\n"
