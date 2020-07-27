@@ -832,6 +832,7 @@ Instalacao_Inelastica() {
     sudo sed -i '$ { s|^.*$|&\nPATH=$PATH:'"$pathInelastica"'/bin\nexport PATH| }' .bashrc
 
     #TERMÍNO DA INSTALAÇÃO DO INELASTICA
+    echo "#\n\nOBS: FECHAR O TERMINAL E EMULAR OUTRO PARA RECARREGAR A FUNÇÃO DO .BARSCH\n\n"
     echo "#TERMÍNO DA INSTALAÇÃO DO INELASTICA\n\n"
 
     sleep 3
@@ -907,7 +908,7 @@ Main() {
 
         if [ "$op2" = "TRUE" ]; then
 
-            InstalacaoSiestaTransiesta | yad --progress --title "INSTALANDO PACOTE SIESTA" --width="300" --pulsate --no-buttons --auto-close
+            InstalacaoSiestaTransiesta 
 
         else
             echo ""
@@ -915,7 +916,7 @@ Main() {
 
         if [ "$op3" = "TRUE" ]; then
 
-            InstalacaoInelastica | yad --progress --title "INSTALANDO PACOTE INELASTICA" --width="300" --pulsate --no-buttons --auto-close
+            InstalacaoInelastica 
 
         else
             echo ""
