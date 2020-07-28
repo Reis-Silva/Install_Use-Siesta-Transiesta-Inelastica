@@ -31,6 +31,7 @@ OBS4: Para instalação das opções [2] e [3] em versões "v.xx.xx < v.17.04" d
 FIM
 
 OBS: NA OPÇÃO DE INSTALAÇÃO "PACOTES ESSENCIAIS" HAVERÁ "DOWNGRADE" EM BIBLIOTECAS, NO ENTANTO SERÃO ATUALIZADAS NOVAMENTE.
+
 OBS2: SE NÃO HOUVER INSTALAÇÃO DOS "PACOTES ESSENCIAIS", ENCONTRE-SE CORRETO PARA QUE A INSTALAÇÃO DAS DEMAIS OPÇÕES SEJA FEITA CORRETAMENTE. 
 
 
@@ -40,15 +41,15 @@ OBS2: SE NÃO HOUVER INSTALAÇÃO DOS "PACOTES ESSENCIAIS", ENCONTRE-SE CORRETO 
 
 EXEMPLO:
 
-mpirun --oversubscribe -np 4 siesta < INPUT.fdf  | tee OUTPUT.fdf 
+"mpirun --oversubscribe -np 4 siesta < INPUT.fdf  | tee OUTPUT.fdf" 
 
-mpirun = Emulação do compilador.
+[1] - mpirun = Emulação do compilador.
 
---oversubscribe = Utilização para todos os nucleos existentes.
+[2] - --oversubscribe = Utilização para todos os nucleos existentes.
 
--np 4 = Escolha do Numero de Núcleos para emular.
+[3] - -np 4 = Escolha do Numero de Núcleos para emular.
 
-siesta < INPUT.fdf  | tee OUTPUT.fdf  = Emulação do comando do Software para arquivo de entrar e saida.
+[4] - siesta < INPUT.fdf  | tee OUTPUT.fdf  = Emulação do comando do Software para arquivo de entrar e saida.
 
 ####################################################################################################################################################################################################################
 
@@ -107,15 +108,15 @@ NOTE2: IF THERE IS NO INSTALLATION OF THE "ESSENTIAL PACKAGES", FIND YOURSELF SO
 
 EXAMPLE:
 
-mpirun --oversubscribe -np 4 siesta <INPUT.fdf | tee OUTPUT.fdf
+"mpirun --oversubscribe -np 4 siesta <INPUT.fdf | tee OUTPUT.fdf"
 
-mpirun = Compiler emulation.
+[1] - mpirun = Compiler emulation.
 
---oversubscribe = Use for all existing cores.
+[2] - --oversubscribe = Use for all existing cores.
 
--np 4 = Choose the number of cores to emulate.
+[3] - -np 4 = Choose the number of cores to emulate.
 
-siesta <INPUT.fdf | tee OUTPUT.fdf = Software command emulation for input and output file.
+[4] - siesta <INPUT.fdf | tee OUTPUT.fdf = Software command emulation for input and output file.
 
 ####################################################################################################################################################################################################################
 
