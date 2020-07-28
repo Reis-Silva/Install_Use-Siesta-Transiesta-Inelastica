@@ -88,6 +88,14 @@ Instalacao_PacotesEssenciais() {
 
     #PACOTE gfortran
     echo "#PACOTE gfortran - 1 de 11\n\n"
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/glibc/libc-dev-bin_2.31-0ubuntu9_amd64.deb
+    sudo dpkg -i libc-dev-bin_2.31-0ubuntu9_amd64.deb
+    wget -c http://security.ubuntu.com/ubuntu/pool/main/l/linux/linux-libc-dev_5.4.0-42.46_amd64.deb
+    sudo dpkg -i linux-libc-dev_5.4.0-42.46_amd64.deb
+    wget -c  http://mirrors.kernel.org/ubuntu/pool/main/libx/libxcrypt/libcrypt-dev_4.4.10-10ubuntu4_amd64.deb
+    sudo dpkg -i libcrypt-dev_4.4.10-10ubuntu4_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/glibc/libc6-dev_2.31-0ubuntu9_amd64.deb
+    sudo dpkg -i libc6-dev_2.31-0ubuntu9_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libf2c2/libf2c2_20130926-3_amd64.deb
     sudo dpkg -i libf2c2_20130926-3_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libf/libf2c2/libf2c2-dev_20130926-3_amd64.deb
@@ -96,12 +104,44 @@ Instalacao_PacotesEssenciais() {
     sudo dpkg -i f2c_20160102-1_amd64.deb
     wget -c http://security.ubuntu.com/ubuntu/pool/universe/f/fort77/fort77_1.15-11_all.deb
     sudo dpkg -i fort77_1.15-11_all.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-10/libquadmath0_10-20200411-0ubuntu1_amd64.deb
+    sudo dpkg -i libquadmath0_10-20200411-0ubuntu1_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-10/libgfortran5_10-20200411-0ubuntu1_amd64.deb
     sudo dpkg -i libgfortran5_10-20200411-0ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-10/libitm1_10-20200411-0ubuntu1_amd64.deb
+    sudo dpkg -i libitm1_10-20200411-0ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-10/libatomic1_10-20200411-0ubuntu1_amd64.deb
+    sudo dpkg -i libatomic1_10-20200411-0ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-9/libasan5_9.3.0-10ubuntu2_amd64.deb
+    sudo dpkg -i libasan5_9.3.0-10ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-10/liblsan0_10-20200411-0ubuntu1_amd64.deb
+    sudo dpkg -i liblsan0_10-20200411-0ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-10/libubsan1_10-20200411-0ubuntu1_amd64.deb
+    sudo dpkg -i libubsan1_10-20200411-0ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-10/libtsan0_10-20200411-0ubuntu1_amd64.deb
+    sudo dpkg -i libtsan0_10-20200411-0ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-9/libgcc-9-dev_9.3.0-10ubuntu2_amd64.deb
+    sudo dpkg -i libgcc-9-dev_9.3.0-10ubuntu2_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-9/libgfortran-9-dev_9.3.0-10ubuntu2_amd64.deb
     sudo dpkg -i libgfortran-9-dev_9.3.0-10ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/b/binutils/binutils-common_2.34-6ubuntu1_amd64.deb
+    sudo dpkg -i binutils-common_2.34-6ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/b/binutils/libbinutils_2.34-6ubuntu1_amd64.deb
+    sudo dpkg -i libbinutils_2.34-6ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/b/binutils/libctf-nobfd0_2.34-6ubuntu1_amd64.deb
+    sudo dpkg -i libctf-nobfd0_2.34-6ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/b/binutils/libctf0_2.34-6ubuntu1_amd64.deb
+    sudo dpkg -i libctf0_2.34-6ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/b/binutils/binutils-x86-64-linux-gnu_2.34-6ubuntu1_amd64.deb
+    sudo dpkg -i binutils-x86-64-linux-gnu_2.34-6ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/b/binutils/binutils_2.34-6ubuntu1_amd64.deb
+    sudo dpkg -i binutils_2.34-6ubuntu1_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-9/gcc-9_9.3.0-10ubuntu2_amd64.deb
+    sudo dpkg -i gcc-9_9.3.0-10ubuntu2_amd64.deb
     wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-9/gfortran-9_9.3.0-10ubuntu2_amd64.deb
     sudo dpkg -i gfortran-9_9.3.0-10ubuntu2_amd64.deb
+    wget -c http://mirrors.kernel.org/ubuntu/pool/main/g/gcc-defaults/gcc_9.3.0-1ubuntu2_amd64.deb
+    sudo dpkg -i gcc_9.3.0-1ubuntu2_amd64.deb
     wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-defaults/gfortran_9.3.0-1ubuntu2_amd64.deb
     sudo dpkg -i gfortran_9.3.0-1ubuntu2_amd64.deb
     wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
