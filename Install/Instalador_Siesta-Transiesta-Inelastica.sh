@@ -1,5 +1,6 @@
 #!/bin/bash
 
+sudo dpkg --configure -a
 sudo apt install yad -y
 
 Instalacao_PacotesEssenciais() {
