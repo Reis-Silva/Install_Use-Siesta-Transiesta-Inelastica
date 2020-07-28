@@ -678,7 +678,7 @@ arch_make_UTILS() {
     echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
 
     sed -i '24cINCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' arch.make
-    sed -i '38cCOMP_LIBS = '"$pathSIESTA"'/siesta-master/Obj/ncdf/obj/libncdf.a '"$pathSIESTA"'/siesta-master/Obj/fdict/obj/libfdict.a '"$pathSIESTA"'/siesta-master/Obj/libsiestaBLAS.a '"$pathSIESTA"'/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a' arch.make
+    sed -i '38cCOMP_LIBS = /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libncdf.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libfdict.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaBLAS.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/fdf/libfdf.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libSiestaXC.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/MatrixSwitch.a' arch.make
     sed -i '46cLIBS += $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' arch.make
 }
 
@@ -727,7 +727,6 @@ Instalacao_SiestaTransiesta() {
 
     wget -c https://gitlab.com/siesta-project/siesta/-/archive/master/siesta-master.tar.gz
     tar -vzxf siesta-master.tar.gz
-    chmod -R o=rx siesta-master/
     pathSIESTA="$(pwd)"
     #Escrevendo arquivo gfortran.make
     echo "#Escrevendo arquivo gfortran.make\n\n"
@@ -757,7 +756,11 @@ Instalacao_SiestaTransiesta() {
     cd ..
     tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Util/Gen-basis
     cd siesta-master/Util/Gen-basis
-    sed -i "103s/^/ \t/" Makefile
+    sed -i '101c\ ' Makefile
+    sed -i '102c\ ' Makefile
+    sed -i '103c\ ' Makefile
+    sed -i '104c\ ' Makefile
+    sed -i "104cgen-basis: $(FDF) $(XC) $(OBJS_GEN-BASIS)" Makefile
     cd ..
     sh build_all.sh
     echo "\n\n"
