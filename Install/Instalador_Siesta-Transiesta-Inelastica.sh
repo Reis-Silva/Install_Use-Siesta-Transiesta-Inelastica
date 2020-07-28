@@ -828,24 +828,24 @@ Instalacao_SiestaTransiesta() {
 
 InstalacaoSiestaTransiesta() {
 
-    if [ -e "PackagesSIETRANINEL" ]; then
-        echo 'O DIRETÓRIO \033[32mPackagesSIETRAN"\033[00m EXISTE
-        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
+    if [ -e "PackageSIESTA" ]; then
+        echo 'O DIRETÓRIO \033[32mPackageSIESTA"\033[00m EXISTE
+        \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackageSIESTA"\033[00;00m\n\n'
 
         sleep 2
 
-        cd PackagesSIETRANINEL
+        cd PackageSIESTA
         Instalacao_SiestaTransiesta
 
     else
 
-        echo 'O DIRETÓRIO \033[32m"PackagesSIETRAN"\033[00m NÃO EXISTE
-        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesSIETRAN"\033[00;00m\n\n'
+        echo 'O DIRETÓRIO \033[32m"PackageSIESTA"\033[00m NÃO EXISTE
+        \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackageSIESTA"\033[00;00m\n\n'
 
         sleep 2
-        mkdir PackagesSIETRANINEL
+        mkdir PackageSIESTA
 
-        cd PackagesSIETRANINEL
+        cd PackageSIESTA
         Instalacao_SiestaTransiesta
 
     fi
