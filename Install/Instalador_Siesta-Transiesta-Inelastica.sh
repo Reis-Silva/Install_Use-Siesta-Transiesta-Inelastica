@@ -787,7 +787,7 @@ arch_make() {
     sed -i "56s/^/LAPACK_LIBS = -llapack/" gfortran.make
     sed -i "57cSCALAPACK_LIBS = /usr/lib/x86_64-linux-gnu/libscalapack-openmpi.so\n\n" gfortran.make
     sed -i "59cFPPFLAGS_CDF = -DNCDF -DNCDF_4 -DCDF" gfortran.make
-    sed -i '61cFPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) (FPPFLAGS_CDF) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP -DUSE_GEMM3m' gfortran.make
+    sed -i '61cFPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) $(FPPFLAGS_CDF) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP -DUSE_GEMM3m' gfortran.make
     sed -i '63s/LIBS =/LIBS = $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(INCFLAGS) $(NETCDF_LIBS) $(HDF5_LIBS) $(OTHER_LIBS) $(MPI_LIBS) -fopenmp\n\n\n/' gfortran.make
     sed -i "65s/^/MPI_INTERFACE = libmpi_f90.a/" gfortran.make
     sed -i "66s/^/MPI_INCLUDE = ./" gfortran.make
