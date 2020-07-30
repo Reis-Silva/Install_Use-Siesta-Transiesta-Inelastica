@@ -719,7 +719,7 @@ arch_make_UTILS() {
     #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
     echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
  
-    sed -i '53cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libncdf.a '"$pathSIESTA"'\/siesta-master/Obj/libfdict.a' arch.make
+    sed -i '53cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master\/Obj\/libncdf.a '"$pathSIESTA"'\/siesta-master\/Obj\/libfdict.a' arch.make
     
     cd ..
     cd ..
@@ -737,8 +737,8 @@ arch_make_UTILS() {
     cd ..
 
     cd TS/tshs2tshs
-    '75cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libfdict.a' Makefile
-    '92cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libncdf.a' Makefile
+    sed -i '75cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libfdict.a' Makefile
+    sed -i '92cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libncdf.a' Makefile
 
     cd ..
     cd ..
