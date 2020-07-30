@@ -718,10 +718,35 @@ arch_make_UTILS() {
 
     #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
     echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
+    
+    /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Util/TS/tshs2tshs
 
     sed -i '24cINCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' arch.make
-    sed -i '38cCOMP_LIBS = /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libncdf.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libfdict.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaBLAS.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/fdf/libfdf.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/libSiestaXC.a /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Obj/MatrixSwitch.a' arch.make
-    sed -i '46cLIBS += $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' arch.make
+    sed -i '38cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libncdf.a '"$pathSIESTA"'\/siesta-master/Obj/libfdict.a '"$pathSIESTA"'\/siesta-master/Obj/libsiestaBLAS.a '"$pathSIESTA"'\/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a '"$pathSIESTA"'\/siesta-master/Obj/fdf/libfdf.a '"$pathSIESTA"'\/siesta-master/Obj/libSiestaXC.a '"$pathSIESTA"'\/siesta-master/Obj/MatrixSwitch.a' arch.make
+    sed -i '46cLIBS = $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' arch.make
+
+    cd ..
+    cd ..
+    tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Util/Gen-basis
+    cd siesta-master/Util/Gen-basis
+    sed -i '101c\ ' Makefile
+    sed -i '102c\ ' Makefile
+    sed -i '103c\ ' Makefile
+    sed -i '104c\ ' Makefile
+    sed -i "104cgen-basis: $(FDF) $(XC) $(OBJS_GEN-BASIS)" Makefile
+    cd ..
+    sh build_all.sh
+    echo "\n\n"
+
+    ###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA
+    echo "###COMPIANDO O PROGRAMA TBtrans DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA\n\n"
+    echo '#OBS: Para outros software da pasta "UTILS" entre na pasta do programa e utilize o comando\033[05;33m"sudo cp NomeDoPrograma /usr/local/bin/NomeDoPrograma"\033[00;00m\n\n'
+    sleep 3
+
+    #PASTA TBtrans
+    echo "#PASTA TBtrans\n\n"
+    cd TS/TBtrans
+    sudo cp -rf tbtrans /usr/local/bin/tbtrans
 }
 
 arch_make() {
@@ -744,7 +769,7 @@ arch_make() {
     sed -i "40s/^/BLAS_LIBS = -lblas/" gfortran.make
     sed -i "41s/^/LAPACK_LIBS = -llapack/" gfortran.make
     sed -i "42cSCALAPACK_LIBS = /usr/lib/x86_64-linux-gnu/libscalapack-openmpi.so" gfortran.make
-    sed -i '44s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA/' gfortran.make
+    sed -i '44s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA -DCDF -DNCDF -DNCDF_4/' gfortran.make
     sed -i '46s/LIBS =/LIBS = -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
     sed -i "48s/^/MPI_INTERFACE = libmpi_f90.a/" gfortran.make
     sed -i "49s/^/MPI_INCLUDE = ./" gfortran.make
@@ -793,29 +818,6 @@ Instalacao_SiestaTransiesta() {
     echo "###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA\n\n"
 
     arch_make_UTILS
-
-    cd ..
-    cd ..
-    tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Util/Gen-basis
-    cd siesta-master/Util/Gen-basis
-    sed -i '101c\ ' Makefile
-    sed -i '102c\ ' Makefile
-    sed -i '103c\ ' Makefile
-    sed -i '104c\ ' Makefile
-    sed -i "104cgen-basis: $(FDF) $(XC) $(OBJS_GEN-BASIS)" Makefile
-    cd ..
-    sh build_all.sh
-    echo "\n\n"
-
-    ###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA
-    echo "###COMPIANDO O PROGRAMA TBtrans DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA\n\n"
-    echo '#OBS: Para outros software da pasta "UTILS" entre na pasta do programa e utilize o comando\033[05;33m"sudo cp NomeDoPrograma /usr/local/bin/NomeDoPrograma"\033[00;00m\n\n'
-    sleep 3
-
-    #PASTA TBtrans
-    echo "#PASTA TBtrans\n\n"
-    cd TS/TBtrans
-    sudo cp -rf tbtrans /usr/local/bin/tbtrans
 
     echo "TERMÍNO DAS COPIAS\n\n"
 
