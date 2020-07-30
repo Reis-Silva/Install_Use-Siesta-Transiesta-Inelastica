@@ -718,27 +718,35 @@ arch_make_UTILS() {
 
     #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
     echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
+ 
+    sed -i '53cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libncdf.a '"$pathSIESTA"'\/siesta-master/Obj/libfdict.a' arch.make
     
-    /home/brainiac/Documentos/Install/PackagesSIETRANINEL/siesta-master/Util/TS/tshs2tshs
-
-    sed -i '24cINCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include -I\/usr\/include' arch.make
-    sed -i '38cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libncdf.a '"$pathSIESTA"'\/siesta-master/Obj/libfdict.a '"$pathSIESTA"'\/siesta-master/Obj/libsiestaBLAS.a '"$pathSIESTA"'\/siesta-master/Obj/libsiestaLAPACK.a /usr/lib/x86_64-linux-gnu/libfftw3f.a /usr/lib/x86_64-linux-gnu/libfftw3.a '"$pathSIESTA"'\/siesta-master/Obj/fdf/libfdf.a '"$pathSIESTA"'\/siesta-master/Obj/libSiestaXC.a '"$pathSIESTA"'\/siesta-master/Obj/MatrixSwitch.a' arch.make
-    sed -i '46cLIBS = $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)' arch.make
-
     cd ..
     cd ..
+
     tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Util/Gen-basis
+    tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Util/TS/tshs2tshs
+
     cd siesta-master/Util/Gen-basis
     sed -i '101c\ ' Makefile
     sed -i '102c\ ' Makefile
     sed -i '103c\ ' Makefile
     sed -i '104c\ ' Makefile
     sed -i "104cgen-basis: $(FDF) $(XC) $(OBJS_GEN-BASIS)" Makefile
+
     cd ..
+
+    cd TS/tshs2tshs
+    '75cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libfdict.a' Makefile
+    '92cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libncdf.a' Makefile
+
+    cd ..
+    cd ..
+
     sh build_all.sh
     echo "\n\n"
 
-    ###COMPIANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA
+    ###COMPIANDO OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA
     echo "###COMPIANDO O PROGRAMA TBtrans DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA\n\n"
     echo '#OBS: Para outros software da pasta "UTILS" entre na pasta do programa e utilize o comando\033[05;33m"sudo cp NomeDoPrograma /usr/local/bin/NomeDoPrograma"\033[00;00m\n\n'
     sleep 3
@@ -762,18 +770,28 @@ arch_make() {
     sed -i '18s, unknown, SIESTA 4.1 - '"$versionSistema"',' gfortran.make
     sed -i "20s/CC = gcc/CPP = gcc -E -P -x c/" gfortran.make
     sed -i '22s, gfortran, mpif90,' gfortran.make
-    sed -i "24s,^,INCFLAGS = -I"$pathSIESTA"\/siesta-master\/Docs\/build\/include,g" gfortran.make
-    sed -i '25s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS=-g -O2 $(INCFLAGS)/' gfortran.make
-    sed -i '36s|LDFLAGS =|LDFLAGS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -Wl,-rpath,'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib|' gfortran.make
-    sed -i "38s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a libncdf.a libfdict.a\n\n\n\n/," gfortran.make
-    sed -i "40s/^/BLAS_LIBS = -lblas/" gfortran.make
-    sed -i "41s/^/LAPACK_LIBS = -llapack/" gfortran.make
-    sed -i "42cSCALAPACK_LIBS = /usr/lib/x86_64-linux-gnu/libscalapack-openmpi.so" gfortran.make
-    sed -i '44s/FPPFLAGS = $(DEFS_PREFIX)-DFC_HAVE_ABORT/FPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP $(FPPFLAGS_CDF) -DTRANSIESTA -DCDF -DNCDF -DNCDF_4/' gfortran.make
-    sed -i '46s/LIBS =/LIBS = -lnetcdff -lnetcdf -lhdf5_hl -lhdf5 -lz $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLAS_LIBS) $(INCFLAGS)\n\n\n/' gfortran.make
-    sed -i "48s/^/MPI_INTERFACE = libmpi_f90.a/" gfortran.make
-    sed -i "49s/^/MPI_INCLUDE = ./" gfortran.make
-    sed -i "53s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
+    sed -i "24s,^,\n,g" gfortran.make
+    sed -i '25cFFTW_LIBS = -L\/usr\/lib\/x86_64-linux-gnu -lfftw3f -lfftw3\n' gfortran.make
+    sed -i '26cFFTW_INCFLAGS = -I\/usr\/include\n\n' gfortran.make
+    sed -i '28cHDF5_LIBS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -lhdf5_hl -lhdf5 -lcurl -lz\n' gfortran.make
+    sed -i '29cHDF5_INCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include\n\n' gfortran.make
+    sed -i '31cWITH_MPI=1\n' gfortran.make
+    sed -i '32cWITH_NETCDF=1\n' gfortran.make
+    sed -i '33cWITH_NCDF=1\n\n' gfortran.make
+    sed -i '35cNETCDF_LIBS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -lnetcdff -lnetcdf\n' gfortran.make
+    sed -i '36cNETCDF_INCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include -lnetcdff -lnetcdf\n\n' gfortran.make
+    sed -i '38cNETCDF_INCFLAGS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -lz\n\n' gfortran.make
+    sed -i '40s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS = -g -O2 $(INCFLAGS) $(NETCDF_INCFLAGS) $(FFTW_INCFLAGS) $(HDF5_INCFLAGS)/' gfortran.make
+    sed -i "53s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a libncdf.a libfdict.a\n\n\n\n/," gfortran.make
+    sed -i "55s/^/BLAS_LIBS = -lblas/" gfortran.make
+    sed -i "56s/^/LAPACK_LIBS = -llapack/" gfortran.make
+    sed -i "57cSCALAPACK_LIBS = /usr/lib/x86_64-linux-gnu/libscalapack-openmpi.so\n\n" gfortran.make
+    sed -i "59cFPPFLAGS_CDF = -DNCDF -DNCDF_4 -DCDF\n\n" gfortran.make
+    sed -i "61cFPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) $(FPPFLAGS_CDF) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP -DUSE_GEMM3m\n\n" gfortran.make
+    sed -i '63s/LIBS =/LIBS = $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(INCFLAGS) $(NETCDF_LIBS) $(HDF5_LIBS) $(OTHER_LIBS) $(MPI_LIBS) -fopenmp\n\n\n/' gfortran.make
+    sed -i "65s/^/MPI_INTERFACE = libmpi_f90.a/" gfortran.make
+    sed -i "66s/^/MPI_INCLUDE = ./" gfortran.make
+    sed -i "70s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
 
     cp gfortran.make arch.make
     rm gfortran.make
