@@ -737,8 +737,8 @@ arch_make_UTILS() {
     cd ..
 
     cd TS/tshs2tshs
-    sed -i '75cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libfdict.a' Makefile
-    sed -i '92cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master/Obj/libncdf.a' Makefile
+    sed -i '75cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master\/Obj\/libfdict.a' Makefile
+    sed -i '92cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master\/Obj\/libncdf.a' Makefile
 
     cd ..
     cd ..
