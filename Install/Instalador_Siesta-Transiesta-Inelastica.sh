@@ -773,7 +773,7 @@ arch_make() {
     sed -i "24s,^,\n,g" gfortran.make
     sed -i '25cFFTW_LIBS = -L\/usr\/lib\/x86_64-linux-gnu -lfftw3f -lfftw3\n' gfortran.make
     sed -i '26cFFTW_INCFLAGS = -I\/usr\/include\n\n' gfortran.make
-    sed -i '28cHDF5_LIBS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -lhdf5_hl -lhdf5 -lcurl -lz\n' gfortran.make
+    sed -i '28cHDF5_LIBS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -lhdf5_hl -lhdf5 -lcurl\n' gfortran.make
     sed -i '29cHDF5_INCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include\n\n' gfortran.make
     sed -i '31cWITH_MPI=1\n' gfortran.make
     sed -i '32cWITH_NETCDF=1\n' gfortran.make
