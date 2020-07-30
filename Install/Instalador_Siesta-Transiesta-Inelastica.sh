@@ -732,13 +732,13 @@ arch_make_UTILS() {
     sed -i '102c\ ' Makefile
     sed -i '103c\ ' Makefile
     sed -i '104c\ ' Makefile
-    sed -i "104cgen-basis: $(FDF) $(XC) $(OBJS_GEN-BASIS)" Makefile
+    sed -i "112cgen-basis: $(FDF) $(XC) $(OBJS_GEN-BASIS)" Makefile
 
     cd ..
 
     cd TS/tshs2tshs
-    sed -i '75cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master\/Obj\/libfdict.a' Makefile
-    sed -i '92cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master\/Obj\/libncdf.a' Makefile
+    sed -i '75cFDICT='"$pathSIESTA"'\/siesta-master\/Obj\/libfdict.a' Makefile
+    sed -i '92cNCDF='"$pathSIESTA"'\/siesta-master\/Obj\/libncdf.a' Makefile
 
     cd ..
     cd ..
