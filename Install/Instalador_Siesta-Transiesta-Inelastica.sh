@@ -691,6 +691,7 @@ Instalacao_PacotesEssenciais() {
     sleep 3
 
     cd $raizInstalacao
+    sudo chmod -R 777 PackagesESSENCIAIS
 }
 
 InstalacaoPacotesEssenciais() {
@@ -823,6 +824,7 @@ Instalacao_SiestaTransiesta() {
     sleep 3
 
     cd $raizInstalacao
+    sudo chmod -R 777 PackageSIESTA
 }
 
 InstalacaoSiestaTransiesta() {
@@ -882,6 +884,7 @@ Instalacao_Inelastica() {
     sleep 3
 
     cd $raizInstalacao
+    sudo chmod -R 777 PackagesINELASTICA
 }
 
 InstalacaoInelastica() {
