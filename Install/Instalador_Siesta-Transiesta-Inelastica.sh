@@ -718,31 +718,10 @@ arch_make_UTILS() {
 
     #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
     echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
- 
-    sed -i '53cCOMP_LIBS = '"$pathSIESTA"'\/siesta-master\/Obj\/libncdf.a '"$pathSIESTA"'\/siesta-master\/Obj\/libfdict.a' arch.make
-    
-    cd ..
-    cd ..
-
-    tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Util/Gen-basis
-    tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Util/TS/tshs2tshs
-
-    cd siesta-master/Util/Gen-basis
-    sed -i '101c\ ' Makefile
-    sed -i '102c\ ' Makefile
-    sed -i '103c\ ' Makefile
-    sed -i '104c\ ' Makefile
-    sed -i "112cgen-basis: $(FDF) $(XC) $(OBJS_GEN-BASIS)" Makefile
 
     cd ..
 
-    cd TS/tshs2tshs
-    sed -i '75cFDICT='"$pathSIESTA"'\/siesta-master\/Obj\/libfdict.a' Makefile
-    sed -i '92cNCDF='"$pathSIESTA"'\/siesta-master\/Obj\/libncdf.a' Makefile
-
-    cd ..
-    cd ..
-
+    cd Util
     sh build_all.sh
     echo "\n\n"
 
@@ -782,13 +761,13 @@ arch_make() {
     sed -i '36cNETCDF_INCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include -lnetcdff -lnetcdf\n\n' gfortran.make
     sed -i '38cOTHER_LIBS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -lz\n' gfortran.make
     sed -i '40s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS = -g -O2 $(INCFLAGS) $(NETCDF_INCFLAGS) $(FFTW_INCFLAGS) $(HDF5_INCFLAGS)/' gfortran.make
-    sed -i "53s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a libncdf.a libfdict.a\n\n\n\n," gfortran.make
+    sed -i "53s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS = libncdf.a libfdict.a\n\n\n\n," gfortran.make
     sed -i "55s/^/BLAS_LIBS = -lblas/" gfortran.make
     sed -i "56s/^/LAPACK_LIBS = -llapack/" gfortran.make
     sed -i "57cSCALAPACK_LIBS = /usr/lib/x86_64-linux-gnu/libscalapack-openmpi.so\n\n" gfortran.make
     sed -i "59cFPPFLAGS_CDF = -DNCDF -DNCDF_4 -DCDF" gfortran.make
     sed -i '61cFPPFLAGS = $(FPPFLAGS_MPI) $(DEFS_PREFIX) $(FPPFLAGS_CDF) -DFC_HAVE_ABORT -DMPI -DFC_HAVE_FLUSH -DGFORTRAN -DGRID_DP -DPHI_GRID_SP -DUSE_GEMM3m' gfortran.make
-    sed -i '63s/LIBS =/LIBS = $(COMP_LIBS) $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(INCFLAGS) $(NETCDF_LIBS) $(HDF5_LIBS) $(OTHER_LIBS) $(MPI_LIBS) -fopenmp\n\n\n/' gfortran.make
+    sed -i '63s/LIBS =/LIBS = $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(INCFLAGS) $(NETCDF_LIBS) $(HDF5_LIBS) $(OTHER_LIBS) $(MPI_LIBS) -fopenmp\n\n\n/' gfortran.make
     sed -i "65s/^/MPI_INTERFACE = libmpi_f90.a/" gfortran.make
     sed -i "66s/^/MPI_INCLUDE = ./" gfortran.make
     sed -i "70s/FFLAGS_DEBUG = -g -O1/FFLAGS_DEBUG = -g -O0/" gfortran.make
@@ -802,7 +781,7 @@ arch_make() {
     echo "##ARCH_MAKE DO GFORTRAN CRIADO\n\n"
 
     ######iNSTALANDO SIESTA4.1
-    echo "###iNSTALANDO SIESTA4.1\n\n"
+    echo "###iNSTALANDO SIESTA\n\n"
     make
     sudo cp -rf siesta /usr/local/bin/siesta
     echo "\n\n"
