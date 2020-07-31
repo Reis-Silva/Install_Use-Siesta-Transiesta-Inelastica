@@ -2,6 +2,7 @@
 
 sudo dpkg --configure -a
 sudo apt install make
+sudo apt-get install synaptic -y
 sudo apt install yad -y
 
 Instalacao_PacotesEssenciais() {
