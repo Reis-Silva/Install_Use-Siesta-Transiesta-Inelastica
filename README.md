@@ -6,6 +6,8 @@
 
 --- Versões SIESTA v4.1-260/INELASTICA v1.3.6
 
+Link Install YOUTUBE: https://youtu.be/af9cmUdHDJ8
+
 ## Opções de instalação completa na interface do programa:
 [1] - Todos os Pacotes essenciais
 
