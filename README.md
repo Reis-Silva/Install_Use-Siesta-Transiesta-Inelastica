@@ -6,10 +6,12 @@
 
 --- Versões SIESTA v4.1-260/INELASTICA v1.3.6
 
+Link Install YOUTUBE: https://www.youtube.com/watch?v=af9cmUdHDJ8
+
 ## Opções de instalação completa na interface do programa:
 [1] - Todos os Pacotes essenciais
 
-[2] - Siesta/Transiesta
+[2] - Siesta/Transiesta - OBS: Todos os programas UTILS compilados!
 
 [3] - Inelastica
 
@@ -76,7 +78,7 @@ EXEMPLO:
 ## Full installation options in the program interface:
 [1] - All Essential Packages
 
-[2] - Siesta/Transiesta
+[2] - Siesta/Transiesta - NOTE: All UTILS programs compiled!
 
 [3] - Inelastica
 
