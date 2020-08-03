@@ -784,7 +784,7 @@ arch_make() {
     sed -i '32cWITH_NETCDF=1\n' gfortran.make
     sed -i '33cWITH_NCDF=1\n\n' gfortran.make
     sed -i '35cNETCDF_LIBS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -lnetcdff -lnetcdf\n' gfortran.make
-    sed -i '36cNETCDF_INCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include -lnetcdff -lnetcdf\n\n' gfortran.make
+    sed -i '36cNETCDF_INCFLAGS = -I'"$pathSIESTA"'\/siesta-master\/Docs\/build\/include\n\n' gfortran.make
     sed -i '38cOTHER_LIBS = -L'"$pathSIESTA"'\/siesta-master\/Docs\/build\/lib -lz\n' gfortran.make
     sed -i '40s/FFLAGS = -O2 -fPIC -ftree-vectorize/FFLAGS = -g -O2 $(INCFLAGS) $(NETCDF_INCFLAGS) $(FFTW_INCFLAGS) $(HDF5_INCFLAGS)/' gfortran.make
     sed -i "53s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS = libncdf.a libfdict.a\n\n\n\n," gfortran.make
