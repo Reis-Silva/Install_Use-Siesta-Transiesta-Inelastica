@@ -176,7 +176,7 @@ Instalacao_PacotesEssenciais_TUDO(){
     ##FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS
     echo '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS"\033[00;00m\n\n'
     sleep 3
-    
+
     cd $raizInstalacao
     sudo chmod -R 777 PackagesESSENCIAIS
 
@@ -439,7 +439,7 @@ arch_make() {
     sed -i "53s,COMP_LIBS = libsiestaLAPACK.a libsiestaBLAS.a,COMP_LIBS = libncdf.a libfdict.a\n\n\n," gfortran.make
     sed -i "55s/^/LAPACK_LIBS = -llapack -lblas/" gfortran.make
 
-    if [ "`echo "${numeracaoSistema} > 16.00" | bc`" -eq 1 ]; then
+    if [ "`echo "${numeracaoSistema} >= 17.00" | bc`" -eq 1 ]; then
         sed -i "56cSCALAPACK_LIBS = /usr/lib/x86_64-linux-gnu/libscalapack-openmpi.so\n\n" gfortran.make
     else
         sed -i "56cSCALAPACK_LIBS = /usr/lib/libscalapack-openmpi.so\n\n" gfortran.make
