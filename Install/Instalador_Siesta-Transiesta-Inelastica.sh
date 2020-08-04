@@ -6,21 +6,21 @@
 #LINK GITHUB: https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica                                       #
 #LINK GITLAB SIESTA: https://gitlab.com/siesta-project/siesta                                                              #
 #                                                                                                                          #
-#VERSÃO BETA FINAL - INSTALAÇÃO SEM INTERRUPÇÕES BASEADOS NO UBUNTU 20.04                                                  #
+#                                                                                                                          #
 #                                                                                                                          #
 #Opções de instalação completa na interface do programa:                                                                   #
 #[1] - Todos os Pacotes essenciais                                                                                         #
 #[2] - Siesta/Transiesta - OBS: Todos os programas UTILS compilados!                                                       #
 #[3] - Inelastica                                                                                                          #
 #                                                                                                                          #
-#OBS: Os pacotes nesta versão beta, foram desenvolvidas para Ubuntu 20.04 (mediante desempenho)                            #
-#para instalar utilizando as opções, [2] INSTALAÇÃO - SIESTA /TRANSIESTA e [3] INSTALAÇÃO - INELASTICA, para outras        #
-#versões do sistema operacional (Versões entre 17.04 e 19.04), apenas instale os pacotes essenciais (Descritos dentro      #
-#do .sh de instalação) por outras fontes .                                                                                 #
+#OBS: Versão Generalizada do Ubuntu e versões derivadas do Debian provavelmente, Realizando testes com Linux Mint          #
 #                                                                                                                          #
-#OBS 2: para versões anteriores ao 17.04, mesma situação da "OBS", com acréscimo de mudança de diretório dentro do .sh de  #
-#instalação, onde tem  "/usr/lib/x86_64-linux-gnu/" altera-se para "/usr/lib/", desta forma, inicia-se da mesma forma que  #
-#está sendo executada no video.                                                                                            #            
+#                                                                                                                          #
+#                                                                                                                          #
+#                                                                                                                          #
+#                                                                                                                          #
+#                                                                                                                          #
+#                                                                                                                          #            
 ############################################################################################################################
 
 sudo rm /var/lib/apt/lists/lock
