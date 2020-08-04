@@ -165,7 +165,7 @@ Instalacao_PacotesEssenciais_TUDO(){
 
     sudo apt-get install python-numpy python-scipy python-matplotlib -y
     sudo apt-get install python-netcdf4 -y
-    apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
+    apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
 
     #Reatualização de repositorios e bibliotecas
     echo "#Reatualização de repositorios e bibliotecas\n\n"
