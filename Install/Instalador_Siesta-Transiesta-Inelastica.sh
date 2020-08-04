@@ -105,22 +105,22 @@ Instalacao_PacotesEssenciais_Geral(){
     echo "\n\n"
 
     #PACOTE bcc
-    echo "#PACOTE bcc - 4 de 10\n\n"
+    echo "#PACOTE bcc - 3 de 10\n\n"
     sudo apt-get install bcc bpfcc-tools -y
     echo "\n\n"
 
     #PACOTE CCCC
-    echo "#PACOTE CCCC - 5 de 10\n\n"
+    echo "#PACOTE CCCC - 4 de 10\n\n"
     sudo apt-get install cccc -y
     echo "\n\n"
 
     #PACOTE fcc
-    echo "#PACOTE fcc - 6 de 10\n\n"
+    echo "#PACOTE fcc - 5 de 10\n\n"
     sudo apt-get install fcc -y
     echo "\n\n"
 
     #PACOTE GPAW e suas dependencias
-    echo "#PACOTE GPAW e suas dependencias - 7 de 10\n\n"
+    echo "#PACOTE GPAW e suas dependencias - 6 de 10\n\n"
     sudo apt install python3-dev libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
     sudo apt-get install gpaw -y 
 
@@ -131,17 +131,17 @@ Instalacao_PacotesEssenciais_Geral(){
     echo "\n\n"
 
     #PACOTE abinit
-    echo "#PACOTE abinit - 8 de 10\n\n"
+    echo "#PACOTE abinit - 7 de 10\n\n"
     sudo apt-get install abinit  -y
     echo "\n\n"
 
     #PACOTE quantum-espresso
-    echo "#PACOTE quantum-espresso - 9 de 10\n\n"
+    echo "#PACOTE quantum-espresso - 8 de 10\n\n"
     sudo apt-get install quantum-espresso -y 
     echo "\n\n"
 
     #PACOTE meep-lam4
-    echo "#PACOTE meep-lam4 - 9 de 11\n\n"
+    echo "#PACOTE meep-lam4 - 9 de 10\n\n"
     sudo apt-get install libhdf5-serial-dev -y
     sudo apt-get install hdf5-tools -y
     sudo apt-get install libatlas-base-dev -y
@@ -183,7 +183,7 @@ Instalacao_PacotesEssenciais_TUDO(){
 Instalacao_PacotesEssenciais20_00() {
 
     #Pacotes para o INELASTICA/SIESTA
-    echo "#Pacotes para o INELASTICA - 11 de 11\n\n"
+    echo "#Pacotes para o INELASTICA\n\n"
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
     sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
     wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
