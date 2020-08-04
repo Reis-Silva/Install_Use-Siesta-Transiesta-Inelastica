@@ -649,7 +649,7 @@ Main() {
 
         if [ "$op" = "TRUE" ]; then
 
-            InstalacaoPacotesEssenciais | yad --progress --title "INSTALANDO PACOTES ESSENCIAIS" --width="300" --pulsate --no-buttons --auto-close
+            InstalacaoPacotesEssenciais
             
         else
             echo ""
