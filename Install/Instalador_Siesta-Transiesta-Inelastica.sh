@@ -176,6 +176,9 @@ Instalacao_PacotesEssenciais_TUDO(){
     ##FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS
     echo '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS"\033[00;00m\n\n'
     sleep 3
+    
+    cd $raizInstalacao
+    sudo chmod -R 777 PackagesESSENCIAIS
 
 }
 
