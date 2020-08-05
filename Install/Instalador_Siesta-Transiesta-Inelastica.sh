@@ -367,7 +367,7 @@ Instalacao_PacotesEssenciais_Geral() {
     sudo apt-get install hdf5-tools -y
     sudo apt-get install libatlas-base-dev -y
     sudo apt-get install libatlas-ecmwf-utils -y
-    sudo apt-get install meep-lam4 -y]
+    sudo apt-get install meep-lam4 -y
 
     pacote=$(dpkg --get-selections | grep meep-lam4)
 
