@@ -125,6 +125,10 @@ Instalacao_PacotesEssenciais_Geral(){
     sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
 
     ##DEPEDENCIAS VARIADAS DE python e python3 
+    sudo apt-get install libhdf5-dev -y
+    sudo apt-get install python3-numpy python3-scipy python3-matplotlib -y
+    sudo apt-get install python3-netcdf4 -y
+
     sudo apt-get install python-scipy python-matplotlib python-netcdf4 -y
     pacote=$(dpkg --get-selections | grep  python-scipy)
     pacote2=$(dpkg --get-selections | grep  python-matplotlib)
@@ -141,6 +145,41 @@ Instalacao_PacotesEssenciais_Geral(){
         
     else
         echo "\n\nPacotes não Encontrados\nBaixando por outras fontes...\n\n"
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/aglfn/aglfn_1.7+git20191031.4036a9c-2_all.deb
+        sudo dpkg -i aglfn_1.7+git20191031.4036a9c-2_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-data_5.2.8+dfsg1-2_all.deb
+        sudo dpkg -i gnuplot-data_5.2.8+dfsg1-2_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/d/double-conversion/libdouble-conversion3_3.1.5-4ubuntu1_amd64.deb
+        sudo dpkg -i libdouble-conversion3_3.1.5-4ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/pcre2/libpcre2-16-0_10.34-7_amd64.deb
+        sudo dpkg -i libpcre2-16-0_10.34-7_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5core5a_5.12.8+dfsg-0ubuntu1_amd64.deb
+        sudo dpkg -i libqt5core5a_5.12.8+dfsg-0ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5dbus5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        sudo dpkg -i libqt5dbus5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5network5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        sudo dpkg -i libqt5network5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/main/libx/libxcb/libxcb-xinerama0_1.14-2_amd64.deb
+        sudo dpkg -i libxcb-xinerama0_1.14-2_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/main/libx/libxcb/libxcb-xinput0_1.14-2_amd64.deb
+        sudo dpkg -i libxcb-xinput0_1.14-2_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5gui5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        sudo dpkg -i libqt5gui5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5widgets5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        sudo dpkg -i libqt5widgets5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5printsupport5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        sudo dpkg -i libqt5printsupport5_5.12.8+dfsg-0ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtsvg-opensource-src/libqt5svg5_5.12.8-0ubuntu1_amd64.deb
+        sudo dpkg -i libqt5svg5_5.12.8-0ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/w/wxwidgets3.0/libwxbase3.0-0v5_3.0.4+dfsg-15build1_amd64.deb
+        sudo dpkg -i libwxbase3.0-0v5_3.0.4+dfsg-15build1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/w/wxwidgets3.0/libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
+        sudo dpkg -i libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
+        sudo dpkg -i gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot_5.2.8+dfsg1-2_all.deb #instalando GNUplot
+        sudo dpkg -i gnuplot_5.2.8+dfsg1-2_all.deb
+
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
@@ -276,10 +315,6 @@ Instalacao_PacotesEssenciais_Geral(){
         sudo apt-get install python-tk -y
         apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
     fi
-
-    sudo apt-get install libhdf5-dev -y
-    sudo apt-get install python3-numpy python3-scipy python3-matplotlib -y
-    sudo apt-get install python3-netcdf4 -y
     echo "\n\n"
 
     sudo apt-get install gpaw -y 
