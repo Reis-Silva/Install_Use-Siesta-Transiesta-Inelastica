@@ -83,8 +83,6 @@ Instalacao_PacotesEssenciais_Geral(){
     echo "\n\n"
     
     echo "##python e python3\n\n"
-    sudo apt-get install python -y
-    sudo apt-get install python-dev -y
     sudo apt-get install python3 -y 
     sudo apt-get install python3-dev -y
     echo "\n\n"
@@ -128,17 +126,19 @@ Instalacao_PacotesEssenciais_Geral(){
     sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
 
     ##DEPEDENCIAS VARIADAS DE python e python3 
-    sudo apt-get install python-numpy python-scipy python-matplotlib python-netcdf4 -y
-    pacote=$(dpkg --get-selections | grep  python-numpy)
-    pacote2=$(dpkg --get-selections | grep  python-scipy)
-    pacote3=$(dpkg --get-selections | grep  python-matplotlib)
-    pacote4=$(dpkg --get-selections | grep  python-netcdf4)
+    sudo apt-get install python-scipy python-matplotlib python-netcdf4 -y
+    pacote=$(dpkg --get-selections | grep  python-scipy)
+    pacote2=$(dpkg --get-selections | grep  python-matplotlib)
+    pacote3=$(dpkg --get-selections | grep  python-netcdf4)
 
-    if [ -n "$pacote" ] && [ -n "$pacote" ] && [ -n "$pacote" ] && [ -n "$pacote" ]; then
+    if [ -n "$pacote" ] && [ -n "$pacote2" ] && [ -n "$pacote3" ]; then
 
+        sudo apt-get install python-numpy -y
+        sudo apt-get install python -y
+        sudo apt-get install python-dev -y
         echo "\n\nPacotes Encontrados\n\n"
         apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
-
+        
     else
         echo "\n\nPacotes não Encontrados\nBaixando por outras fontes...\n\n"
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
