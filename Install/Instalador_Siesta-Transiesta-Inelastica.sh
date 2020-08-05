@@ -2,7 +2,7 @@
 
 ############################################################################################################################
 #DEVELOPER: REIS-SILVA                                                                                                     #
-#LINK YOUTUBE: https://www.youtube.com/watch?v=af9cmUdHDJ8                                                                 #                                                        
+#LINK YOUTUBE: https://www.youtube.com/watch?v=af9cmUdHDJ8                                                                 #
 #LINK GITHUB: https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica                                       #
 #LINK GITLAB SIESTA: https://gitlab.com/siesta-project/siesta                                                              #
 #                                                                                                                          #
@@ -20,7 +20,7 @@
 #                                                                                                                          #
 #                                                                                                                          #
 #                                                                                                                          #
-#                                                                                                                          #            
+#                                                                                                                          #
 ############################################################################################################################
 
 sudo rm /var/lib/apt/lists/lock
@@ -32,8 +32,8 @@ sudo apt install make
 sudo apt-get install synaptic -y
 sudo apt install yad -y
 
-Instalacao_PacotesEssenciais_Geral(){
-####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####
+Instalacao_PacotesEssenciais_Geral() {
+    ####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####
     echo '\033[05;33m####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####\033[00;00m'
 
     #### COMANDOS GERAIS ####
@@ -80,9 +80,9 @@ Instalacao_PacotesEssenciais_Geral(){
     echo "##python3-tk\n\n"
     sudo apt-get install python3-tk -y
     echo "\n\n"
-    
+
     echo "##python3\n\n"
-    sudo apt-get install python3 -y 
+    sudo apt-get install python3 -y
     sudo apt-get install python3-dev -y
     echo "\n\n"
 
@@ -96,13 +96,13 @@ Instalacao_PacotesEssenciais_Geral(){
     #PACOTE gfortran
     echo "#PACOTE gfortran - 1 de 10\n\n"
     sudo apt-get install g++
-    sudo apt-get install gfortran -y     
+    sudo apt-get install gfortran -y
     sudo apt-get install gfortran-10 -y
     echo "\n\n"
 
     #PACOTE m4
     echo "#PACOTE m4 - 2 de 10"
-    sudo apt-get install m4 -y 
+    sudo apt-get install m4 -y
     echo "\n\n"
 
     #PACOTE bcc
@@ -124,15 +124,15 @@ Instalacao_PacotesEssenciais_Geral(){
     echo "#PACOTE GPAW e suas dependencias - 6 de 10\n\n"
     sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
 
-    ##DEPEDENCIAS VARIADAS DE python e python3 
+    ##DEPEDENCIAS VARIADAS DE python e python3
     sudo apt-get install libhdf5-dev -y
     sudo apt-get install python3-numpy python3-scipy python3-matplotlib -y
     sudo apt-get install python3-netcdf4 -y
 
     sudo apt-get install python-scipy python-matplotlib python-netcdf4 -y
-    pacote=$(dpkg --get-selections | grep  python-scipy)
-    pacote2=$(dpkg --get-selections | grep  python-matplotlib)
-    pacote3=$(dpkg --get-selections | grep  python-netcdf4)
+    pacote=$(dpkg --get-selections | grep python-scipy)
+    pacote2=$(dpkg --get-selections | grep python-matplotlib)
+    pacote3=$(dpkg --get-selections | grep python-netcdf4)
 
     if [ -n "$pacote" ] && [ -n "$pacote2" ] && [ -n "$pacote3" ]; then
 
@@ -142,7 +142,7 @@ Instalacao_PacotesEssenciais_Geral(){
         sudo apt-get install python-dev -y
         echo "\n\nPacotes Encontrados\n\n"
         apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
-        
+
     else
         echo "\n\nPacotes não Encontrados\nBaixando por outras fontes...\n\n"
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/aglfn/aglfn_1.7+git20191031.4036a9c-2_all.deb
@@ -185,7 +185,7 @@ Instalacao_PacotesEssenciais_Geral(){
         sudo dpkg -i python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-minimal_2.7.16-1_amd64.deb
         sudo dpkg -i python2-minimal_2.7.16-1_amd64.deb
-         wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-minimal_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-minimal_2.7.16-1_amd64.deb
         sudo dpkg -i python-minimal_2.7.16-1_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi6_3.2.1-9_amd64.deb
         sudo dpkg -i libffi6_3.2.1-9_amd64.deb
@@ -238,7 +238,7 @@ Instalacao_PacotesEssenciais_Geral(){
         wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python-mpi4py_3.0.2-13_amd64.deb
         sudo dpkg -i python-mpi4py_3.0.2-13_amd64.deb
         wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python-h5py_2.9.0-7_amd64.deb
-         sudo dpkg -i python-h5py_2.9.0-7_amd64.deb
+        sudo dpkg -i python-h5py_2.9.0-7_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_44.0.0-3_all.deb
         sudo dpkg -i python-pkg-resources_44.0.0-3_all.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-setuptools_44.0.0-3_all.deb
@@ -332,16 +332,33 @@ Instalacao_PacotesEssenciais_Geral(){
     fi
     echo "\n\n"
 
-    sudo apt-get install gpaw -y 
+    sudo apt-get install gpaw -y
 
     #PACOTE abinit
     echo "#PACOTE abinit - 7 de 10\n\n"
-    sudo apt-get install abinit  -y
+    sudo apt-get install abinit -y
+
+    pacote=$(dpkg --get-selections | grep abinit)
+
+    if [ -n "$pacote" ]; then
+
+        echo "\n\nPacote Encontrado\n\n"
+
+    else
+
+        echo "\n\nPacotes não Encontrados\nBaixando por outras fontes...\n\n"
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
+        sudo dpkg -i abinit-data_8.10.2-2_all.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
+        sudo dpkg -i abinit_8.10.2-2_amd64.deb
+
+    fi
+
     echo "\n\n"
 
     #PACOTE quantum-espresso
     echo "#PACOTE quantum-espresso - 8 de 10\n\n"
-    sudo apt-get install quantum-espresso -y 
+    sudo apt-get install quantum-espresso -y
     echo "\n\n"
 
     #PACOTE meep-lam4
@@ -350,7 +367,60 @@ Instalacao_PacotesEssenciais_Geral(){
     sudo apt-get install hdf5-tools -y
     sudo apt-get install libatlas-base-dev -y
     sudo apt-get install libatlas-ecmwf-utils -y
-    sudo apt-get install meep-lam4 -y 
+    sudo apt-get install meep-lam4 -y]
+
+    pacote=$(dpkg --get-selections | grep meep-lam4)
+
+    if [ -n "$pacote" ]; then
+
+        echo "\n\nPacote Encontrado\n\n"
+
+    else
+
+        echo "\n\nPacotes não Encontrados\nBaixando por outras fontes...\n\n"
+        wget -c http://security.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
+        sudo dpkg -i libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
+        sudo dpkg -i libjpeg8-dev_8c-2ubuntu8_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg-dev_8c-2ubuntu8_amd64.deb
+        sudo dpkg -i libjpeg-dev_8c-2ubuntu8_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec0_1.0.4-1_amd64.deb
+        sudo dpkg -i libaec0_1.0.4-1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libsz2_1.0.4-1_amd64.deb
+        sudo dpkg -i libsz2_1.0.4-1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec-dev_1.0.4-1_amd64.deb
+        sudo dpkg -i libaec-dev_1.0.4-1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libc/libctl/libctl7_4.4.0-3_amd64.deb
+        sudo dpkg -i libctl7_4.4.0-3_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/liblam4_7.1.4-6build1_amd64.deb
+        sudo dpkg -i liblam4_7.1.4-6build1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/atlas/libatlas3-base_3.10.3-8ubuntu7_amd64.deb
+        sudo dpkg -i libatlas3-base_3.10.3-8ubuntu7_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgslcblas0_2.5+dfsg-6_amd64.deb
+        sudo dpkg -i libgslcblas0_2.5+dfsg-6_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgsl23_2.5+dfsg-6_amd64.deb
+        sudo dpkg -i libgsl23_2.5+dfsg-6_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/harminv/libharminv3_1.4.1-2_amd64.deb
+        sudo dpkg -i libharminv3_1.4.1-2_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/meep-lam4/libmeep-lam4-12_1.7.0-3_amd64.deb
+        sudo dpkg -i libmeep-lam4-12_1.7.0-3_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-client_8.2p1-4_amd64.deb
+        sudo dpkg -i openssh-client_8.2p1-4_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-sftp-server_8.2p1-4_amd64.deb
+        sudo dpkg -i openssh-sftp-server_8.2p1-4_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-server_8.2p1-4_amd64.deb
+        sudo dpkg -i openssh-server_8.2p1-4_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/lam-runtime_7.1.4-6build1_amd64.deb
+        sudo dpkg -i lam-runtime_7.1.4-6build1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
+        sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
+
+    fi
+
     echo "\n\n"
 
     #PACOTE GaussSum e suas dependencias
@@ -373,17 +443,16 @@ Instalacao_PacotesEssenciais_Geral(){
 
 }
 
-InstalacaoPacotesEssenciaisIntermediario(){
+InstalacaoPacotesEssenciaisIntermediario() {
 
-        #if [ "`echo "${numeracaoSistema} >= 20.00" | bc`" -eq 1 ] && [ "`echo "${numeracaoSistema} < 21.00" | bc`" -eq 1 ]; then
+    #if [ "`echo "${numeracaoSistema} >= 20.00" | bc`" -eq 1 ] && [ "`echo "${numeracaoSistema} < 21.00" | bc`" -eq 1 ]; then
 
-             echo 'Instalando pacotes essenciais para versão: \033[05;33m'$versionSistema'\033[00;00m\n\n'
-             sleep 2
+    echo 'Instalando pacotes essenciais para versão: \033[05;33m'$versionSistema'\033[00;00m\n\n'
+    sleep 2
 
-             Instalacao_PacotesEssenciais_Geral
+    Instalacao_PacotesEssenciais_Geral
 
 }
-
 
 InstalacaoPacotesEssenciais() {
 
@@ -395,16 +464,16 @@ InstalacaoPacotesEssenciais() {
 
         InstalacaoPacotesEssenciaisIntermediario
 
-
     else
+
         echo 'O DIRETÓRIO \033[32m"PackagesESSENCIAIS"\033[00m NÃO EXISTE
         \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesESSENCIAIS"\033[00;00m\n\n'
         mkdir PackagesESSENCIAIS
         cd PackagesESSENCIAIS
         sleep 2
-        
+
         InstalacaoPacotesEssenciaisIntermediario
-        
+
     fi
 }
 
@@ -469,7 +538,7 @@ arch_make() {
         sed -i "54cBLACS_LIBS=/usr/lib/libblacs-openmpi.so /usr/lib/libblacsF77init-openmpi.so /usr/lib/libblacsCinit-openmpi.so" gfortran.make
         sed -i "56cSCALAPACK_LIBS = /usr/lib/libscalapack-openmpi.so\n\n" gfortran.make
         sed -i '62s/LIBS =/LIBS = $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLACS_LIBS) $(INCFLAGS) $(NETCDF_LIBS) $(HDF5_LIBS) $(OTHER_LIBS) $(MPI_LIBS) -fopenmp\n\n\n/' gfortran.make
-        
+
     else
         echo " Caminhos não encontrados"
     fi
@@ -499,7 +568,7 @@ arch_make() {
     sudo sed -i '$ { s/^.*$/&\n\n#netcdf/ }' ~/.bashrc
     sudo sed -i '$ { s|^.*$|&\nLD_LIBRARY_PATH=$LD_LIBRARY_PATH:'"$pathSIESTA"'/siesta-master/Docs/build/lib\nexport LD_LIBRARY_PATH| }' ~/.bashrc
     sudo sed -i '$ { s|^.*$|&\nINCLUDE=$INCLUDE:'"$pathSIESTA"'/siesta-master/Docs/build/include\nexport INCLUDE| }' ~/.bashrc
-    
+
     cd /home/$(users)
     sudo sed -i '$ { s/^.*$/&\n\n##netcdf/ }' .bashrc
     sudo sed -i '$ { s|^.*$|&\nLD_LIBRARY_PATH=$LD_LIBRARY_PATH:'"$pathSIESTA"'/siesta-master/Docs/build/lib\nexport LD_LIBRARY_PATH| }' .bashrc
@@ -593,7 +662,7 @@ Instalacao_Inelastica() {
     sudo sed -i '$ { s/^.*$/&\n\n#INELASTICA446/ }' ~/.bashrc
     sudo sed -i '$ { s|^.*$|&\nPYTHONPATH=$PYTHONPATH:'"$pathInelastica"'/lib/python2.7/site-packages\nexport PYTHONPATH| }' ~/.bashrc
     sudo sed -i '$ { s|^.*$|&\nPATH=$PATH:'"$pathInelastica"'/bin\nexport PATH| }' ~/.bashrc
-    
+
     cd /home/$(users)
     sudo sed -i '$ { s/^.*$/&\n\n#INELASTICA446/ }' .bashrc
     sudo sed -i '$ { s|^.*$|&\nPYTHONPATH=$PYTHONPATH:'"$pathInelastica"'/lib/python2.7/site-packages\nexport PYTHONPATH| }' .bashrc
@@ -646,22 +715,24 @@ Main() {
     versionSistema="$(lsb_release -d -s)"
     numeracaoSistema="$(lsb_release -r -s)"
 
-    github=$(yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
+    github=$(
+        yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
         --image="$raizInstalacao/img/IronGit.png" --image-on-top \
         --text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
-	        Page: https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica" --text-align=center)
+	        Page: https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica" --text-align=center
+    )
 
     while :; do
 
         instalacao=$(
             yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" \
-                --image="$raizInstalacao/img/SIESTA_INELASTICA.png" --image-on-top \
-                --text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
+            --image="$raizInstalacao/img/SIESTA_INELASTICA.png" --image-on-top \
+            --text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
     		\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center \
-                --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK \
-                --field="INSTALAÇÃO - SIESTA/TRANSIESTA":CHK \
-                --field="INSTALAÇÃO - INELASTICA":CHK \
-                --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2
+            --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK \
+            --field="INSTALAÇÃO - SIESTA/TRANSIESTA":CHK \
+            --field="INSTALAÇÃO - INELASTICA":CHK \
+            --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2
         )
 
         escolha=$(echo $?)
@@ -672,14 +743,14 @@ Main() {
         if [ "$op" = "TRUE" ]; then
 
             InstalacaoPacotesEssenciais
-            
+
         else
             echo ""
         fi
 
         if [ "$op2" = "TRUE" ]; then
 
-            InstalacaoSiestaTransiesta 
+            InstalacaoSiestaTransiesta
 
         else
             echo ""
@@ -687,7 +758,7 @@ Main() {
 
         if [ "$op3" = "TRUE" ]; then
 
-            InstalacaoInelastica 
+            InstalacaoInelastica
 
         else
             echo ""
