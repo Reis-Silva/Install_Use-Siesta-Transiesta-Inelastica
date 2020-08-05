@@ -126,13 +126,161 @@ Instalacao_PacotesEssenciais_Geral(){
     #PACOTE GPAW e suas dependencias
     echo "#PACOTE GPAW e suas dependencias - 6 de 10\n\n"
     sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
-    sudo apt-get install gpaw -y 
 
-    ##DEPEDENCIAS VARIADAS DE python3 
+    ##DEPEDENCIAS VARIADAS DE python e python3 
+    sudo apt-get install python-numpy python-scipy python-matplotlib python-netcdf4 -y
+    pacote=$(dpkg --get-selections | grep  python-numpy)
+    pacote2=$(dpkg --get-selections | grep  python-scipy)
+    pacote3=$(dpkg --get-selections | grep  python-matplotlib)
+    pacote4=$(dpkg --get-selections | grep  python-netcdf4)
+
+    if [-n "$pacote"] && [-n "$pacote"] && [-n "$pacote"] && [-n "$pacote"]; then
+
+        apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
+
+    else
+        echo "Baixando por outras fontes...\n\n"
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+        sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+        sudo dpkg -i python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-minimal_2.7.16-1_amd64.deb
+        sudo dpkg -i python2-minimal_2.7.16-1_amd64.deb
+         wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-minimal_2.7.16-1_amd64.deb
+        sudo dpkg -i python-minimal_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi6_3.2.1-9_amd64.deb
+        sudo dpkg -i libffi6_3.2.1-9_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/r/readline/libreadline7_7.0-5_amd64.deb
+        sudo dpkg -i libreadline7_7.0-5_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
+        sudo dpkg -i libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7_2.7.16-2+deb10u1_amd64.deb
+        sudo dpkg -i python2.7_2.7.16-2+deb10u1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-stdlib_2.7.16-1_amd64.deb
+        sudo dpkg -i libpython2-stdlib_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-stdlib_2.7.16-1_amd64.deb
+        sudo dpkg -i libpython-stdlib_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2_2.7.16-1_amd64.deb
+        sudo dpkg -i python2_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python_2.7.16-1_amd64.deb
+        sudo dpkg -i python_2.7.16-1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/e/elpa/libelpa-dev_2016.05.001-6build1_amd64.deb
+        sudo dpkg -i libelpa-dev_2016.05.001-6build1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_40.8.0-1_all.deb
+        sudo dpkg -i python-pkg-resources_40.8.0-1_all.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy_1.16.2-1_amd64.deb
+        sudo dpkg -i python-numpy_1.16.2-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/u/underscore/libjs-underscore_1.9.1~dfsg-1_all.deb
+        sudo dpkg -i libjs-underscore_1.9.1~dfsg-1_all.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/s/sphinx/libjs-sphinxdoc_1.8.4-1_all.deb
+        sudo dpkg -i libjs-sphinxdoc_1.8.4-1_all.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-doc_1.16.2-1_all.deb
+        sudo dpkg -i python-numpy-doc_1.16.2-1_all.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+        sudo dpkg -i libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dbg_2.7.16-1_amd64.deb
+        sudo dpkg -i libpython2-dbg_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dbg_2.7.16-1_amd64.deb
+        sudo dpkg -i libpython-dbg_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+        sudo dpkg -i python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dbg_2.7.16-1_amd64.deb
+        sudo dpkg -i python2-dbg_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dbg_2.7.16-1_amd64.deb
+        sudo dpkg -i python-dbg_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-dbg_1.16.2-1_amd64.deb
+        sudo dpkg -i python-numpy-dbg_1.16.2-1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/six/python-six_1.12.0-2_all.deb
+        sudo dpkg -i python-six_1.12.0-2_all.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python-mpi4py_3.0.2-13_amd64.deb
+        sudo dpkg -i python-mpi4py_3.0.2-13_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python-h5py_2.9.0-7_amd64.deb
+         sudo dpkg -i python-h5py_2.9.0-7_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_44.0.0-3_all.deb
+        sudo dpkg -i python-pkg-resources_44.0.0-3_all.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-setuptools_44.0.0-3_all.deb
+        sudo dpkg -i python-setuptools_44.0.0-3_all.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7_2.7.16-2+deb10u1_amd64.deb
+        sudo dpkg -i libpython2.7_2.7.16-2+deb10u1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
+        sudo dpkg -i libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dev_2.7.16-1_amd64.deb
+        sudo dpkg -i libpython2-dev_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dev_2.7.16-1_amd64.deb
+        sudo dpkg -i libpython-dev_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dev_2.7.16-2+deb10u1_amd64.deb
+        sudo dpkg -i python2.7-dev_2.7.16-2+deb10u1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dev_2.7.16-1_amd64.deb
+        sudo dpkg -i python2-dev_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dev_2.7.16-1_amd64.deb
+        sudo dpkg -i python-dev_2.7.16-1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.2.1-9_amd64.deb
+        sudo dpkg -i libffi-dev_3.2.1-9_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/c/cython/cython_0.29.14-0.1ubuntu3_amd64.deb
+        sudo dpkg -i cython_0.29.14-0.1ubuntu3_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/n/netcdf/libnetcdf13_4.6.2-1build1_amd64.deb
+        sudo dpkg -i libnetcdf13_4.6.2-1build1_amd64.deb
+        wget -c http://ftp.br.debian.org/debian/pool/main/c/cftime/python-cftime_1.0.3.4-1_amd64.deb
+        sudo dpkg -i python-cftime_1.0.3.4-1_amd64.deb
+        wget -c http://ftp.br.debian.org/debian/pool/main/n/netcdf4-python/python-netcdf4_1.4.2-1+b1_amd64.deb
+        sudo dpkg -i python-netcdf4_1.4.2-1+b1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-decorator/python-decorator_4.3.0-1.1_all.deb
+        sudo dpkg -i python-decorator_4.3.0-1.1_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy_1.2.2-4_amd64.deb
+        sudo dpkg -i python-scipy_1.2.2-4_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-dbg_1.2.2-4_amd64.deb
+        sudo dpkg -i python-scipy-dbg_1.2.2-4_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/fonts-mathjax_2.7.4+dfsg-1_all.deb
+        sudo dpkg -i fonts-mathjax_2.7.4+dfsg-1_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/libjs-mathjax_2.7.4+dfsg-1_all.deb
+        sudo dpkg -i libjs-mathjax_2.7.4+dfsg-1_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-doc_1.2.2-4_all.deb
+        sudo dpkg -i python-scipy-doc_1.2.2-4_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libh/libhdf4/libhdf4-0_4.2.10-3.2_amd64.deb
+        sudo dpkg -i libhdf4-0_4.2.10-3.2_amd64.deb
+        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.23-0ubuntu11.2_amd64.deb
+        sudo dpkg -i multiarch-support_2.23-0ubuntu11.2_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libm/libmatheval/libmatheval1_1.1.11+dfsg-2_amd64.deb
+        sudo dpkg -i libmatheval1_1.1.11+dfsg-2_amd64.deb
+        wget -c http://ppa.launchpad.net/linuxuprising/libpng12/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+        sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/h5utils/h5utils_1.12.1-4_amd64.deb
+        sudo dpkg -i h5utils_1.12.1-4_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/sip4/python3-sip_4.19.21+dfsg-1build1_amd64.deb
+        sudo dpkg -i python3-sip_4.19.21+dfsg-1build1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/w/wxpython4.0/python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
+        sudo dpkg -i python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python3-mpi4py_3.0.3-4build2_amd64.deb
+        sudo dpkg -i python3-mpi4py_3.0.3-4build2_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python3-h5py_2.10.0-2build2_amd64.deb
+        sudo dpkg -i python3-h5py_2.10.0-2build2_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf-compass/python3-hdf-compass_0.7~b8-2_all.deb
+        sudo dpkg -i python3-hdf-compass_0.7~b8-2_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass_0.7~b8-2_all.deb
+        sudo dpkg -i hdf-compass_0.7~b8-2_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass-doc_0.7~b8-2_all.deb
+        sudo dpkg -i hdf-compass-doc_0.7~b8-2_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-doc_1.10.0-patch1+docs-4_all.deb
+        sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
+        apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
+    fi
+
     sudo apt-get install libhdf5-dev -y
     sudo apt-get install python3-numpy python3-scipy python3-matplotlib -y
     sudo apt-get install python3-netcdf4 -y
     echo "\n\n"
+
+    sudo apt-get install gpaw -y 
 
     #PACOTE abinit
     echo "#PACOTE abinit - 7 de 10\n\n"
@@ -163,19 +311,6 @@ Instalacao_PacotesEssenciais_Geral(){
     sudo apt-get update -y
     sudo apt-get dist-upgrade -y
     echo "\n\n"
-}
-
-Instalacao_PacotesEssenciais_TUDO(){
-
-    sudo apt-get install python-numpy python-scipy python-matplotlib -y
-    sudo apt-get install python-netcdf4 -y
-    apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
-
-    #Reatualização de repositorios e bibliotecas
-    echo "#Reatualização de repositorios e bibliotecas\n\n"
-    sudo apt-get update -y
-    sudo apt-get dist-upgrade -y
-    echo "\n\n"
 
     ##FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS
     echo '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS"\033[00;00m\n\n'
@@ -185,186 +320,15 @@ Instalacao_PacotesEssenciais_TUDO(){
     sudo chmod -R 777 PackagesESSENCIAIS
 
 }
-
-
-Instalacao_PacotesEssenciais20_00() {
-
-    #Pacotes para o INELASTICA/SIESTA
-    echo "#Pacotes para o INELASTICA\n\n"
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
-    sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
-    sudo dpkg -i python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-minimal_2.7.16-1_amd64.deb
-    sudo dpkg -i python2-minimal_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-minimal_2.7.16-1_amd64.deb
-    sudo dpkg -i python-minimal_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi6_3.2.1-9_amd64.deb
-    sudo dpkg -i libffi6_3.2.1-9_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/r/readline/libreadline7_7.0-5_amd64.deb
-    sudo dpkg -i libreadline7_7.0-5_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
-    sudo dpkg -i libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7_2.7.16-2+deb10u1_amd64.deb
-    sudo dpkg -i python2.7_2.7.16-2+deb10u1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-stdlib_2.7.16-1_amd64.deb
-    sudo dpkg -i libpython2-stdlib_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-stdlib_2.7.16-1_amd64.deb
-    sudo dpkg -i libpython-stdlib_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2_2.7.16-1_amd64.deb
-    sudo dpkg -i python2_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python_2.7.16-1_amd64.deb
-    sudo dpkg -i python_2.7.16-1_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/e/elpa/libelpa-dev_2016.05.001-6build1_amd64.deb
-    sudo dpkg -i libelpa-dev_2016.05.001-6build1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_40.8.0-1_all.deb
-    sudo dpkg -i python-pkg-resources_40.8.0-1_all.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy_1.16.2-1_amd64.deb
-    sudo dpkg -i python-numpy_1.16.2-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/u/underscore/libjs-underscore_1.9.1~dfsg-1_all.deb
-    sudo dpkg -i libjs-underscore_1.9.1~dfsg-1_all.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/s/sphinx/libjs-sphinxdoc_1.8.4-1_all.deb
-    sudo dpkg -i libjs-sphinxdoc_1.8.4-1_all.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-doc_1.16.2-1_all.deb
-    sudo dpkg -i python-numpy-doc_1.16.2-1_all.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
-    sudo dpkg -i libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dbg_2.7.16-1_amd64.deb
-    sudo dpkg -i libpython2-dbg_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dbg_2.7.16-1_amd64.deb
-    sudo dpkg -i libpython-dbg_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
-    sudo dpkg -i python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dbg_2.7.16-1_amd64.deb
-    sudo dpkg -i python2-dbg_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dbg_2.7.16-1_amd64.deb
-    sudo dpkg -i python-dbg_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-dbg_1.16.2-1_amd64.deb
-    sudo dpkg -i python-numpy-dbg_1.16.2-1_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/six/python-six_1.12.0-2_all.deb
-    sudo dpkg -i python-six_1.12.0-2_all.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
-    sudo dpkg -i libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python-mpi4py_3.0.2-13_amd64.deb
-    sudo dpkg -i python-mpi4py_3.0.2-13_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python-h5py_2.9.0-7_amd64.deb
-    sudo dpkg -i python-h5py_2.9.0-7_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_44.0.0-3_all.deb
-    sudo dpkg -i python-pkg-resources_44.0.0-3_all.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-setuptools_44.0.0-3_all.deb
-    sudo dpkg -i python-setuptools_44.0.0-3_all.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7_2.7.16-2+deb10u1_amd64.deb
-    sudo dpkg -i libpython2.7_2.7.16-2+deb10u1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
-    sudo dpkg -i libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dev_2.7.16-1_amd64.deb
-    sudo dpkg -i libpython2-dev_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dev_2.7.16-1_amd64.deb
-    sudo dpkg -i libpython-dev_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dev_2.7.16-2+deb10u1_amd64.deb
-    sudo dpkg -i python2.7-dev_2.7.16-2+deb10u1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dev_2.7.16-1_amd64.deb
-    sudo dpkg -i python2-dev_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dev_2.7.16-1_amd64.deb
-    sudo dpkg -i python-dev_2.7.16-1_amd64.deb
-    wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.2.1-9_amd64.deb
-    sudo dpkg -i libffi-dev_3.2.1-9_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/c/cython/cython_0.29.14-0.1ubuntu3_amd64.deb
-    sudo dpkg -i cython_0.29.14-0.1ubuntu3_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/n/netcdf/libnetcdf13_4.6.2-1build1_amd64.deb
-    sudo dpkg -i libnetcdf13_4.6.2-1build1_amd64.deb
-    wget -c http://ftp.br.debian.org/debian/pool/main/c/cftime/python-cftime_1.0.3.4-1_amd64.deb
-    sudo dpkg -i python-cftime_1.0.3.4-1_amd64.deb
-    wget -c http://ftp.br.debian.org/debian/pool/main/n/netcdf4-python/python-netcdf4_1.4.2-1+b1_amd64.deb
-    sudo dpkg -i python-netcdf4_1.4.2-1+b1_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-decorator/python-decorator_4.3.0-1.1_all.deb
-    sudo dpkg -i python-decorator_4.3.0-1.1_all.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy_1.2.2-4_amd64.deb
-    sudo dpkg -i python-scipy_1.2.2-4_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-dbg_1.2.2-4_amd64.deb
-    sudo dpkg -i python-scipy-dbg_1.2.2-4_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/fonts-mathjax_2.7.4+dfsg-1_all.deb
-    sudo dpkg -i fonts-mathjax_2.7.4+dfsg-1_all.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/libjs-mathjax_2.7.4+dfsg-1_all.deb
-    sudo dpkg -i libjs-mathjax_2.7.4+dfsg-1_all.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-doc_1.2.2-4_all.deb
-    sudo dpkg -i python-scipy-doc_1.2.2-4_all.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libh/libhdf4/libhdf4-0_4.2.10-3.2_amd64.deb
-    sudo dpkg -i libhdf4-0_4.2.10-3.2_amd64.deb
-    wget -c http://security.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.23-0ubuntu11.2_amd64.deb
-    sudo dpkg -i multiarch-support_2.23-0ubuntu11.2_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libm/libmatheval/libmatheval1_1.1.11+dfsg-2_amd64.deb
-    sudo dpkg -i libmatheval1_1.1.11+dfsg-2_amd64.deb
-    wget -c http://ppa.launchpad.net/linuxuprising/libpng12/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
-    sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/h5utils/h5utils_1.12.1-4_amd64.deb
-    sudo dpkg -i h5utils_1.12.1-4_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/sip4/python3-sip_4.19.21+dfsg-1build1_amd64.deb
-    sudo dpkg -i python3-sip_4.19.21+dfsg-1build1_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/w/wxpython4.0/python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
-    sudo dpkg -i python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python3-mpi4py_3.0.3-4build2_amd64.deb
-    sudo dpkg -i python3-mpi4py_3.0.3-4build2_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python3-h5py_2.10.0-2build2_amd64.deb
-    sudo dpkg -i python3-h5py_2.10.0-2build2_amd64.deb
-    wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf-compass/python3-hdf-compass_0.7~b8-2_all.deb
-    sudo dpkg -i python3-hdf-compass_0.7~b8-2_all.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass_0.7~b8-2_all.deb
-    sudo dpkg -i hdf-compass_0.7~b8-2_all.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass-doc_0.7~b8-2_all.deb
-    sudo dpkg -i hdf-compass-doc_0.7~b8-2_all.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
-    sudo dpkg -i libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
-    sudo dpkg -i libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
-    sudo dpkg -i libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
-    sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
-    wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-doc_1.10.0-patch1+docs-4_all.deb
-    sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
-    apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
-    echo "\n\n"
-
-    #Reatualização de repositorios e bibliotecas
-    echo "#Reatualização de repositorios e bibliotecas\n\n"
-    sudo apt-get update -y
-    sudo apt-get dist-upgrade -y
-    echo "\n\n"
-
-    ##FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS
-    echo '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS"\033[00;00m\n\n'
-    sleep 3
-
-    cd $raizInstalacao
-    sudo chmod -R 777 PackagesESSENCIAIS
-}
-
-
-
 
 InstalacaoPacotesEssenciaisIntermediario(){
 
-        if [ "`echo "${numeracaoSistema} >= 20.00" | bc`" -eq 1 ] && [ "`echo "${numeracaoSistema} < 21.00" | bc`" -eq 1 ]; then
-
-             echo 'Instalando pacotes essenciais para versão: \033[05;33m'$versionSistema'\033[00;00m\n\n'
-             sleep 2
-
-             Instalacao_PacotesEssenciais_Geral   
-             Instalacao_PacotesEssenciais20_00
-
-        elif [ "`echo "${numeracaoSistema} < 20.00" | bc`" -eq 1 ] && [ "`echo "${numeracaoSistema} >= 15.00" | bc`" -eq 1 ]; then
+        #if [ "`echo "${numeracaoSistema} >= 20.00" | bc`" -eq 1 ] && [ "`echo "${numeracaoSistema} < 21.00" | bc`" -eq 1 ]; then
 
              echo 'Instalando pacotes essenciais para versão: \033[05;33m'$versionSistema'\033[00;00m\n\n'
              sleep 2
 
              Instalacao_PacotesEssenciais_Geral
-             Instalacao_PacotesEssenciais_TUDO
-
-        else 
-            echo " "
-        fi
-
 
 }
 
