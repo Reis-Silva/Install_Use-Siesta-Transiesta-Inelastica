@@ -81,7 +81,7 @@ Instalacao_PacotesEssenciais_Geral(){
     sudo apt-get install python3-tk -y
     echo "\n\n"
     
-    echo "##python e python3\n\n"
+    echo "##python3\n\n"
     sudo apt-get install python3 -y 
     sudo apt-get install python3-dev -y
     echo "\n\n"
@@ -179,7 +179,6 @@ Instalacao_PacotesEssenciais_Geral(){
         sudo dpkg -i gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot_5.2.8+dfsg1-2_all.deb #instalando GNUplot
         sudo dpkg -i gnuplot_5.2.8+dfsg1-2_all.deb
-
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
@@ -204,6 +203,8 @@ Instalacao_PacotesEssenciais_Geral(){
         sudo dpkg -i python2_2.7.16-1_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python_2.7.16-1_amd64.deb
         sudo dpkg -i python_2.7.16-1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/e/elpa/libelpa4_2016.05.001-6build1_amd64.deb
+        sudo dpkg -i libelpa4_2016.05.001-6build1_amd64.deb
         wget -c http://archive.ubuntu.com/ubuntu/pool/universe/e/elpa/libelpa-dev_2016.05.001-6build1_amd64.deb
         sudo dpkg -i libelpa-dev_2016.05.001-6build1_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_40.8.0-1_all.deb
@@ -286,6 +287,12 @@ Instalacao_PacotesEssenciais_Geral(){
         sudo dpkg -i libmatheval1_1.1.11+dfsg-2_amd64.deb
         wget -c http://ppa.launchpad.net/linuxuprising/libpng12/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
         sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
+        sudo dpkg -i gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
+        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
+        sudo dpkg -i libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
+        wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
+        sudo dpkg -i libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/h5utils/h5utils_1.12.1-4_amd64.deb
         sudo dpkg -i h5utils_1.12.1-4_amd64.deb
         wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/sip4/python3-sip_4.19.21+dfsg-1build1_amd64.deb
@@ -306,8 +313,16 @@ Instalacao_PacotesEssenciais_Geral(){
         sudo dpkg -i libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
         sudo dpkg -i libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/hwloc-nox_2.1.0+dfsg-4_amd64.deb
+        sudo dpkg -i hwloc-nox_2.1.0+dfsg-4_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mpich/libmpich12_3.3.2-2build1_amd64.deb
+        sudo dpkg -i libmpich12_3.3.2-2build1_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
         sudo dpkg -i libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpich/mpich_3.3.2-2build1_amd64.deb
+        sudo dpkg -i mpich_3.3.2-2build1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpich/libmpich-dev_3.3.2-2build1_amd64.deb
+        sudo dpkg -i libmpich-dev_3.3.2-2build1_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
         sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-doc_1.10.0-patch1+docs-4_all.deb
