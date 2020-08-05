@@ -77,8 +77,7 @@ Instalacao_PacotesEssenciais_Geral(){
     sudo apt install unzip -y
     echo "\n\n"
 
-    echo "##python e python3-tk\n\n"
-    sudo apt-get install python-tk -y
+    echo "##python3-tk\n\n"
     sudo apt-get install python3-tk -y
     echo "\n\n"
     
@@ -133,6 +132,7 @@ Instalacao_PacotesEssenciais_Geral(){
 
     if [ -n "$pacote" ] && [ -n "$pacote2" ] && [ -n "$pacote3" ]; then
 
+        sudo apt-get install python-tk -y
         sudo apt-get install python-numpy -y
         sudo apt-get install python -y
         sudo apt-get install python-dev -y
@@ -273,6 +273,7 @@ Instalacao_PacotesEssenciais_Geral(){
         sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-doc_1.10.0-patch1+docs-4_all.deb
         sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
+        sudo apt-get install python-tk -y
         apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
     fi
 
