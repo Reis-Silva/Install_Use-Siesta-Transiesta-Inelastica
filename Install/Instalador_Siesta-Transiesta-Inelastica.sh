@@ -474,7 +474,7 @@ arch_make() {
     echo "##ARCH_MAKE DO GFORTRAN CRIADO\n\n"
 
     ######iNSTALANDO SIESTA4.1
-    echo "###iNSTALANDO SIESTA\n\n"
+    echo "###INSTALANDO SIESTA\n\n"
     make
     sudo cp -rf siesta /usr/local/bin/siesta
     echo "\n\n"
@@ -490,7 +490,8 @@ arch_make() {
     sudo sed -i '$ { s|^.*$|&\nLD_LIBRARY_PATH=$LD_LIBRARY_PATH:'"$pathSIESTA"'/siesta-master/Docs/build/lib\nexport LD_LIBRARY_PATH| }' .bashrc
     sudo sed -i '$ { s|^.*$|&\nINCLUDE=$INCLUDE:'"$pathSIESTA"'/siesta-master/Docs/build/include\nexport INCLUDE| }' .bashrc
 
-    cd $raizInstalacao
+    cd $raizInstalacao/PackageSIESTA/siesta-master/Obj
+
 }
 
 Instalacao_SiestaTransiesta() {
