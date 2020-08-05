@@ -77,13 +77,16 @@ Instalacao_PacotesEssenciais_Geral(){
     sudo apt install unzip -y
     echo "\n\n"
 
-    echo "##python3-tk\n\n"
+    echo "##python e python3-tk\n\n"
     sudo apt-get install python-tk -y
     sudo apt-get install python3-tk -y
     echo "\n\n"
     
-    echo "##python3\n\n"
-    sudo apt-get install python3 -y #instalando Python 3
+    echo "##python e python3\n\n"
+    sudo apt-get install python -y
+    sudo apt-get install python-dev -y
+    sudo apt-get install python3 -y 
+    sudo apt-get install python3-dev -y
     echo "\n\n"
 
     echo "##python3-pip\n\n"
@@ -122,7 +125,7 @@ Instalacao_PacotesEssenciais_Geral(){
 
     #PACOTE GPAW e suas dependencias
     echo "#PACOTE GPAW e suas dependencias - 6 de 10\n\n"
-    sudo apt install python3-dev libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
+    sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
     sudo apt-get install gpaw -y 
 
     ##DEPEDENCIAS VARIADAS DE python3 
