@@ -101,7 +101,7 @@ Instalacao_PacotesEssenciais_Geral() {
     echo "\n\n"
 
     #PACOTE m4
-    echo "#PACOTE m4 - 2 de 10"
+    echo "#PACOTE m4 - 2 de 10\n\n"
     sudo apt-get install m4 -y
     echo "\n\n"
 
@@ -330,9 +330,9 @@ Instalacao_PacotesEssenciais_Geral() {
         sudo apt-get install python-tk -y
         apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
     fi
-    echo "\n\n"
-
+    
     sudo apt-get install gpaw -y
+    echo "\n\n"
 
     #PACOTE abinit
     echo "#PACOTE abinit - 7 de 10\n\n"
@@ -420,7 +420,6 @@ Instalacao_PacotesEssenciais_Geral() {
         sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
 
     fi
-
     echo "\n\n"
 
     #PACOTE GaussSum e suas dependencias
