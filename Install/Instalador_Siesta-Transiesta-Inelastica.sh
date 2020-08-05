@@ -134,12 +134,13 @@ Instalacao_PacotesEssenciais_Geral(){
     pacote3=$(dpkg --get-selections | grep  python-matplotlib)
     pacote4=$(dpkg --get-selections | grep  python-netcdf4)
 
-    if [-n "$pacote"] && [-n "$pacote"] && [-n "$pacote"] && [-n "$pacote"]; then
+    if [ -n "$pacote" ] && [ -n "$pacote" ] && [ -n "$pacote" ] && [ -n "$pacote" ]; then
 
+        echo "\n\nPacotes Encontrados\n\n"
         apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
 
     else
-        echo "Baixando por outras fontes...\n\n"
+        echo "\n\nPacotes não Encontrados\nBaixando por outras fontes...\n\n"
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
