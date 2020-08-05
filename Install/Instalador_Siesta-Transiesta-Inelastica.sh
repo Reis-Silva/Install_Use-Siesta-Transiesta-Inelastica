@@ -485,7 +485,7 @@ arch_make_UTILS() {
 
     cd ..
 
-    cd siesta-master/Util
+    cd Util
     sh build_all.sh
     echo "\n\n"
 
