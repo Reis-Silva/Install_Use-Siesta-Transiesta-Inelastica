@@ -175,6 +175,8 @@ Instalacao_PacotesEssenciais_Geral() {
         sudo dpkg -i libwxbase3.0-0v5_3.0.4+dfsg-15build1_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/w/wxwidgets3.0/libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
         sudo dpkg -i libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/main/l/lua5.3/liblua5.3-0_5.3.3-1.1ubuntu2_amd64.deb
+        sudo dpkg -i liblua5.3-0_5.3.3-1.1ubuntu2_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
         sudo dpkg -i gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot_5.2.8+dfsg1-2_all.deb #instalando GNUplot
