@@ -342,7 +342,7 @@ Instalacao_PacotesEssenciais_Geral() {
 
     if [ -n "$pacote" ]; then
 
-        echo "\n\nPacote $pacote Encontrado\n\n"
+        echo "\n\nPacote $pacote Encontrado"
 
     else
 
@@ -373,11 +373,11 @@ Instalacao_PacotesEssenciais_Geral() {
 
     if [ -n "$pacote" ]; then
 
-        echo "\n\nPacote $pacote Encontrado\n\n"
+        echo "\n\nPacote $pacote Encontrado"
 
     else
 
-        echo "\n\nPacote $pacote não Encontrado\nBaixando por outras fontes...\n\n"
+        echo "\n\nPacote $pacote não Encontrado\nBaixando por outras fontes..."
         wget -c http://security.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
         sudo dpkg -i libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
