@@ -140,11 +140,11 @@ Instalacao_PacotesEssenciais_Geral() {
         sudo apt-get install python-numpy -y
         sudo apt-get install python -y
         sudo apt-get install python-dev -y
-        echo "\n\nPacotes Encontrados\n\n"
+        echo "\n\nPacotes $pacote $pacote2 $pacote3 Encontrados\n\n"
         apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
 
     else
-        echo "\n\nPacotes não Encontrados\nBaixando por outras fontes...\n\n"
+        echo "\n\nPacotes $pacote $pacote2 $pacote3 não Encontrados\nBaixando por outras fontes...\n\n"
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/aglfn/aglfn_1.7+git20191031.4036a9c-2_all.deb
         sudo dpkg -i aglfn_1.7+git20191031.4036a9c-2_all.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-data_5.2.8+dfsg1-2_all.deb
@@ -342,11 +342,11 @@ Instalacao_PacotesEssenciais_Geral() {
 
     if [ -n "$pacote" ]; then
 
-        echo "\n\nPacote Encontrado\n\n"
+        echo "\n\nPacote $pacote Encontrado\n\n"
 
     else
 
-        echo "\n\nPacotes não Encontrados\nBaixando por outras fontes...\n\n"
+        echo "\n\nPacote $pacote não Encontrado\nBaixando por outras fontes...\n\n"
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
         sudo dpkg -i abinit-data_8.10.2-2_all.deb
         wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
@@ -373,11 +373,11 @@ Instalacao_PacotesEssenciais_Geral() {
 
     if [ -n "$pacote" ]; then
 
-        echo "\n\nPacote Encontrado\n\n"
+        echo "\n\nPacote $pacote Encontrado\n\n"
 
     else
 
-        echo "\n\nPacotes não Encontrados\nBaixando por outras fontes...\n\n"
+        echo "\n\nPacote $pacote não Encontrado\nBaixando por outras fontes...\n\n"
         wget -c http://security.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
         sudo dpkg -i libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
