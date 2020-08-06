@@ -95,7 +95,7 @@ Instalacao_PacotesEssenciais_Geral() {
 
     #PACOTE gfortran
     echo "#PACOTE gfortran - 1 de 10\n\n"
-    sudo apt-get install g++
+    sudo apt-get install g++ -y
     sudo apt-get install gfortran -y
     sudo apt-get install gfortran-10 -y
     echo "\n\n"
