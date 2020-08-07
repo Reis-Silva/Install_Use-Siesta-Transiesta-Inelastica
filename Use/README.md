@@ -2,7 +2,7 @@
 
 ## MODELOS DE SCRIPTS SIESTA:
 
-[1] -
+[1] - CONSTRUINDO UM script fdf (geração de TSHS dos eletrodos, necessário para o bias_Script)
 
 [2] - bias_script.sh - EMULAÇÃO DE TRANSMITANCIA
 
