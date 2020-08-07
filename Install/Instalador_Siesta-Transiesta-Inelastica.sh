@@ -13,8 +13,8 @@
 #[2] - Siesta/Transiesta - OBS: Todos os programas UTILS compilados!                                                       #
 #[3] - Inelastica                                                                                                          #
 #                                                                                                                          #
-#OBS: Versão Generalizada do Ubuntu e versões derivadas do Debian provavelmente, Realizando testes com Linux Mint          #
-#                                                                                                                          #
+#OBS: Versão Generalizada do Ubuntu e versões derivadas do Debian provavelmente (Testedo com Linux Mint)                   #
+#OBS2: Realizando testes com openSUSE                                                                                      #
 #                                                                                                                          #
 #                                                                                                                          #
 #                                                                                                                          #
@@ -22,6 +22,9 @@
 #                                                                                                                          #
 #                                                                                                                          #
 ############################################################################################################################
+
+
+zypper install lsb-release #(Comando openSUSE) ignore o erro caso esteja em um sistema ubuntu ou derivados.
 
 sudo rm /var/lib/apt/lists/lock
 sudo rm /var/cache/apt/archives/lock
