@@ -13,9 +13,9 @@
 #[2] - Siesta/Transiesta - OBS: Todos os programas UTILS compilados!                                                       #
 #[3] - Inelastica                                                                                                          #
 #                                                                                                                          #
-#OBS: Versão Generalizada do Ubuntu e versões derivadas do Debian provavelmente (Testedo com Linux Mint)                   #
+#OBS: Versão Generalizada do Ubuntu e versões derivadas do Debian provavelmente (Testado com Linux Mint)                   #
 #OBS2: Realizando testes com openSUSE                                                                                      #
-#                                                                                                                          #
+#OBS3: Lembre-se quando terminar de instalar tudo, feche e abra o terminal de novo para poder emular(reload .bashrs)       #
 #                                                                                                                          #
 #                                                                                                                          #
 #                                                                                                                          #
@@ -23,423 +23,597 @@
 #                                                                                                                          #
 ############################################################################################################################
 
-
-zypper install lsb-release #(Comando openSUSE) ignore o erro caso esteja em um sistema ubuntu ou derivados.
-
 sudo rm /var/lib/apt/lists/lock
 sudo rm /var/cache/apt/archives/lock
 sudo rm /var/lib/dpkg/lock
 sudo rm /var/lib/dpkg/lock-frontend
-sudo dpkg --configure -a
-sudo apt install make
-sudo apt-get install synaptic -y
-sudo apt install yad -y
+
+linuxSistema="$(uname -rs)"
+
+if [ "$linuxSistema" = "lp" ]; then
+    sudo zypper --non-interactive install lsb-release
+else
+    echo ""
+fi
+
+raizInstalacao="$(pwd)"
+versionSistema="$(lsb_release -d -s)"
+numeracaoSistema="$(lsb_release -r -s)"
+
+if [ "$linuxSistema" = "lp" ]; then
+    nomeSistema=${versionSistema:1:8}
+else
+    echo " " #OPENSUSE EM TESTE - nomeSistema="$(linuxSistema)"
+fi
+
+if [ "$nomeSistema" = "openSUSE" ]; then
+
+    touch .Xauthority
+    xauth merge ~brainiac/.Xauthority
+    export DISPLAY=:0.0
+    comandoInicialSistema="sudo zypper --non-interactive install"
+    comandoFinalSistema=" "
+    comandoInicialLinha="-e"
+    atualizacaoPacotes="zypper --non-interactive up"
+
+    echo $comandoInicialLinha $comandoInicialLinha "SISTEMA $versionSistema\nAdicionando pacotes...\n\n"
+
+    $comandoInicialSistema dpkg
+    sudo dpkg --configure -a
+    $comandoInicialSistema wget
+    $comandoInicialSistema unzip
+    $comandoInicialSistema make
+    zypper addrepo -f https://ftp.lysator.liu.se/pub/opensuse/repositories/GNOME:/Apps/openSUSE_Leap_15.1/ gnome-apps-x86_64
+    zypper --gpg-auto-import-keys refresh
+    $comandoInicialSistema yad
+
+else
+
+    comandoInicialSistema="sudo apt-get install"
+    comandoFinalSistema="-y"
+    comandoInicialLinha=" "
+    atualizacaoPacotes="sudo apt-get update && sudo apt-get dist-upgrade $comandoFinalSistema"
+
+    echo $comandoInicialLinha $comandoInicialLinha "SISTEMA $versionSistema\nAdicionando pacotes...\n\n"
+
+    sudo dpkg --configure -a
+    $comandoInicialSistema make
+    $comandoInicialSistema unzip
+    $comandoInicialSistema synaptic $comandoFinalSistema
+    $comandoInicialSistema yad $comandoFinalSistema
+
+    #Ativando repositorio canoninal e adicionando repositorios
+    echo $comandoInicialLinha "ativando repositorio canoninal e adicionando repositorios\n\n"
+    sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test $comandoFinalSistema
+    echo $comandoInicialLinha "\n\n"
+
+fi
 
 Instalacao_PacotesEssenciais_Geral() {
     ####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####
-    echo '\033[05;33m####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####\033[00;00m'
-
-    #### COMANDOS GERAIS ####
-
-    #sh InstaladorSiesta.sh     /Iniciar a instalação completa do Siesta/Transiesta
-    #sudo dpkg -i NOME_DO_PACOTE.deb     /INSTALA PACOTES .deb
-    #sudo apt-get install -f        /reparar pacotes quebrados
+    echo $comandoInicialLinha '\033[05;33m####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####\033[00;00m'
 
     ###Atualização do repositorio e Atualização de pacotes para a versão mais recente####
-    echo "###Atualização do repositorio e Atualização de pacotes para a versão mais recente####\n\n"
+    echo $comandoInicialLinha "###Atualização do repositorio e Atualização de pacotes para a versão mais recente####\n\n"
+    $atualizacaoPacotes
 
     # Removendo processos anteriores
-    echo "Removendo processos anteriores \n\n"
-    sudo apt-get clean -y
+    echo $comandoInicialLinha "\n\nRemovendo processos anteriores \n\n"
+
+    if [ "$nomeSistema" == "openSUSE" ]; then
+        zypper --non-interactive clean
+    else
+        sudo apt-get clean $comandoFinalSistema
+    fi
+
     sudo rm /var/lib/apt/lists/lock
     sudo rm /var/cache/apt/archives/lock
     sudo rm /var/lib/dpkg/lock
     sudo rm /var/lib/dpkg/lock-frontend
-    echo "\n\n"
-
-    #Ativando repositorio canoninal e adicionando repositorios
-    echo "ativando repositorio canoninal e adicionando repositorios\n\n"
-    sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
-    sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-    echo "\n\n"
-
-    #Atualização de repositorios e bibliotecas
-    echo "Atualização de repositorios e bibliotecas\n\n"
-    sudo apt-get update -y
-    sudo apt-get dist-upgrade -y
-    echo "\n\n"
+    echo $comandoInicialLinha "\n\n"
 
     # Instalando programas essenciais de instalação
-    echo "#Instalando programas essenciais de instalação\n\n"
+    echo $comandoInicialLinha "#Instalando programas essenciais de instalação\n\n"
 
-    echo "##wget\n\n"
-    sudo apt-get install wget -y #instalando para baixar direito de sites
-    echo "\n\n"
+    echo $comandoInicialLinha "##wget\n\n"
+    $comandoInicialSistema wget $comandoFinalSistema #instalando para baixar direito de sites
+    echo $comandoInicialLinha "\n\n"
 
-    echo "##unzip\n\n"
-    sudo apt install unzip -y
-    echo "\n\n"
+    echo $comandoInicialLinha "##unzip\n\n"
+    $comandoInicialSistema unzip $comandoFinalSistema
+    echo $comandoInicialLinha "\n\n"
 
-    echo "##python3-tk\n\n"
-    sudo apt-get install python3-tk -y
-    echo "\n\n"
+    echo $comandoInicialLinha "##python3-tk\n\n"
+    $comandoInicialSistema python3-tk $comandoFinalSistema
+    echo $comandoInicialLinha "\n\n"
 
-    echo "##python3\n\n"
-    sudo apt-get install python3 -y
-    sudo apt-get install python3-dev -y
-    echo "\n\n"
+    echo $comandoInicialLinha "##python3\n\n"
 
-    echo "##python3-pip\n\n"
-    sudo apt-get install python3-pip -y
-    echo "\n\n"
+    if [ "$nomeSistema" == "openSUSE" ]; then
+        $comandoInicialSistema python3 $comandoFinalSistema
+        $comandoInicialSistema python3-devel $comandoFinalSistema
+
+    else
+        $comandoInicialSistema python3 $comandoFinalSistema
+        $comandoInicialSistema python3-dev $comandoFinalSistema
+    fi
+
+    echo $comandoInicialLinha "\n\n"
+
+    echo $comandoInicialLinha "##python3-pip\n\n"
+    $comandoInicialSistema python3-pip $comandoFinalSistema
+    echo $comandoInicialLinha "\n\n"
 
     ####PACOTES A SEREM INSTALADOS####
-    echo "#####PACOTES A SEREM INSTALADOS####\n\n"
+    echo $comandoInicialLinha "#####PACOTES A SEREM INSTALADOS####\n\n"
 
     #PACOTE gfortran
-    echo "#PACOTE gfortran - 1 de 10\n\n"
-    sudo apt-get install g++ -y
-    sudo apt-get install gfortran -y
-    sudo apt-get install gfortran-10 -y
-    echo "\n\n"
+    echo $comandoInicialLinha "#PACOTE gfortran - 1 de 10\n\n"
+
+    if [ "$nomeSistema" == "openSUSE" ]; then
+        $comandoInicialSistema gcc-fortran gcc-c++ gcc9$comandoFinalSistema
+    else
+        $comandoInicialSistema g++ $comandoFinalSistema
+        $comandoInicialSistema gfortran $comandoFinalSistema
+        $comandoInicialSistema gfortran-10 $comandoFinalSistema
+    fi
+
+    echo $comandoInicialLinha "\n\n"
 
     #PACOTE m4
-    echo "#PACOTE m4 - 2 de 10\n\n"
-    sudo apt-get install m4 -y
-    echo "\n\n"
+    echo $comandoInicialLinha "#PACOTE m4 - 2 de 10\n\n"
+    $comandoInicialSistema m4 $comandoFinalSistema
+    echo $comandoInicialLinha "\n\n"
 
     #PACOTE bcc
-    echo "#PACOTE bcc - 3 de 10\n\n"
-    sudo apt-get install bcc bpfcc-tools -y
-    echo "\n\n"
+    echo $comandoInicialLinha "#PACOTE bcc - 3 de 10\n\n"
+
+    if [ "$nomeSistema" == "openSUSE" ]; then
+
+        $comandoInicialSistema bcc-devel $comandoFinalSistema
+
+    else
+        $comandoInicialSistema bcc bpfcc-tools $comandoFinalSistema
+    fi
+    echo $comandoInicialLinha "\n\n"
 
     #PACOTE CCCC
-    echo "#PACOTE CCCC - 4 de 10\n\n"
-    sudo apt-get install cccc -y
-    echo "\n\n"
+    echo $comandoInicialLinha "#PACOTE CCCC - 4 de 10\n\n"
+
+    if [ "$nomeSistema" == "openSUSE" ]; then
+        zypper addrepo -f zypper addrepo https://download.opensuse.org/repositories/home:illuusio/openSUSE_Leap_15.2/home:illuusio.repo
+        zypper --gpg-auto-import-keys refresh
+        $comandoInicialSistema cccc $comandoFinalSistema
+    else
+        $comandoInicialSistema cccc $comandoFinalSistema
+    fi
+
+    echo $comandoInicialLinha "\n\n"
 
     #PACOTE fcc
-    echo "#PACOTE fcc - 5 de 10\n\n"
-    sudo apt-get install fcc -y
-    echo "\n\n"
+    echo $comandoInicialLinha "#PACOTE fcc - 5 de 10\n\n"
+
+    if [ "$nomeSistema" == "openSUSE" ]; then
+        echo " "
+    else
+        $comandoInicialSistema fcc $comandoFinalSistema
+    fi
+    echo $comandoInicialLinha "\n\n"
 
     #PACOTE GPAW e suas dependencias
-    echo "#PACOTE GPAW e suas dependencias - 6 de 10\n\n"
-    sudo apt install libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev -y
+    echo $comandoInicialLinha "#PACOTE GPAW e suas dependencias - 6 de 10\n\n"
 
-    ##DEPEDENCIAS VARIADAS DE python e python3
-    sudo apt-get install libhdf5-dev -y
-    sudo apt-get install python3-numpy python3-scipy python3-matplotlib -y
-    sudo apt-get install python3-netcdf4 -y
+    if [ "$nomeSistema" == "openSUSE" ]; then
 
-    sudo apt-get install python-scipy python-matplotlib python-netcdf4 -y
-    pacote=$(dpkg --get-selections | grep python-scipy)
-    pacote2=$(dpkg --get-selections | grep python-matplotlib)
-    pacote3=$(dpkg --get-selections | grep python-netcdf4)
+        zypper addrepo -f https://ftp.lysator.liu.se/pub/opensuse/repositories/science/openSUSE_Leap_15.2/ science-x86_64
+        zypper addrepo -f https://download.opensuse.org/repositories/science/openSUSE_Leap_15.2/science.repo
+        zypper addrepo -f https://download.opensuse.org/repositories/Education/openSUSE_Leap_15.2/Education.repo
+        zypper addrepo -f https://download.opensuse.org/repositories/home:eeich:hpc/openSUSE_Factory/home:eeich:hpc.repo
+        zypper addrepo -f https://download.opensuse.org/repositories/devel:languages:python/openSUSE_Leap_15.2/devel:languages:python.repo
+        zypper --gpg-auto-import-keys refresh
 
-    if [ -n "$pacote" ] && [ -n "$pacote2" ] && [ -n "$pacote3" ]; then
+        $comandoInicialSistema zypper install libopenblas_pthreads0 $comandoFinalSistema
+        $comandoInicialSistema libopenblas_pthreads-devel $comandoFinalSistema
+        $comandoInicialSistema openblas-devel $comandoFinalSistema
+        $comandoInicialSistema libscalapack2-mvapich2 $comandoFinalSistema
 
-        sudo apt-get install python-tk -y
-        sudo apt-get install python-numpy -y
-        sudo apt-get install python -y
-        sudo apt-get install python-dev -y
-        echo "\n\nPacotes $pacote $pacote2 $pacote3 Encontrados\n\n"
-        apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
+        #wget -c https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.6.tar.gz
+        #tar vxf -o openmpi-3.1.6.tar.gz
+        #cd openmpi-3.1.6
+        #./configure --prefix=$HOME/opt/usr/local
+        #make all
+        #make install
+        #cd ..
+        $comandoInicialSistema cairo-devel python-pycairo-common-devel$comandoFinalSistema
+        $comandoInicialSistema libtool $comandoFinalSistema
+        $comandoInicialSistema lapack $comandoFinalSistema
+        $comandoInicialSistema openmpi $comandoFinalSistema
+        $comandoInicialSistema openmpi3-devel $comandoFinalSistema
+        $comandoInicialSistema openmpi3-gnu-hpc-devel $comandoFinalSistema
+        $comandoInicialSistema lam lam-devel $comandoFinalSistema
+        $comandoInicialSistema libxc-devel $comandoFinalSistema
+        $comandoInicialSistema libfftw3-3 $comandoFinalSistema
+        $comandoInicialSistema mpich $comandoFinalSistema
+        $comandoInicialSistema automake autoconf libtool $comandoFinalSistema
+        pip install --upgrade pip
+        pip install numpy scipy matplotlib
+        pip install --upgrade --user ase
+        $comandoInicialSistema python3-wheel $comandoFinalSistema
+
+        wget -c https://salsa.debian.org/debichem-team/gpaw/-/archive/master/gpaw-master.zip
+        sudo unzip -o gpaw-master.zip
+        cd gpaw-master
+        sed -i "68cmpicompiler = 'gcc'" setup.py
+        sed -i "69cmpilinker = 'gcc'" setup.py
+        sed -i "71cerror = subprocess.call(['which', 'gcc'], stdout=subprocess.PIPE)" setup.py
+        python3 setup.py install
+        cd ..
 
     else
-        echo "\n\nPacotes $pacote $pacote2 $pacote3 não Encontrados\nBaixando por outras fontes...\n\n"
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/aglfn/aglfn_1.7+git20191031.4036a9c-2_all.deb
-        sudo dpkg -i aglfn_1.7+git20191031.4036a9c-2_all.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-data_5.2.8+dfsg1-2_all.deb
-        sudo dpkg -i gnuplot-data_5.2.8+dfsg1-2_all.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/d/double-conversion/libdouble-conversion3_3.1.5-4ubuntu1_amd64.deb
-        sudo dpkg -i libdouble-conversion3_3.1.5-4ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/pcre2/libpcre2-16-0_10.34-7_amd64.deb
-        sudo dpkg -i libpcre2-16-0_10.34-7_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5core5a_5.12.8+dfsg-0ubuntu1_amd64.deb
-        sudo dpkg -i libqt5core5a_5.12.8+dfsg-0ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5dbus5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        sudo dpkg -i libqt5dbus5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5network5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        sudo dpkg -i libqt5network5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/main/libx/libxcb/libxcb-xinerama0_1.14-2_amd64.deb
-        sudo dpkg -i libxcb-xinerama0_1.14-2_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/main/libx/libxcb/libxcb-xinput0_1.14-2_amd64.deb
-        sudo dpkg -i libxcb-xinput0_1.14-2_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5gui5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        sudo dpkg -i libqt5gui5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5widgets5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        sudo dpkg -i libqt5widgets5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5printsupport5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        sudo dpkg -i libqt5printsupport5_5.12.8+dfsg-0ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtsvg-opensource-src/libqt5svg5_5.12.8-0ubuntu1_amd64.deb
-        sudo dpkg -i libqt5svg5_5.12.8-0ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/w/wxwidgets3.0/libwxbase3.0-0v5_3.0.4+dfsg-15build1_amd64.deb
-        sudo dpkg -i libwxbase3.0-0v5_3.0.4+dfsg-15build1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/w/wxwidgets3.0/libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
-        sudo dpkg -i libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/main/l/lua5.3/liblua5.3-0_5.3.3-1.1ubuntu2_amd64.deb
-        sudo dpkg -i liblua5.3-0_5.3.3-1.1ubuntu2_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
-        sudo dpkg -i gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot_5.2.8+dfsg1-2_all.deb #instalando GNUplot
-        sudo dpkg -i gnuplot_5.2.8+dfsg1-2_all.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
-        sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
-        sudo dpkg -i python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-minimal_2.7.16-1_amd64.deb
-        sudo dpkg -i python2-minimal_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-minimal_2.7.16-1_amd64.deb
-        sudo dpkg -i python-minimal_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi6_3.2.1-9_amd64.deb
-        sudo dpkg -i libffi6_3.2.1-9_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/r/readline/libreadline7_7.0-5_amd64.deb
-        sudo dpkg -i libreadline7_7.0-5_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
-        sudo dpkg -i libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7_2.7.16-2+deb10u1_amd64.deb
-        sudo dpkg -i python2.7_2.7.16-2+deb10u1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-stdlib_2.7.16-1_amd64.deb
-        sudo dpkg -i libpython2-stdlib_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-stdlib_2.7.16-1_amd64.deb
-        sudo dpkg -i libpython-stdlib_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2_2.7.16-1_amd64.deb
-        sudo dpkg -i python2_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python_2.7.16-1_amd64.deb
-        sudo dpkg -i python_2.7.16-1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/e/elpa/libelpa4_2016.05.001-6build1_amd64.deb
-        sudo dpkg -i libelpa4_2016.05.001-6build1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/e/elpa/libelpa-dev_2016.05.001-6build1_amd64.deb
-        sudo dpkg -i libelpa-dev_2016.05.001-6build1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_40.8.0-1_all.deb
-        sudo dpkg -i python-pkg-resources_40.8.0-1_all.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy_1.16.2-1_amd64.deb
-        sudo dpkg -i python-numpy_1.16.2-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/u/underscore/libjs-underscore_1.9.1~dfsg-1_all.deb
-        sudo dpkg -i libjs-underscore_1.9.1~dfsg-1_all.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/s/sphinx/libjs-sphinxdoc_1.8.4-1_all.deb
-        sudo dpkg -i libjs-sphinxdoc_1.8.4-1_all.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-doc_1.16.2-1_all.deb
-        sudo dpkg -i python-numpy-doc_1.16.2-1_all.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
-        sudo dpkg -i libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dbg_2.7.16-1_amd64.deb
-        sudo dpkg -i libpython2-dbg_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dbg_2.7.16-1_amd64.deb
-        sudo dpkg -i libpython-dbg_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
-        sudo dpkg -i python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dbg_2.7.16-1_amd64.deb
-        sudo dpkg -i python2-dbg_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dbg_2.7.16-1_amd64.deb
-        sudo dpkg -i python-dbg_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-dbg_1.16.2-1_amd64.deb
-        sudo dpkg -i python-numpy-dbg_1.16.2-1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/six/python-six_1.12.0-2_all.deb
-        sudo dpkg -i python-six_1.12.0-2_all.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
-        sudo dpkg -i libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python-mpi4py_3.0.2-13_amd64.deb
-        sudo dpkg -i python-mpi4py_3.0.2-13_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python-h5py_2.9.0-7_amd64.deb
-        sudo dpkg -i python-h5py_2.9.0-7_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_44.0.0-3_all.deb
-        sudo dpkg -i python-pkg-resources_44.0.0-3_all.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-setuptools_44.0.0-3_all.deb
-        sudo dpkg -i python-setuptools_44.0.0-3_all.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7_2.7.16-2+deb10u1_amd64.deb
-        sudo dpkg -i libpython2.7_2.7.16-2+deb10u1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
-        sudo dpkg -i libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dev_2.7.16-1_amd64.deb
-        sudo dpkg -i libpython2-dev_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dev_2.7.16-1_amd64.deb
-        sudo dpkg -i libpython-dev_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dev_2.7.16-2+deb10u1_amd64.deb
-        sudo dpkg -i python2.7-dev_2.7.16-2+deb10u1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dev_2.7.16-1_amd64.deb
-        sudo dpkg -i python2-dev_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dev_2.7.16-1_amd64.deb
-        sudo dpkg -i python-dev_2.7.16-1_amd64.deb
-        wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.2.1-9_amd64.deb
-        sudo dpkg -i libffi-dev_3.2.1-9_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/c/cython/cython_0.29.14-0.1ubuntu3_amd64.deb
-        sudo dpkg -i cython_0.29.14-0.1ubuntu3_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/n/netcdf/libnetcdf13_4.6.2-1build1_amd64.deb
-        sudo dpkg -i libnetcdf13_4.6.2-1build1_amd64.deb
-        wget -c http://ftp.br.debian.org/debian/pool/main/c/cftime/python-cftime_1.0.3.4-1_amd64.deb
-        sudo dpkg -i python-cftime_1.0.3.4-1_amd64.deb
-        wget -c http://ftp.br.debian.org/debian/pool/main/n/netcdf4-python/python-netcdf4_1.4.2-1+b1_amd64.deb
-        sudo dpkg -i python-netcdf4_1.4.2-1+b1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-decorator/python-decorator_4.3.0-1.1_all.deb
-        sudo dpkg -i python-decorator_4.3.0-1.1_all.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy_1.2.2-4_amd64.deb
-        sudo dpkg -i python-scipy_1.2.2-4_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-dbg_1.2.2-4_amd64.deb
-        sudo dpkg -i python-scipy-dbg_1.2.2-4_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/fonts-mathjax_2.7.4+dfsg-1_all.deb
-        sudo dpkg -i fonts-mathjax_2.7.4+dfsg-1_all.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/libjs-mathjax_2.7.4+dfsg-1_all.deb
-        sudo dpkg -i libjs-mathjax_2.7.4+dfsg-1_all.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-doc_1.2.2-4_all.deb
-        sudo dpkg -i python-scipy-doc_1.2.2-4_all.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libh/libhdf4/libhdf4-0_4.2.10-3.2_amd64.deb
-        sudo dpkg -i libhdf4-0_4.2.10-3.2_amd64.deb
-        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.23-0ubuntu11.2_amd64.deb
-        sudo dpkg -i multiarch-support_2.23-0ubuntu11.2_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libm/libmatheval/libmatheval1_1.1.11+dfsg-2_amd64.deb
-        sudo dpkg -i libmatheval1_1.1.11+dfsg-2_amd64.deb
-        wget -c http://ppa.launchpad.net/linuxuprising/libpng12/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
-        sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
-        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
-        sudo dpkg -i gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
-        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
-        sudo dpkg -i libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
-        wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
-        sudo dpkg -i libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/h5utils/h5utils_1.12.1-4_amd64.deb
-        sudo dpkg -i h5utils_1.12.1-4_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/sip4/python3-sip_4.19.21+dfsg-1build1_amd64.deb
-        sudo dpkg -i python3-sip_4.19.21+dfsg-1build1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/w/wxpython4.0/python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
-        sudo dpkg -i python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python3-mpi4py_3.0.3-4build2_amd64.deb
-        sudo dpkg -i python3-mpi4py_3.0.3-4build2_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python3-h5py_2.10.0-2build2_amd64.deb
-        sudo dpkg -i python3-h5py_2.10.0-2build2_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf-compass/python3-hdf-compass_0.7~b8-2_all.deb
-        sudo dpkg -i python3-hdf-compass_0.7~b8-2_all.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass_0.7~b8-2_all.deb
-        sudo dpkg -i hdf-compass_0.7~b8-2_all.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass-doc_0.7~b8-2_all.deb
-        sudo dpkg -i hdf-compass-doc_0.7~b8-2_all.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
-        sudo dpkg -i libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
-        sudo dpkg -i libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/hwloc-nox_2.1.0+dfsg-4_amd64.deb
-        sudo dpkg -i hwloc-nox_2.1.0+dfsg-4_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mpich/libmpich12_3.3.2-2build1_amd64.deb
-        sudo dpkg -i libmpich12_3.3.2-2build1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
-        sudo dpkg -i libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpich/mpich_3.3.2-2build1_amd64.deb
-        sudo dpkg -i mpich_3.3.2-2build1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpich/libmpich-dev_3.3.2-2build1_amd64.deb
-        sudo dpkg -i libmpich-dev_3.3.2-2build1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
-        sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-doc_1.10.0-patch1+docs-4_all.deb
-        sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
-        sudo apt-get install python-tk -y
-        apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
+
+        $comandoInicialSistema libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev $comandoFinalSistema
+
+        ##DEPEDENCIAS VARIADAS DE python e python3
+        $comandoInicialSistema libhdf5-dev $comandoFinalSistema
+        $comandoInicialSistema python3-numpy python3-scipy python3-matplotlib $comandoFinalSistema
+        $comandoInicialSistema python3-netcdf4 $comandoFinalSistema
+
+        $comandoInicialSistema python-scipy python-matplotlib python-netcdf4 $comandoFinalSistema
+        pacote=$(dpkg --get-selections | grep python-scipy)
+        pacote2=$(dpkg --get-selections | grep python-matplotlib)
+        pacote3=$(dpkg --get-selections | grep python-netcdf4)
+
+        if [ -n "$pacote" ] && [ -n "$pacote2" ] && [ -n "$pacote3" ]; then
+
+            $comandoInicialSistema python-tk $comandoFinalSistema
+            $comandoInicialSistema python-numpy $comandoFinalSistema
+            $comandoInicialSistema python $comandoFinalSistema
+            $comandoInicialSistema python-dev $comandoFinalSistema
+            echo $comandoInicialLinha "\n\nPacotes $pacote $pacote2 $pacote3 Encontrados\n\n"
+            apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
+
+        else
+            echo $comandoInicialLinha "\n\nPacotes $pacote $pacote2 $pacote3 não Encontrados\nBaixando por outras fontes...\n\n"
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/aglfn/aglfn_1.7+git20191031.4036a9c-2_all.deb
+            sudo dpkg -i aglfn_1.7+git20191031.4036a9c-2_all.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-data_5.2.8+dfsg1-2_all.deb
+            sudo dpkg -i gnuplot-data_5.2.8+dfsg1-2_all.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/d/double-conversion/libdouble-conversion3_3.1.5-4ubuntu1_amd64.deb
+            sudo dpkg -i libdouble-conversion3_3.1.5-4ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/main/p/pcre2/libpcre2-16-0_10.34-7_amd64.deb
+            sudo dpkg -i libpcre2-16-0_10.34-7_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5core5a_5.12.8+dfsg-0ubuntu1_amd64.deb
+            sudo dpkg -i libqt5core5a_5.12.8+dfsg-0ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5dbus5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            sudo dpkg -i libqt5dbus5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5network5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            sudo dpkg -i libqt5network5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/main/libx/libxcb/libxcb-xinerama0_1.14-2_amd64.deb
+            sudo dpkg -i libxcb-xinerama0_1.14-2_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/main/libx/libxcb/libxcb-xinput0_1.14-2_amd64.deb
+            sudo dpkg -i libxcb-xinput0_1.14-2_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5gui5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            sudo dpkg -i libqt5gui5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5widgets5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            sudo dpkg -i libqt5widgets5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtbase-opensource-src/libqt5printsupport5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            sudo dpkg -i libqt5printsupport5_5.12.8+dfsg-0ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/q/qtsvg-opensource-src/libqt5svg5_5.12.8-0ubuntu1_amd64.deb
+            sudo dpkg -i libqt5svg5_5.12.8-0ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/w/wxwidgets3.0/libwxbase3.0-0v5_3.0.4+dfsg-15build1_amd64.deb
+            sudo dpkg -i libwxbase3.0-0v5_3.0.4+dfsg-15build1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/w/wxwidgets3.0/libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
+            sudo dpkg -i libwxgtk3.0-gtk3-0v5_3.0.4+dfsg-15build1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/main/l/lua5.3/liblua5.3-0_5.3.3-1.1ubuntu2_amd64.deb
+            sudo dpkg -i liblua5.3-0_5.3.3-1.1ubuntu2_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
+            sudo dpkg -i gnuplot-qt_5.2.8+dfsg1-2_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gnuplot/gnuplot_5.2.8+dfsg1-2_all.deb #instalando GNUplot
+            sudo dpkg -i gnuplot_5.2.8+dfsg1-2_all.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+            sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+            sudo dpkg -i python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-minimal_2.7.16-1_amd64.deb
+            sudo dpkg -i python2-minimal_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-minimal_2.7.16-1_amd64.deb
+            sudo dpkg -i python-minimal_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi6_3.2.1-9_amd64.deb
+            sudo dpkg -i libffi6_3.2.1-9_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/r/readline/libreadline7_7.0-5_amd64.deb
+            sudo dpkg -i libreadline7_7.0-5_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
+            sudo dpkg -i libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7_2.7.16-2+deb10u1_amd64.deb
+            sudo dpkg -i python2.7_2.7.16-2+deb10u1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-stdlib_2.7.16-1_amd64.deb
+            sudo dpkg -i libpython2-stdlib_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-stdlib_2.7.16-1_amd64.deb
+            sudo dpkg -i libpython-stdlib_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2_2.7.16-1_amd64.deb
+            sudo dpkg -i python2_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python_2.7.16-1_amd64.deb
+            sudo dpkg -i python_2.7.16-1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/e/elpa/libelpa4_2016.05.001-6build1_amd64.deb
+            sudo dpkg -i libelpa4_2016.05.001-6build1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/e/elpa/libelpa-dev_2016.05.001-6build1_amd64.deb
+            sudo dpkg -i libelpa-dev_2016.05.001-6build1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_40.8.0-1_all.deb
+            sudo dpkg -i python-pkg-resources_40.8.0-1_all.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy_1.16.2-1_amd64.deb
+            sudo dpkg -i python-numpy_1.16.2-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/u/underscore/libjs-underscore_1.9.1~dfsg-1_all.deb
+            sudo dpkg -i libjs-underscore_1.9.1~dfsg-1_all.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/s/sphinx/libjs-sphinxdoc_1.8.4-1_all.deb
+            sudo dpkg -i libjs-sphinxdoc_1.8.4-1_all.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-doc_1.16.2-1_all.deb
+            sudo dpkg -i python-numpy-doc_1.16.2-1_all.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+            sudo dpkg -i libpython2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dbg_2.7.16-1_amd64.deb
+            sudo dpkg -i libpython2-dbg_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dbg_2.7.16-1_amd64.deb
+            sudo dpkg -i libpython-dbg_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+            sudo dpkg -i python2.7-dbg_2.7.16-2+deb10u1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dbg_2.7.16-1_amd64.deb
+            sudo dpkg -i python2-dbg_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dbg_2.7.16-1_amd64.deb
+            sudo dpkg -i python-dbg_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-numpy/python-numpy-dbg_1.16.2-1_amd64.deb
+            sudo dpkg -i python-numpy-dbg_1.16.2-1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/six/python-six_1.12.0-2_all.deb
+            sudo dpkg -i python-six_1.12.0-2_all.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
+            sudo dpkg -i libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python-mpi4py_3.0.2-13_amd64.deb
+            sudo dpkg -i python-mpi4py_3.0.2-13_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python-h5py_2.9.0-7_amd64.deb
+            sudo dpkg -i python-h5py_2.9.0-7_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_44.0.0-3_all.deb
+            sudo dpkg -i python-pkg-resources_44.0.0-3_all.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-setuptools_44.0.0-3_all.deb
+            sudo dpkg -i python-setuptools_44.0.0-3_all.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7_2.7.16-2+deb10u1_amd64.deb
+            sudo dpkg -i libpython2.7_2.7.16-2+deb10u1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
+            sudo dpkg -i libpython2.7-dev_2.7.16-2+deb10u1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython2-dev_2.7.16-1_amd64.deb
+            sudo dpkg -i libpython2-dev_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/libpython-dev_2.7.16-1_amd64.deb
+            sudo dpkg -i libpython-dev_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-dev_2.7.16-2+deb10u1_amd64.deb
+            sudo dpkg -i python2.7-dev_2.7.16-2+deb10u1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python2-dev_2.7.16-1_amd64.deb
+            sudo dpkg -i python2-dev_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/p/python-defaults/python-dev_2.7.16-1_amd64.deb
+            sudo dpkg -i python-dev_2.7.16-1_amd64.deb
+            wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.2.1-9_amd64.deb
+            sudo dpkg -i libffi-dev_3.2.1-9_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/c/cython/cython_0.29.14-0.1ubuntu3_amd64.deb
+            sudo dpkg -i cython_0.29.14-0.1ubuntu3_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/n/netcdf/libnetcdf13_4.6.2-1build1_amd64.deb
+            sudo dpkg -i libnetcdf13_4.6.2-1build1_amd64.deb
+            wget -c http://ftp.br.debian.org/debian/pool/main/c/cftime/python-cftime_1.0.3.4-1_amd64.deb
+            sudo dpkg -i python-cftime_1.0.3.4-1_amd64.deb
+            wget -c http://ftp.br.debian.org/debian/pool/main/n/netcdf4-python/python-netcdf4_1.4.2-1+b1_amd64.deb
+            sudo dpkg -i python-netcdf4_1.4.2-1+b1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-decorator/python-decorator_4.3.0-1.1_all.deb
+            sudo dpkg -i python-decorator_4.3.0-1.1_all.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy_1.2.2-4_amd64.deb
+            sudo dpkg -i python-scipy_1.2.2-4_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-dbg_1.2.2-4_amd64.deb
+            sudo dpkg -i python-scipy-dbg_1.2.2-4_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/fonts-mathjax_2.7.4+dfsg-1_all.deb
+            sudo dpkg -i fonts-mathjax_2.7.4+dfsg-1_all.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/libjs-mathjax_2.7.4+dfsg-1_all.deb
+            sudo dpkg -i libjs-mathjax_2.7.4+dfsg-1_all.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-doc_1.2.2-4_all.deb
+            sudo dpkg -i python-scipy-doc_1.2.2-4_all.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libh/libhdf4/libhdf4-0_4.2.10-3.2_amd64.deb
+            sudo dpkg -i libhdf4-0_4.2.10-3.2_amd64.deb
+            wget -c http://security.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.23-0ubuntu11.2_amd64.deb
+            sudo dpkg -i multiarch-support_2.23-0ubuntu11.2_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libm/libmatheval/libmatheval1_1.1.11+dfsg-2_amd64.deb
+            sudo dpkg -i libmatheval1_1.1.11+dfsg-2_amd64.deb
+            wget -c http://ppa.launchpad.net/linuxuprising/libpng12/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+            sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+            wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
+            sudo dpkg -i gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
+            wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
+            sudo dpkg -i libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
+            wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
+            sudo dpkg -i libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/h5utils/h5utils_1.12.1-4_amd64.deb
+            sudo dpkg -i h5utils_1.12.1-4_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/s/sip4/python3-sip_4.19.21+dfsg-1build1_amd64.deb
+            sudo dpkg -i python3-sip_4.19.21+dfsg-1build1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/w/wxpython4.0/python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
+            sudo dpkg -i python3-wxgtk4.0_4.0.7+dfsg-2build1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python3-mpi4py_3.0.3-4build2_amd64.deb
+            sudo dpkg -i python3-mpi4py_3.0.3-4build2_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python3-h5py_2.10.0-2build2_amd64.deb
+            sudo dpkg -i python3-h5py_2.10.0-2build2_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf-compass/python3-hdf-compass_0.7~b8-2_all.deb
+            sudo dpkg -i python3-hdf-compass_0.7~b8-2_all.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass_0.7~b8-2_all.deb
+            sudo dpkg -i hdf-compass_0.7~b8-2_all.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf-compass/hdf-compass-doc_0.7~b8-2_all.deb
+            sudo dpkg -i hdf-compass-doc_0.7~b8-2_all.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+            sudo dpkg -i libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+            sudo dpkg -i libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/hwloc-nox_2.1.0+dfsg-4_amd64.deb
+            sudo dpkg -i hwloc-nox_2.1.0+dfsg-4_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mpich/libmpich12_3.3.2-2build1_amd64.deb
+            sudo dpkg -i libmpich12_3.3.2-2build1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
+            sudo dpkg -i libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpich/mpich_3.3.2-2build1_amd64.deb
+            sudo dpkg -i mpich_3.3.2-2build1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpich/libmpich-dev_3.3.2-2build1_amd64.deb
+            sudo dpkg -i libmpich-dev_3.3.2-2build1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+            sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-doc_1.10.0-patch1+docs-4_all.deb
+            sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
+            $comandoInicialSistema python-tk $comandoFinalSistema
+            apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
+        fi
+
+        $comandoInicialSistema gpaw $comandoFinalSistema
+        echo $comandoInicialLinha "\n\n"
+
     fi
-    
-    sudo apt-get install gpaw -y
-    echo "\n\n"
 
     #PACOTE abinit
-    echo "#PACOTE abinit - 7 de 10\n\n"
-    sudo apt-get install abinit -y
+    echo $comandoInicialLinha "#PACOTE abinit - 7 de 10\n\n"
 
-    pacote=$(dpkg --get-selections | grep abinit)
+    if [ "$nomeSistema" == "openSUSE" ]; then
 
-    if [ -n "$pacote" ]; then
-
-        echo "\n\nPacote $pacote Encontrado"
+        wget -c https://www.abinit.org/sites/default/files/packages/abinit-8.10.2.tar.gz
+        tar vxf abinit-8.10.2.tar.gz
+        cd abinit-8.10.2
+        ./configure
+        make
+        make install
+        cd ..
 
     else
 
-        echo "\n\nPacote $pacote não Encontrado\nBaixando por outras fontes...\n\n"
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
-        sudo dpkg -i abinit-data_8.10.2-2_all.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
-        sudo dpkg -i abinit_8.10.2-2_amd64.deb
+        $comandoInicialSistema abinit $comandoFinalSistema
+
+        pacote=$(dpkg --get-selections | grep abinit)
+
+        if [ -n "$pacote" ]; then
+
+            echo $comandoInicialLinha "\n\nPacote $pacote Encontrado"
+
+        else
+
+            echo $comandoInicialLinha "\n\nPacote $pacote não Encontrado\nBaixando por outras fontes...\n\n"
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
+            sudo dpkg -i abinit-data_8.10.2-2_all.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
+            sudo dpkg -i abinit_8.10.2-2_amd64.deb
+
+        fi
 
     fi
-
-    echo "\n\n"
+    echo $comandoInicialLinha "\n\n"
 
     #PACOTE quantum-espresso
-    echo "#PACOTE quantum-espresso - 8 de 10\n\n"
-    sudo apt-get install quantum-espresso -y
-    echo "\n\n"
+    echo $comandoInicialLinha "#PACOTE quantum-espresso - 8 de 10\n\n"
+
+    if [ "$nomeSistema" == "openSUSE" ]; then
+
+        wget -c https://github.com/QEF/q-e/archive/qe-6.6.tar.gz
+        tar vxf qe-6.6.tar.gz
+        cd q-e-qe-6.6
+        ./configure
+        make all
+        cd ..
+
+    else
+        $comandoInicialSistema quantum-espresso $comandoFinalSistema
+    fi
+    echo $comandoInicialLinha "\n\n"
 
     #PACOTE meep-lam4
-    echo "#PACOTE meep-lam4 - 9 de 10\n\n"
-    sudo apt-get install libhdf5-serial-dev -y
-    sudo apt-get install hdf5-tools -y
-    sudo apt-get install libatlas-base-dev -y
-    sudo apt-get install libatlas-ecmwf-utils -y
-    sudo apt-get install meep-lam4 -y
+    echo $comandoInicialLinha "#PACOTE meep-lam4 - 9 de 10\n\n"
 
-    pacote=$(dpkg --get-selections | grep meep-lam4)
+    if [ "$nomeSistema" == "openSUSE" ]; then
 
-    if [ -n "$pacote" ]; then
-
-        echo "\n\nPacote $pacote Encontrado"
+        $comandoInicialSistema meep $comandoFinalSistema
 
     else
 
-        echo "\n\nPacote $pacote não Encontrado\nBaixando por outras fontes..."
-        wget -c http://security.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
-        sudo dpkg -i libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
-        sudo dpkg -i libjpeg8-dev_8c-2ubuntu8_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg-dev_8c-2ubuntu8_amd64.deb
-        sudo dpkg -i libjpeg-dev_8c-2ubuntu8_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec0_1.0.4-1_amd64.deb
-        sudo dpkg -i libaec0_1.0.4-1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libsz2_1.0.4-1_amd64.deb
-        sudo dpkg -i libsz2_1.0.4-1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec-dev_1.0.4-1_amd64.deb
-        sudo dpkg -i libaec-dev_1.0.4-1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
-        sudo dpkg -i hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libc/libctl/libctl7_4.4.0-3_amd64.deb
-        sudo dpkg -i libctl7_4.4.0-3_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/liblam4_7.1.4-6build1_amd64.deb
-        sudo dpkg -i liblam4_7.1.4-6build1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/atlas/libatlas3-base_3.10.3-8ubuntu7_amd64.deb
-        sudo dpkg -i libatlas3-base_3.10.3-8ubuntu7_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgslcblas0_2.5+dfsg-6_amd64.deb
-        sudo dpkg -i libgslcblas0_2.5+dfsg-6_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgsl23_2.5+dfsg-6_amd64.deb
-        sudo dpkg -i libgsl23_2.5+dfsg-6_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/harminv/libharminv3_1.4.1-2_amd64.deb
-        sudo dpkg -i libharminv3_1.4.1-2_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
-        sudo dpkg -i libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/meep-lam4/libmeep-lam4-12_1.7.0-3_amd64.deb
-        sudo dpkg -i libmeep-lam4-12_1.7.0-3_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-client_8.2p1-4_amd64.deb
-        sudo dpkg -i openssh-client_8.2p1-4_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-sftp-server_8.2p1-4_amd64.deb
-        sudo dpkg -i openssh-sftp-server_8.2p1-4_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-server_8.2p1-4_amd64.deb
-        sudo dpkg -i openssh-server_8.2p1-4_amd64.deb
-        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/lam-runtime_7.1.4-6build1_amd64.deb
-        sudo dpkg -i lam-runtime_7.1.4-6build1_amd64.deb
-        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
-        sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
+        $comandoInicialSistema libhdf5-serial-dev $comandoFinalSistema
+        $comandoInicialSistema hdf5-tools $comandoFinalSistema
+        $comandoInicialSistema libatlas-base-dev $comandoFinalSistema
+        $comandoInicialSistema libatlas-ecmwf-utils $comandoFinalSistema
+        $comandoInicialSistema meep-lam4 $comandoFinalSistema
 
+        pacote=$(dpkg --get-selections | grep meep-lam4)
+
+        if [ -n "$pacote" ]; then
+
+            echo $comandoInicialLinha "\n\nPacote $pacote Encontrado"
+
+        else
+
+            echo $comandoInicialLinha "\n\nPacote $pacote não Encontrado\nBaixando por outras fontes..."
+            wget -c http://security.ubuntu.com/ubuntu/pool/main/libj/libjpeg-turbo/libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
+            sudo dpkg -i libjpeg-turbo8-dev_2.0.3-0ubuntu1.20.04.1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg8-dev_8c-2ubuntu8_amd64.deb
+            sudo dpkg -i libjpeg8-dev_8c-2ubuntu8_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/main/libj/libjpeg8-empty/libjpeg-dev_8c-2ubuntu8_amd64.deb
+            sudo dpkg -i libjpeg-dev_8c-2ubuntu8_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec0_1.0.4-1_amd64.deb
+            sudo dpkg -i libaec0_1.0.4-1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libsz2_1.0.4-1_amd64.deb
+            sudo dpkg -i libsz2_1.0.4-1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/liba/libaec/libaec-dev_1.0.4-1_amd64.deb
+            sudo dpkg -i libaec-dev_1.0.4-1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
+            sudo dpkg -i hdf5-helpers_1.10.4+repack-11ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libc/libctl/libctl7_4.4.0-3_amd64.deb
+            sudo dpkg -i libctl7_4.4.0-3_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/liblam4_7.1.4-6build1_amd64.deb
+            sudo dpkg -i liblam4_7.1.4-6build1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/atlas/libatlas3-base_3.10.3-8ubuntu7_amd64.deb
+            sudo dpkg -i libatlas3-base_3.10.3-8ubuntu7_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgslcblas0_2.5+dfsg-6_amd64.deb
+            sudo dpkg -i libgslcblas0_2.5+dfsg-6_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/g/gsl/libgsl23_2.5+dfsg-6_amd64.deb
+            sudo dpkg -i libgsl23_2.5+dfsg-6_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/harminv/libharminv3_1.4.1-2_amd64.deb
+            sudo dpkg -i libharminv3_1.4.1-2_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
+            sudo dpkg -i libhdf5-cpp-103_1.10.4+repack-11ubuntu1_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/meep-lam4/libmeep-lam4-12_1.7.0-3_amd64.deb
+            sudo dpkg -i libmeep-lam4-12_1.7.0-3_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-client_8.2p1-4_amd64.deb
+            sudo dpkg -i openssh-client_8.2p1-4_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-sftp-server_8.2p1-4_amd64.deb
+            sudo dpkg -i openssh-sftp-server_8.2p1-4_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/main/o/openssh/openssh-server_8.2p1-4_amd64.deb
+            sudo dpkg -i openssh-server_8.2p1-4_amd64.deb
+            wget -c http://mirrors.kernel.org/ubuntu/pool/universe/l/lam/lam-runtime_7.1.4-6build1_amd64.deb
+            sudo dpkg -i lam-runtime_7.1.4-6build1_amd64.deb
+            wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
+            sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
+
+        fi
+        echo $comandoInicialLinha "\n\n"
     fi
-    echo "\n\n"
 
     #PACOTE GaussSum e suas dependencias
-    echo "#PACOTE GaussSum e suas dependencias - 10 de 10\n\n"
-    sudo apt-get install gausssum -y
-    echo "\n\n"
+    echo $comandoInicialLinha "#PACOTE GaussSum e suas dependencias - 10 de 10\n\n"
+
+    if [ "$nomeSistema" == "openSUSE" ]; then
+
+        wget -c https://sourceforge.net/projects/gausssum/files/gausssum3/GaussSum%203.0.2/GaussSum-3.0.2.tar.gz/download?use_mirror=ufpr&download=
+        tar vxf GaussSum-3.0.2.tar.gz
+        cd GaussSum-3.0.2
+        ./configure
+        make all
+        cd ..
+
+    else
+        $comandoInicialSistema gausssum $comandoFinalSistema
+    fi
+    echo $comandoInicialLinha "\n\n"
 
     #Reatualização de repositorios e bibliotecas
-    echo "#Reatualização de repositorios e bibliotecas\n\n"
-    sudo apt-get update -y
-    sudo apt-get dist-upgrade -y
-    echo "\n\n"
+    echo $comandoInicialLinha "#Reatualização de repositorios e bibliotecas\n\n"
+    $atualizacaoPacotes
+    echo $comandoInicialLinha "\n\n"
 
     ##FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS
-    echo '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS"\033[00;00m\n\n'
+    echo $comandoInicialLinha '\033[05;33m"#FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS"\033[00;00m\n\n'
     sleep 3
 
     cd $raizInstalacao
@@ -449,9 +623,9 @@ Instalacao_PacotesEssenciais_Geral() {
 
 InstalacaoPacotesEssenciaisIntermediario() {
 
-    #if [ "`echo "${numeracaoSistema} >= 20.00" | bc`" -eq 1 ] && [ "`echo "${numeracaoSistema} < 21.00" | bc`" -eq 1 ]; then
+    #if [ "`echo $comandoInicialLinha "${numeracaoSistema} >= 20.00" | bc`" -eq 1 ] && [ "`echo $comandoInicialLinha "${numeracaoSistema} < 21.00" | bc`" -eq 1 ]; then
 
-    echo 'Instalando pacotes essenciais para versão: \033[05;33m'$versionSistema'\033[00;00m\n\n'
+    echo $comandoInicialLinha 'Instalando pacotes essenciais para versão: \033[05;33m'$versionSistema'\033[00;00m\n\n'
     sleep 2
 
     Instalacao_PacotesEssenciais_Geral
@@ -461,7 +635,7 @@ InstalacaoPacotesEssenciaisIntermediario() {
 InstalacaoPacotesEssenciais() {
 
     if [ -e "PackagesESSENCIAIS" ]; then
-        echo 'O DIRETÓRIO \033[32m"PackagesESSENCIAIS"\033[00m EXISTE
+        echo $comandoInicialLinha 'O DIRETÓRIO \033[32m"PackagesESSENCIAIS"\033[00m EXISTE
         \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesESSENCIAIS"\033[00;00m\n\n'
         sleep 2
         cd PackagesESSENCIAIS
@@ -470,7 +644,7 @@ InstalacaoPacotesEssenciais() {
 
     else
 
-        echo 'O DIRETÓRIO \033[32m"PackagesESSENCIAIS"\033[00m NÃO EXISTE
+        echo $comandoInicialLinha 'O DIRETÓRIO \033[32m"PackagesESSENCIAIS"\033[00m NÃO EXISTE
         \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesESSENCIAIS"\033[00;00m\n\n'
         mkdir PackagesESSENCIAIS
         cd PackagesESSENCIAIS
@@ -486,21 +660,21 @@ arch_make_UTILS() {
     cp arch.make archSIESTAORIGINAL.bkp
 
     #CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS
-    echo "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
+    echo $comandoInicialLinha "#CONSTRUINDO O ARCH_MAKE DO SIESTA_UTILS\n\n"
 
     cd ..
 
     cd Util
     sh build_all.sh
-    echo "\n\n"
+    echo $comandoInicialLinha "\n\n"
 
     ###COPIANDO OS PROGRAMAS DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA
-    echo "###COPIANDO O PROGRAMA TBtrans DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA\n\n"
-    echo '#OBS: Para outros software da pasta "UTILS" entre na pasta do programa e utilize o comando\033[05;33m"sudo cp NomeDoPrograma /usr/local/bin/NomeDoPrograma"\033[00;00m\n\n'
+    echo $comandoInicialLinha "###COPIANDO O PROGRAMA TBtrans DA PASTA UTILS DO SIESTA PARA A PASTA BIN DO SISTEMA\n\n"
+    echo $comandoInicialLinha '#OBS: Para outros software da pasta "UTILS" entre na pasta do programa e utilize o comando\033[05;33m"sudo cp NomeDoPrograma /usr/local/bin/NomeDoPrograma"\033[00;00m\n\n'
     sleep 3
 
     #PASTA TBtrans
-    echo "#PASTA TBtrans\n\n"
+    echo $comandoInicialLinha "#PASTA TBtrans\n\n"
     cd TS/TBtrans
     sudo cp -rf tbtrans /usr/local/bin/tbtrans
 }
@@ -512,7 +686,7 @@ arch_make() {
     cp gfortran.make gfortran.bkp
 
     #CONSTRUINDO O ARCH_MAKE DO GFORTRAN
-    echo "#CONSTRUINDO O ARCH_MAKE DO GFORTRAN\n\n"
+    echo $comandoInicialLinha "#CONSTRUINDO O ARCH_MAKE DO GFORTRAN\n\n"
 
     sed -i '18s, unknown, SIESTA 4.1 - '"$versionSistema"',' gfortran.make
     sed -i "20s/CC = gcc/CPP = gcc -E -P -x c/" gfortran.make
@@ -544,7 +718,7 @@ arch_make() {
         sed -i '62s/LIBS =/LIBS = $(SCALAPACK_LIBS) $(LAPACK_LIBS) $(BLACS_LIBS) $(INCFLAGS) $(NETCDF_LIBS) $(HDF5_LIBS) $(OTHER_LIBS) $(MPI_LIBS) -fopenmp\n\n\n/' gfortran.make
 
     else
-        echo " Caminhos não encontrados"
+        echo $comandoInicialLinha " Caminhos não encontrados"
     fi
 
     sed -i "58cFPPFLAGS_CDF = -DNCDF -DNCDF_4 -DCDF" gfortran.make
@@ -559,13 +733,13 @@ arch_make() {
     rm gfortran.bkp
 
     ###ARCH_MAKE DO GFORTRAN CRIADO
-    echo "##ARCH_MAKE DO GFORTRAN CRIADO\n\n"
+    echo $comandoInicialLinha "##ARCH_MAKE DO GFORTRAN CRIADO\n\n"
 
     ######iNSTALANDO SIESTA4.1
-    echo "###INSTALANDO SIESTA\n\n"
+    echo $comandoInicialLinha "###INSTALANDO SIESTA\n\n"
     make
     sudo cp -rf siesta /usr/local/bin/siesta
-    echo "\n\n"
+    echo $comandoInicialLinha "\n\n"
 
     #REFERÊNCIA NO .bashrc
     cd ${HOME}
@@ -588,18 +762,18 @@ Instalacao_SiestaTransiesta() {
     tar -vzxf siesta-master.tar.gz
     pathSIESTA="$(pwd)"
     #Escrevendo arquivo gfortran.make
-    echo "#Escrevendo arquivo gfortran.make\n\n"
+    echo $comandoInicialLinha "#Escrevendo arquivo gfortran.make\n\n"
 
     tar vxf siesta-master.tar.gz -C $pathSIESTA siesta-master/Obj/gfortran.make
-    echo "\n\n"
+    echo $comandoInicialLinha "\n\n"
 
     #./install_netcdf4.bash
-    echo "#./install_netcdf4.bash\n\n"
+    echo $comandoInicialLinha "#./install_netcdf4.bash\n\n"
     cd siesta-master/Docs
     sed -i '213c\ ' install_netcdf4.bash
     sed -i '214c\ ' install_netcdf4.bash
     ./install_netcdf4.bash
-    echo "\n\n"
+    echo $comandoInicialLinha "\n\n"
 
     cd ..
     cd Obj
@@ -607,14 +781,14 @@ Instalacao_SiestaTransiesta() {
     arch_make
 
     ###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA
-    echo "###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA\n\n"
+    echo $comandoInicialLinha "###COMPILANDO TODOS OS PROGRAMAS DA PASTA UTILS DO SIESTA\n\n"
 
     arch_make_UTILS
 
-    echo "TERMÍNO DAS COPIAS\n\n"
+    echo $comandoInicialLinha "TERMÍNO DAS COPIAS\n\n"
 
     ##TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA
-    echo "#TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA\n\n"
+    echo $comandoInicialLinha "#TERMÍNO DA INSTALAÇÃO DO SIESTA/TRANSIESTA\n\n"
     sleep 3
 
     cd $raizInstalacao
@@ -624,7 +798,7 @@ Instalacao_SiestaTransiesta() {
 InstalacaoSiestaTransiesta() {
 
     if [ -e "PackageSIESTA" ]; then
-        echo 'O DIRETÓRIO \033[32mPackageSIESTA"\033[00m EXISTE
+        echo $comandoInicialLinha 'O DIRETÓRIO \033[32mPackageSIESTA"\033[00m EXISTE
         \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackageSIESTA"\033[00;00m\n\n'
 
         sleep 2
@@ -634,7 +808,7 @@ InstalacaoSiestaTransiesta() {
 
     else
 
-        echo 'O DIRETÓRIO \033[32m"PackageSIESTA"\033[00m NÃO EXISTE
+        echo $comandoInicialLinha 'O DIRETÓRIO \033[32m"PackageSIESTA"\033[00m NÃO EXISTE
         \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackageSIESTA"\033[00;00m\n\n'
 
         sleep 2
@@ -650,7 +824,7 @@ InstalacaoSiestaTransiesta() {
 Instalacao_Inelastica() {
 
     ###INSTALAÇÃO DO INELASTICA 446
-    echo "###INSTALAÇÃO DO INELASTICA\n\n"
+    echo $comandoInicialLinha "###INSTALAÇÃO DO INELASTICA\n\n"
 
     # instalar destino de inelastica
     wget -c https://sourceforge.net/projects/inelastica/files/latest/download
@@ -673,8 +847,8 @@ Instalacao_Inelastica() {
     sudo sed -i '$ { s|^.*$|&\nPATH=$PATH:'"$pathInelastica"'/bin\nexport PATH| }' .bashrc
 
     #TERMÍNO DA INSTALAÇÃO DO INELASTICA
-    echo "#\n\nOBS: FECHAR O TERMINAL E EMULAR OUTRO PARA RECARREGAR A FUNÇÃO DO .BARSCH\n\n"
-    echo "#TERMÍNO DA INSTALAÇÃO DO INELASTICA\n\n"
+    echo $comandoInicialLinha "#\n\nOBS: FECHAR O TERMINAL E EMULAR OUTRO PARA RECARREGAR A FUNÇÃO DO .BARSCH\n\n"
+    echo $comandoInicialLinha "#TERMÍNO DA INSTALAÇÃO DO INELASTICA\n\n"
 
     sleep 3
 
@@ -685,7 +859,7 @@ Instalacao_Inelastica() {
 InstalacaoInelastica() {
 
     if [ -e "PackagesINELASTICA" ]; then
-        echo 'O DIRETÓRIO \033[32mPackagesINELASTICA"\033[00m EXISTE
+        echo $comandoInicialLinha 'O DIRETÓRIO \033[32mPackagesINELASTICA"\033[00m EXISTE
         \n\n MUDANDO O DIRETÓRIO ATUAL PARA: \033[05;33m"PackagesINELASTICA"\033[00;00m\n\n'
 
         sleep 2
@@ -695,7 +869,7 @@ InstalacaoInelastica() {
 
     else
 
-        echo 'O DIRETÓRIO \033[32m"PackagesINELASTICA"\033[00m NÃO EXISTE
+        echo $comandoInicialLinha 'O DIRETÓRIO \033[32m"PackagesINELASTICA"\033[00m NÃO EXISTE
         \n\n CRIANDO O DIRETÓRIO: \033[05;33m"PackagesINELASTICA"\033[00;00m\n\n'
 
         sleep 2
@@ -711,13 +885,9 @@ InstalacaoInelastica() {
 Main() {
 
     ####INICIANDO SISTEMA####
-    echo '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
+    echo $comandoInicialLinha '\033[05;37m                              ####INICIANDO SISTEMA####\033[00;00m\n\n'
 
     sleep 3
-
-    raizInstalacao="$(pwd)"
-    versionSistema="$(lsb_release -d -s)"
-    numeracaoSistema="$(lsb_release -r -s)"
 
     github=$(
         yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
@@ -739,17 +909,17 @@ Main() {
             --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2
         )
 
-        escolha=$(echo $?)
-        op=$(echo "$instalacao" | cut -d "|" -f 1)
-        op2=$(echo "$instalacao" | cut -d "|" -f 2)
-        op3=$(echo "$instalacao" | cut -d "|" -f 3)
+        escolha=$(echo $comandoInicialLinha $?)
+        op=$(echo $comandoInicialLinha "$instalacao" | cut -d "|" -f 1)
+        op2=$(echo $comandoInicialLinha "$instalacao" | cut -d "|" -f 2)
+        op3=$(echo $comandoInicialLinha "$instalacao" | cut -d "|" -f 3)
 
         if [ "$op" = "TRUE" ]; then
 
             InstalacaoPacotesEssenciais
 
         else
-            echo ""
+            echo $comandoInicialLinha ""
         fi
 
         if [ "$op2" = "TRUE" ]; then
@@ -757,7 +927,7 @@ Main() {
             InstalacaoSiestaTransiesta
 
         else
-            echo ""
+            echo $comandoInicialLinha ""
         fi
 
         if [ "$op3" = "TRUE" ]; then
@@ -765,7 +935,7 @@ Main() {
             InstalacaoInelastica
 
         else
-            echo ""
+            echo $comandoInicialLinha ""
         fi
 
         if [ "$op" = "TRUE" ] || [ "$op2" = "TRUE" ] || [ "$op3" = "TRUE" ]; then
@@ -773,7 +943,7 @@ Main() {
             exit
 
         else
-            echo ""
+            echo $comandoInicialLinha ""
         fi
 
         if [ "$escolha" = 1 ] || [ "$escolha" = 252 ]; then
@@ -781,13 +951,13 @@ Main() {
             exit
 
         else
-            echo ""
+            echo $comandoInicialLinha ""
         fi
 
         if [ "$op" = "FALSE" ] && [ "$op2" = "FALSE" ] && [ "$op3" = "FALSE" ]; then
             yad --width 325 --height 50 --title "ERROR" --image=dialog-question --buttons-layout=center --button=OK:0 --text="ESCOLHA UMA OPÇÃO DE INSTALAÇÃO"
         else
-            echo ""
+            echo $comandoInicialLinha ""
         fi
 
     done
