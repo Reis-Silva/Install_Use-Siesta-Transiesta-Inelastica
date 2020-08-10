@@ -101,7 +101,7 @@ Instalacao_PacotesEssenciais_Geral() {
     # Removendo processos anteriores
     echo $comandoInicialLinha "\n\nRemovendo processos anteriores \n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
         zypper --non-interactive clean
     else
         sudo apt-get clean $comandoFinalSistema
@@ -130,7 +130,7 @@ Instalacao_PacotesEssenciais_Geral() {
 
     echo $comandoInicialLinha "##python3\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
         $comandoInicialSistema python3 $comandoFinalSistema
         $comandoInicialSistema python3-devel $comandoFinalSistema
 
@@ -151,14 +151,13 @@ Instalacao_PacotesEssenciais_Geral() {
     #PACOTE gfortran
     echo $comandoInicialLinha "#PACOTE gfortran - 1 de 10\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
         $comandoInicialSistema gcc-fortran gcc-c++ gcc9$comandoFinalSistema
     else
         $comandoInicialSistema g++ $comandoFinalSistema
         $comandoInicialSistema gfortran $comandoFinalSistema
         $comandoInicialSistema gfortran-10 $comandoFinalSistema
     fi
-
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE m4
@@ -169,7 +168,7 @@ Instalacao_PacotesEssenciais_Geral() {
     #PACOTE bcc
     echo $comandoInicialLinha "#PACOTE bcc - 3 de 10\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
 
         $comandoInicialSistema bcc-devel $comandoFinalSistema
 
@@ -181,20 +180,19 @@ Instalacao_PacotesEssenciais_Geral() {
     #PACOTE CCCC
     echo $comandoInicialLinha "#PACOTE CCCC - 4 de 10\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
         zypper addrepo -f zypper addrepo https://download.opensuse.org/repositories/home:illuusio/openSUSE_Leap_15.2/home:illuusio.repo
         zypper --gpg-auto-import-keys refresh
         $comandoInicialSistema cccc $comandoFinalSistema
     else
         $comandoInicialSistema cccc $comandoFinalSistema
     fi
-
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE fcc
     echo $comandoInicialLinha "#PACOTE fcc - 5 de 10\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
         echo " "
     else
         $comandoInicialSistema fcc $comandoFinalSistema
@@ -204,7 +202,7 @@ Instalacao_PacotesEssenciais_Geral() {
     #PACOTE GPAW e suas dependencias
     echo $comandoInicialLinha "#PACOTE GPAW e suas dependencias - 6 de 10\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
 
         zypper addrepo -f https://ftp.lysator.liu.se/pub/opensuse/repositories/science/openSUSE_Leap_15.2/ science-x86_64
         zypper addrepo -f https://download.opensuse.org/repositories/science/openSUSE_Leap_15.2/science.repo
@@ -464,14 +462,14 @@ Instalacao_PacotesEssenciais_Geral() {
         fi
 
         $comandoInicialSistema gpaw $comandoFinalSistema
-        echo $comandoInicialLinha "\n\n"
-
+        
     fi
+    echo $comandoInicialLinha "\n\n"
 
     #PACOTE abinit
     echo $comandoInicialLinha "#PACOTE abinit - 7 de 10\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
 
         wget -c https://www.abinit.org/sites/default/files/packages/abinit-8.10.2.tar.gz
         tar vxf abinit-8.10.2.tar.gz
@@ -507,7 +505,7 @@ Instalacao_PacotesEssenciais_Geral() {
     #PACOTE quantum-espresso
     echo $comandoInicialLinha "#PACOTE quantum-espresso - 8 de 10\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
 
         wget -c https://github.com/QEF/q-e/archive/qe-6.6.tar.gz
         tar vxf qe-6.6.tar.gz
@@ -524,7 +522,7 @@ Instalacao_PacotesEssenciais_Geral() {
     #PACOTE meep-lam4
     echo $comandoInicialLinha "#PACOTE meep-lam4 - 9 de 10\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
 
         $comandoInicialSistema meep $comandoFinalSistema
 
@@ -587,13 +585,14 @@ Instalacao_PacotesEssenciais_Geral() {
             sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
 
         fi
-        echo $comandoInicialLinha "\n\n"
+        
     fi
+    echo $comandoInicialLinha "\n\n"
 
     #PACOTE GaussSum e suas dependencias
     echo $comandoInicialLinha "#PACOTE GaussSum e suas dependencias - 10 de 10\n\n"
 
-    if [ "$nomeSistema" == "openSUSE" ]; then
+    if [ "$nomeSistema" = "openSUSE" ]; then
 
         wget -c https://sourceforge.net/projects/gausssum/files/gausssum3/GaussSum%203.0.2/GaussSum-3.0.2.tar.gz/download?use_mirror=ufpr&download=
         tar vxf GaussSum-3.0.2.tar.gz
