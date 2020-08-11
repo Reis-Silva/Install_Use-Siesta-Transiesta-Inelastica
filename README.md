@@ -6,8 +6,12 @@
 
 --- Versões SIESTA v4.1-260/INELASTICA v1.3.6
 
-#### Link YouTube:
-[![Install Siesta/Inelastica](http://img.youtube.com/vi/af9cmUdHDJ8/0.jpg)](http://www.youtube.com/watch?v=af9cmUdHDJ8 "Install SIESTA/Inelastica com Interface")
+<p align="center">
+  <b>Link YouTube:</b><br>
+  <a href="http://www.youtube.com/watch?v=af9cmUdHDJ8">Install SIESTA/Inelastica com Interface</a> |
+  <br><br>
+  <img src="http://img.youtube.com/vi/af9cmUdHDJ8/0.jpg">
+</p>
 
 ##### OBS: Haverá adição de outro link sobre update
 
