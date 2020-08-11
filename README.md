@@ -22,7 +22,7 @@
 ![InicioDeveloper](https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/ReferenceImage/Developer.png)
 
 #### Opções de Instalação:
-![Install](https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/ReferenceImage/Install.png)
+![Install](https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/ReferenceImage/Install.png?style=centerme)
 
 ## Observações:
 
