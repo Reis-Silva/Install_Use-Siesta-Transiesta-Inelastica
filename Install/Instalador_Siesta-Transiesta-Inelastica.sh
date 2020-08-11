@@ -13,8 +13,8 @@
 #[2] - Siesta/Transiesta - OBS: Todos os programas UTILS compilados!                                                       #
 #[3] - Inelastica                                                                                                          #
 #                                                                                                                          #
-#OBS: Versão Generalizada do Ubuntu e versões derivadas do Debian provavelmente (Testado com Linux Mint)                   #
-#OBS2: Realizando testes com openSUSE                                                                                      #
+#OBS: Versão Generalizada do Ubuntu e algumas outras versões derivadas do Debian provavelmente (Testado com Linux Mint)    #
+#OBS2: Realizando testes com openSUSE 15.2 ainda                                                                           #
 #OBS3: Lembre-se quando terminar de instalar tudo, feche e abra o terminal de novo para poder emular(reload .bashrs)       #
 #                                                                                                                          #
 #                                                                                                                          #
@@ -28,22 +28,20 @@ sudo rm /var/cache/apt/archives/lock
 sudo rm /var/lib/dpkg/lock
 sudo rm /var/lib/dpkg/lock-frontend
 
-linuxSistema="$(uname -rs)"
 
-if [ "$linuxSistema" = "lp" ]; then
+linuxSistema="$(uname -r -s )"
+
+if [ "$linuxSistema" = "Linux 5.3.18-lp152.33-default" ]; then
     sudo zypper --non-interactive install lsb-release
-else
-    echo ""
-fi
-
-raizInstalacao="$(pwd)"
-versionSistema="$(lsb_release -d -s)"
-numeracaoSistema="$(lsb_release -r -s)"
-
-if [ "$linuxSistema" = "lp" ]; then
+    raizInstalacao="$(pwd)"
+    versionSistema="$(lsb_release -d -s)"
     nomeSistema=${versionSistema:1:8}
+    numeracaoSistema="$(lsb_release -r -s)"
+    
 else
-    echo " " #OPENSUSE EM TESTE - nomeSistema="$(linuxSistema)"
+    raizInstalacao="$(pwd)"
+    versionSistema="$(lsb_release -d -s)"
+    numeracaoSistema="$(lsb_release -r -s)"
 fi
 
 if [ "$nomeSistema" = "openSUSE" ]; then
