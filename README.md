@@ -19,10 +19,14 @@
 [3] - Inelastica
 
 #### Início:
-![InicioDeveloper](https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/ReferenceImage/Developer.png)
+<p align="center">
+<img src="https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/ReferenceImage/Developer.png">
+</p>
 
 #### Opções de Instalação:
-![Install](https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/ReferenceImage/Install.png?style=centerme)
+<p align="center">
+<img src="https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/ReferenceImage/Install.png">
+</p>
 
 ## Observações:
 
