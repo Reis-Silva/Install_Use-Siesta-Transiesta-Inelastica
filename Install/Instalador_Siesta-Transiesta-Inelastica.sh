@@ -37,7 +37,8 @@ numeracaoSistema="$(lsb_release -r -s)"
 comandoInicialSistema="sudo apt-get install"
 comandoFinalSistema="-y"
 comandoInicialLinha=" "
-atualizacaoPacotes="sudo apt-get update && sudo apt-get dist-upgrade $comandoFinalSistema"
+atualizacaoPacotes="sudo apt-get update $comandoFinalSistema"
+upgradePacotes="sudo apt-get dist-upgrade $comandoFinalSistema"
 
 echo $comandoInicialLinha "SISTEMA $versionSistema\nAdicionando pacotes...\n\n"
 
@@ -54,6 +55,7 @@ Instalacao_PacotesEssenciais_Geral() {
     ###Atualização do repositorio e Atualização de pacotes para a versão mais recente####
     echo $comandoInicialLinha "###Atualização do repositorio e Atualização de pacotes para a versão mais recente####\n\n"
     $atualizacaoPacotes
+    $upgradePacotes
 
     #Ativando repositorio canoninal e adicionando repositorios
     echo $comandoInicialLinha "ativando repositorio canoninal e adicionando repositorios\n\n"
@@ -433,6 +435,7 @@ Instalacao_PacotesEssenciais_Geral() {
     #Reatualização de repositorios e bibliotecas
     echo $comandoInicialLinha "#Reatualização de repositorios e bibliotecas\n\n"
     $atualizacaoPacotes
+    $upgradePacotes
     echo $comandoInicialLinha "\n\n"
 
     ##FIM DAS INSTALAÇÕES DOS PACOTES ESSENCIAIS
