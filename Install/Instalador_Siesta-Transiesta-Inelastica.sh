@@ -2,10 +2,10 @@
 
 ############################################################################################################################
 #DEVELOPER: REIS-SILVA                                                                                                     #
-#LINK YOUTUBE: https://www.youtube.com/watch?v=af9cmUdHDJ8                                                                 #
+#LINK YOUTUBE: https://www.youtube.com/watch?v=af9cmUdHDJ8       #VIDEO INTRODUTÓRIO DE INSTALAÇÃO                         #
+#LINK YOUTUBE (UPDATE):                                                                                                    #
 #LINK GITHUB: https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica                                       #
 #LINK GITLAB SIESTA: https://gitlab.com/siesta-project/siesta                                                              #
-#                                                                                                                          #
 #                                                                                                                          #
 #                                                                                                                          #
 #Opções de instalação completa na interface do programa:                                                                   #
@@ -13,13 +13,13 @@
 #[2] - Siesta/Transiesta - OBS: Todos os programas UTILS compilados!                                                       #
 #[3] - Inelastica                                                                                                          #
 #                                                                                                                          #
-#OBS: Versão Generalizada do Ubuntu e algumas outras versões derivadas do Debian provavelmente (Testado com Linux Mint)    #
-#OBS2: Realizando testes com openSUSE 15.2 ainda                                                                           #
+#OBS: Versão Generalizada do Ubuntu e Linux Mint (algumas outras versões derivadas do Debian provavelmente).               #
+#OBS2: Testes realizados com  Ubuntu: 16.04, 18.04 e 20.04 e Linux Mint: 18 e 20.                                          #
 #OBS3: Lembre-se quando terminar de instalar tudo, feche e abra o terminal de novo para poder emular(reload .bashrs)       #
 #                                                                                                                          #
+#Contatos:                                                                                                                 #
 #                                                                                                                          #
-#                                                                                                                          #
-#                                                                                                                          #
+#Email: cesar.everlastingtechnologydeveloper@outlook.com                                                                   #
 #                                                                                                                          #
 ############################################################################################################################
 
@@ -30,63 +30,22 @@ sudo rm /var/lib/dpkg/lock-frontend
 
 
 linuxSistema="$(uname -r -s )"
+raizInstalacao="$(pwd)"
+versionSistema="$(lsb_release -d -s)"
+numeracaoSistema="$(lsb_release -r -s)"
 
-if [ "$linuxSistema" = "Linux 5.3.18-lp152.33-default" ]; then
-    sudo zypper --non-interactive install lsb-release
-    raizInstalacao="$(pwd)"
-    versionSistema="$(lsb_release -d -s)"
-    nomeSistema=${versionSistema:1:8}
-    numeracaoSistema="$(lsb_release -r -s)"
-    
-else
-    raizInstalacao="$(pwd)"
-    versionSistema="$(lsb_release -d -s)"
-    numeracaoSistema="$(lsb_release -r -s)"
-fi
+comandoInicialSistema="sudo apt-get install"
+comandoFinalSistema="-y"
+comandoInicialLinha=" "
+atualizacaoPacotes="sudo apt-get update && sudo apt-get dist-upgrade $comandoFinalSistema"
 
-if [ "$nomeSistema" = "openSUSE" ]; then
+echo $comandoInicialLinha "SISTEMA $versionSistema\nAdicionando pacotes...\n\n"
 
-    touch .Xauthority
-    xauth merge ~brainiac/.Xauthority
-    export DISPLAY=:0.0
-    comandoInicialSistema="sudo zypper --non-interactive install"
-    comandoFinalSistema=" "
-    comandoInicialLinha="-e"
-    atualizacaoPacotes="zypper --non-interactive up"
-
-    echo $comandoInicialLinha $comandoInicialLinha "SISTEMA $versionSistema\nAdicionando pacotes...\n\n"
-
-    $comandoInicialSistema dpkg
-    sudo dpkg --configure -a
-    $comandoInicialSistema wget
-    $comandoInicialSistema unzip
-    $comandoInicialSistema make
-    zypper addrepo -f https://ftp.lysator.liu.se/pub/opensuse/repositories/GNOME:/Apps/openSUSE_Leap_15.1/ gnome-apps-x86_64
-    zypper --gpg-auto-import-keys refresh
-    $comandoInicialSistema yad
-
-else
-
-    comandoInicialSistema="sudo apt-get install"
-    comandoFinalSistema="-y"
-    comandoInicialLinha=" "
-    atualizacaoPacotes="sudo apt-get update && sudo apt-get dist-upgrade $comandoFinalSistema"
-
-    echo $comandoInicialLinha $comandoInicialLinha "SISTEMA $versionSistema\nAdicionando pacotes...\n\n"
-
-    sudo dpkg --configure -a
-    $comandoInicialSistema make
-    $comandoInicialSistema unzip
-    $comandoInicialSistema synaptic $comandoFinalSistema
-    $comandoInicialSistema yad $comandoFinalSistema
-
-    #Ativando repositorio canoninal e adicionando repositorios
-    echo $comandoInicialLinha "ativando repositorio canoninal e adicionando repositorios\n\n"
-    sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
-    sudo add-apt-repository ppa:ubuntu-toolchain-r/test $comandoFinalSistema
-    echo $comandoInicialLinha "\n\n"
-
-fi
+sudo dpkg --configure -a
+$comandoInicialSistema make
+$comandoInicialSistema unzip
+$comandoInicialSistema synaptic $comandoFinalSistema
+$comandoInicialSistema yad $comandoFinalSistema
 
 Instalacao_PacotesEssenciais_Geral() {
     ####INSTALATAÇÃO DE PACOTES INICIAIS PARA SIESTA/TRANSIESTA - ARQUITETURA AMD64####
@@ -96,15 +55,15 @@ Instalacao_PacotesEssenciais_Geral() {
     echo $comandoInicialLinha "###Atualização do repositorio e Atualização de pacotes para a versão mais recente####\n\n"
     $atualizacaoPacotes
 
+    #Ativando repositorio canoninal e adicionando repositorios
+    echo $comandoInicialLinha "ativando repositorio canoninal e adicionando repositorios\n\n"
+    sudo sed -i.bak "/^# deb .*partner/ s/^# //" /etc/apt/sources.list
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test $comandoFinalSistema
+    echo $comandoInicialLinha "\n\n"
+
     # Removendo processos anteriores
     echo $comandoInicialLinha "\n\nRemovendo processos anteriores \n\n"
-
-    if [ "$nomeSistema" = "openSUSE" ]; then
-        zypper --non-interactive clean
-    else
-        sudo apt-get clean $comandoFinalSistema
-    fi
-
+    sudo apt-get clean $comandoFinalSistema
     sudo rm /var/lib/apt/lists/lock
     sudo rm /var/cache/apt/archives/lock
     sudo rm /var/lib/dpkg/lock
@@ -127,16 +86,8 @@ Instalacao_PacotesEssenciais_Geral() {
     echo $comandoInicialLinha "\n\n"
 
     echo $comandoInicialLinha "##python3\n\n"
-
-    if [ "$nomeSistema" = "openSUSE" ]; then
-        $comandoInicialSistema python3 $comandoFinalSistema
-        $comandoInicialSistema python3-devel $comandoFinalSistema
-
-    else
-        $comandoInicialSistema python3 $comandoFinalSistema
-        $comandoInicialSistema python3-dev $comandoFinalSistema
-    fi
-
+    $comandoInicialSistema python3 $comandoFinalSistema
+    $comandoInicialSistema python3-dev $comandoFinalSistema
     echo $comandoInicialLinha "\n\n"
 
     echo $comandoInicialLinha "##python3-pip\n\n"
@@ -148,14 +99,9 @@ Instalacao_PacotesEssenciais_Geral() {
 
     #PACOTE gfortran
     echo $comandoInicialLinha "#PACOTE gfortran - 1 de 10\n\n"
-
-    if [ "$nomeSistema" = "openSUSE" ]; then
-        $comandoInicialSistema gcc-fortran gcc-c++ gcc9$comandoFinalSistema
-    else
-        $comandoInicialSistema g++ $comandoFinalSistema
-        $comandoInicialSistema gfortran $comandoFinalSistema
-        $comandoInicialSistema gfortran-10 $comandoFinalSistema
-    fi
+    $comandoInicialSistema g++ $comandoFinalSistema
+    $comandoInicialSistema gfortran $comandoFinalSistema
+    $comandoInicialSistema gfortran-10 $comandoFinalSistema
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE m4
@@ -165,100 +111,32 @@ Instalacao_PacotesEssenciais_Geral() {
 
     #PACOTE bcc
     echo $comandoInicialLinha "#PACOTE bcc - 3 de 10\n\n"
-
-    if [ "$nomeSistema" = "openSUSE" ]; then
-
-        $comandoInicialSistema bcc-devel $comandoFinalSistema
-
-    else
-        $comandoInicialSistema bcc bpfcc-tools $comandoFinalSistema
-    fi
+    $comandoInicialSistema bcc bpfcc-tools $comandoFinalSistema
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE CCCC
     echo $comandoInicialLinha "#PACOTE CCCC - 4 de 10\n\n"
-
-    if [ "$nomeSistema" = "openSUSE" ]; then
-        zypper addrepo -f zypper addrepo https://download.opensuse.org/repositories/home:illuusio/openSUSE_Leap_15.2/home:illuusio.repo
-        zypper --gpg-auto-import-keys refresh
-        $comandoInicialSistema cccc $comandoFinalSistema
-    else
-        $comandoInicialSistema cccc $comandoFinalSistema
-    fi
+    $comandoInicialSistema cccc $comandoFinalSistema
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE fcc
     echo $comandoInicialLinha "#PACOTE fcc - 5 de 10\n\n"
-
-    if [ "$nomeSistema" = "openSUSE" ]; then
-        echo " "
-    else
-        $comandoInicialSistema fcc $comandoFinalSistema
-    fi
+    $comandoInicialSistema fcc $comandoFinalSistema
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE GPAW e suas dependencias
     echo $comandoInicialLinha "#PACOTE GPAW e suas dependencias - 6 de 10\n\n"
+    $comandoInicialSistema libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev $comandoFinalSistema
 
-    if [ "$nomeSistema" = "openSUSE" ]; then
+    ##DEPEDENCIAS VARIADAS DE python e python3
+    $comandoInicialSistema libhdf5-dev $comandoFinalSistema
+    $comandoInicialSistema python3-numpy python3-scipy python3-matplotlib $comandoFinalSistema
+    $comandoInicialSistema python3-netcdf4 $comandoFinalSistema
 
-        zypper addrepo -f https://ftp.lysator.liu.se/pub/opensuse/repositories/science/openSUSE_Leap_15.2/ science-x86_64
-        zypper addrepo -f https://download.opensuse.org/repositories/science/openSUSE_Leap_15.2/science.repo
-        zypper addrepo -f https://download.opensuse.org/repositories/Education/openSUSE_Leap_15.2/Education.repo
-        zypper addrepo -f https://download.opensuse.org/repositories/home:eeich:hpc/openSUSE_Factory/home:eeich:hpc.repo
-        zypper addrepo -f https://download.opensuse.org/repositories/devel:languages:python/openSUSE_Leap_15.2/devel:languages:python.repo
-        zypper --gpg-auto-import-keys refresh
-
-        $comandoInicialSistema zypper install libopenblas_pthreads0 $comandoFinalSistema
-        $comandoInicialSistema libopenblas_pthreads-devel $comandoFinalSistema
-        $comandoInicialSistema openblas-devel $comandoFinalSistema
-        $comandoInicialSistema libscalapack2-mvapich2 $comandoFinalSistema
-
-        #wget -c https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.6.tar.gz
-        #tar vxf -o openmpi-3.1.6.tar.gz
-        #cd openmpi-3.1.6
-        #./configure --prefix=$HOME/opt/usr/local
-        #make all
-        #make install
-        #cd ..
-        $comandoInicialSistema cairo-devel python-pycairo-common-devel$comandoFinalSistema
-        $comandoInicialSistema libtool $comandoFinalSistema
-        $comandoInicialSistema lapack $comandoFinalSistema
-        $comandoInicialSistema openmpi $comandoFinalSistema
-        $comandoInicialSistema openmpi3-devel $comandoFinalSistema
-        $comandoInicialSistema openmpi3-gnu-hpc-devel $comandoFinalSistema
-        $comandoInicialSistema lam lam-devel $comandoFinalSistema
-        $comandoInicialSistema libxc-devel $comandoFinalSistema
-        $comandoInicialSistema libfftw3-3 $comandoFinalSistema
-        $comandoInicialSistema mpich $comandoFinalSistema
-        $comandoInicialSistema automake autoconf libtool $comandoFinalSistema
-        pip install --upgrade pip
-        pip install numpy scipy matplotlib
-        pip install --upgrade --user ase
-        $comandoInicialSistema python3-wheel $comandoFinalSistema
-
-        wget -c https://salsa.debian.org/debichem-team/gpaw/-/archive/master/gpaw-master.zip
-        sudo unzip -o gpaw-master.zip
-        cd gpaw-master
-        sed -i "68cmpicompiler = 'gcc'" setup.py
-        sed -i "69cmpilinker = 'gcc'" setup.py
-        sed -i "71cerror = subprocess.call(['which', 'gcc'], stdout=subprocess.PIPE)" setup.py
-        python3 setup.py install
-        cd ..
-
-    else
-
-        $comandoInicialSistema libopenblas-dev libxc-dev libscalapack-mpi-dev libfftw3-dev $comandoFinalSistema
-
-        ##DEPEDENCIAS VARIADAS DE python e python3
-        $comandoInicialSistema libhdf5-dev $comandoFinalSistema
-        $comandoInicialSistema python3-numpy python3-scipy python3-matplotlib $comandoFinalSistema
-        $comandoInicialSistema python3-netcdf4 $comandoFinalSistema
-
-        $comandoInicialSistema python-scipy python-matplotlib python-netcdf4 $comandoFinalSistema
-        pacote=$(dpkg --get-selections | grep python-scipy)
-        pacote2=$(dpkg --get-selections | grep python-matplotlib)
-        pacote3=$(dpkg --get-selections | grep python-netcdf4)
+    $comandoInicialSistema python-scipy python-matplotlib python-netcdf4 $comandoFinalSistema
+    pacote=$(dpkg --get-selections | grep python-scipy)
+    pacote2=$(dpkg --get-selections | grep python-matplotlib)
+    pacote3=$(dpkg --get-selections | grep python-netcdf4)
 
         if [ -n "$pacote" ] && [ -n "$pacote2" ] && [ -n "$pacote3" ]; then
 
@@ -459,29 +337,13 @@ Instalacao_PacotesEssenciais_Geral() {
             apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
         fi
 
-        $comandoInicialSistema gpaw $comandoFinalSistema
-        
-    fi
+    $comandoInicialSistema gpaw $comandoFinalSistema
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE abinit
     echo $comandoInicialLinha "#PACOTE abinit - 7 de 10\n\n"
-
-    if [ "$nomeSistema" = "openSUSE" ]; then
-
-        wget -c https://www.abinit.org/sites/default/files/packages/abinit-8.10.2.tar.gz
-        tar vxf abinit-8.10.2.tar.gz
-        cd abinit-8.10.2
-        ./configure
-        make
-        make install
-        cd ..
-
-    else
-
-        $comandoInicialSistema abinit $comandoFinalSistema
-
-        pacote=$(dpkg --get-selections | grep abinit)
+    $comandoInicialSistema abinit $comandoFinalSistema
+    pacote=$(dpkg --get-selections | grep abinit)
 
         if [ -n "$pacote" ]; then
 
@@ -496,43 +358,22 @@ Instalacao_PacotesEssenciais_Geral() {
             sudo dpkg -i abinit_8.10.2-2_amd64.deb
 
         fi
-
-    fi
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE quantum-espresso
     echo $comandoInicialLinha "#PACOTE quantum-espresso - 8 de 10\n\n"
-
-    if [ "$nomeSistema" = "openSUSE" ]; then
-
-        wget -c https://github.com/QEF/q-e/archive/qe-6.6.tar.gz
-        tar vxf qe-6.6.tar.gz
-        cd q-e-qe-6.6
-        ./configure
-        make all
-        cd ..
-
-    else
-        $comandoInicialSistema quantum-espresso $comandoFinalSistema
-    fi
+    $comandoInicialSistema quantum-espresso $comandoFinalSistema
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE meep-lam4
     echo $comandoInicialLinha "#PACOTE meep-lam4 - 9 de 10\n\n"
+    $comandoInicialSistema libhdf5-serial-dev $comandoFinalSistema
+    $comandoInicialSistema hdf5-tools $comandoFinalSistema
+    $comandoInicialSistema libatlas-base-dev $comandoFinalSistema
+    $comandoInicialSistema libatlas-ecmwf-utils $comandoFinalSistema
+    $comandoInicialSistema meep-lam4 $comandoFinalSistema
 
-    if [ "$nomeSistema" = "openSUSE" ]; then
-
-        $comandoInicialSistema meep $comandoFinalSistema
-
-    else
-
-        $comandoInicialSistema libhdf5-serial-dev $comandoFinalSistema
-        $comandoInicialSistema hdf5-tools $comandoFinalSistema
-        $comandoInicialSistema libatlas-base-dev $comandoFinalSistema
-        $comandoInicialSistema libatlas-ecmwf-utils $comandoFinalSistema
-        $comandoInicialSistema meep-lam4 $comandoFinalSistema
-
-        pacote=$(dpkg --get-selections | grep meep-lam4)
+    pacote=$(dpkg --get-selections | grep meep-lam4)
 
         if [ -n "$pacote" ]; then
 
@@ -581,27 +422,12 @@ Instalacao_PacotesEssenciais_Geral() {
             sudo dpkg -i lam-runtime_7.1.4-6build1_amd64.deb
             wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/meep-lam4/meep-lam4_1.7.0-3_amd64.deb
             sudo dpkg -i meep-lam4_1.7.0-3_amd64.deb
-
         fi
-        
-    fi
     echo $comandoInicialLinha "\n\n"
 
     #PACOTE GaussSum e suas dependencias
     echo $comandoInicialLinha "#PACOTE GaussSum e suas dependencias - 10 de 10\n\n"
-
-    if [ "$nomeSistema" = "openSUSE" ]; then
-
-        wget -c https://sourceforge.net/projects/gausssum/files/gausssum3/GaussSum%203.0.2/GaussSum-3.0.2.tar.gz/download?use_mirror=ufpr&download=
-        tar vxf GaussSum-3.0.2.tar.gz
-        cd GaussSum-3.0.2
-        ./configure
-        make all
-        cd ..
-
-    else
-        $comandoInicialSistema gausssum $comandoFinalSistema
-    fi
+    $comandoInicialSistema gausssum $comandoFinalSistema
     echo $comandoInicialLinha "\n\n"
 
     #Reatualização de repositorios e bibliotecas
