@@ -489,7 +489,13 @@ arch_make_UTILS() {
 
     cd ..
 
-    cd Util
+    cd Util/TS/TBtrans
+    
+    sed -i "258c    Elecs_xa_EPS = fdf_get('TS.Elecs.Coord.Eps',0.001_dp, 'Bohr')" m_tbt_options.F90 #Concerto de Bug temporário do GITLAB da plataforma SIESTA  
+
+    cd ..
+    cd ..    
+
     sh build_all.sh
     echo "\n\n"
 
