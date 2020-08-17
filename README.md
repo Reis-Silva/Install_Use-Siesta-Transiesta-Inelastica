@@ -2,9 +2,7 @@
 
 ## Instalação dos softwares Siesta/Transiesta/Inelastica:
 
---- Instalação generalizada para Sistemas operacionais UBUNTU e derivados debian (Linux Mint Testado, Testando para openSUSE).
-
---- Versões SIESTA v4.1-260/INELASTICA v1.3.6
+--- Versões SIESTA v4.1-261/INELASTICA v1.3.6
 
 <p align="center">
   <b>Link YouTube:</b><br>
