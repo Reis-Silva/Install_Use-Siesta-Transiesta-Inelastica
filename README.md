@@ -2,7 +2,7 @@
 
 ## Instalação dos softwares Siesta/Transiesta/Inelastica:
 
---- Versões SIESTA v4.1-261/INELASTICA v1.3.6
+--- Versões SIESTA v4.1-262/INELASTICA v1.3.6
 
 <p align="center">
   <b>Link YouTube:</b><br>
