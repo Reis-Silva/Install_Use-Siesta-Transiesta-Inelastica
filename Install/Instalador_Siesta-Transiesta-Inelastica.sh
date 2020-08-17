@@ -732,7 +732,7 @@ Main() {
         instalacao=$(
             yad --form --title "INSTALAÇÃO SIESTA/TRANSIESTA/INELASTICA" \
             --image="$raizInstalacao/img/SIESTA_INELASTICA.png" --image-on-top \
-            --text "VERSION: Siesta-master v4.1 - 260\nLINK: https://gitlab.com/siesta-project/siesta 
+            --text "VERSION: Siesta-master v4.1 - 261\nLINK: https://gitlab.com/siesta-project/siesta 
     		\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center \
             --field="INSTALAÇÃO - PACOTES ESSENCIAIS":CHK \
             --field="INSTALAÇÃO - SIESTA/TRANSIESTA":CHK \
