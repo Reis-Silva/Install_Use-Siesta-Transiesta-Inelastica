@@ -11,7 +11,14 @@
   <img src="http://img.youtube.com/vi/af9cmUdHDJ8/0.jpg">
 </p>
 
-##### OBS: Haverá adição de outro link sobre update
+===========================================================================
+
+<p align="center">
+  <b>Link YouTube:</b><br>
+  <a href="https://www.youtube.com/watch?v=2pTLMxiM1GY">UPDATE - Install SIESTA/Inelastica com Interface</a> |
+  <br><br>
+  <img src="http://img.youtube.com/vi/2pTLMxiM1GY/0.jpg">
+</p>
 
 ## Opções de instalação completa na interface do programa:
 [1] - Todos os Pacotes essenciais
