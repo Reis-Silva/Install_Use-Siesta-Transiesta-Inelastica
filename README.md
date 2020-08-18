@@ -45,13 +45,13 @@
 
 ##### OBS2: Testes realizados com  Ubuntu: 16.04, 18.04 e 20.04 e Linux Mint: 18 e 20.
 
-##### OBS3: Lembre-se quando terminar de instalar tudo, feche e abra o terminal de novo para poder emular(reload .bashrs)
+##### OBS3: Lembre-se quando terminar de instalar tudo, feche e abra o terminal de novo para poder emular (reload .bashrs).
 
 ## INSTALAÇÃO:
 
 ##### 1 - ENTRAR NO TERMINAL ONDE ESTÁ LOCALIZADO O ARQUIVO "Install_Use-Siesta-Transiesta-Inelastica.sh", ENTRE NO MODO ROOT DO SISTEMA "sudo su", E INSTALE COM O COMANDO "sh Install_Use-Siesta-Transiesta-Inelastica.sh".
 
-##### 2 - SELECIONAR AS OPÇÕES DE INSTALAÇÃO E APERTE INSTALAR
+##### 2 - SELECIONAR AS OPÇÕES DE INSTALAÇÃO E APERTE INSTALAR.
 
 FIM
 
@@ -77,7 +77,7 @@ EXEMPLO:
 
 [4] - siesta < INPUT.fdf  | tee OUTPUT.fdf  = Emulação do comando do Software para arquivo de entrar e saida.
 
-####################################################################################################################################################################################################################
+########################################################################################################################################################################################
 
 
 ### Deixar comentários e Likes para iniciar operação de upgrade dos instaladores.
