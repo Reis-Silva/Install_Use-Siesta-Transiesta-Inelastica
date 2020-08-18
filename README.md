@@ -57,6 +57,7 @@ FIM
 
 ##### OBS2: SE NÃO HOUVER INSTALAÇÃO DOS "PACOTES ESSENCIAIS", ENCONTRE-SE CORRETO PARA QUE A INSTALAÇÃO DAS DEMAIS OPÇÕES SEJA FEITA CORRETAMENTE. 
 
+##### OBS3: NA OPÇÃO "INSTALAÇÃO SIESTA/TRANSIESTA", EXISTE A POSSIBILIDADE DE APARECER O TERMO: "tee: 'saída padrão': Recurso temporariamente indisponível" NO PROCESSO ./install_netcdf4.bash, apenas aguarde, pois está sendo efetuado testes para a biblioteca HDF5, quando terminar o processo, a visualização de instalação do SIESTA continuará no terminal. Pode ser visto o processo de testes do HDF5 em "install_netcdf4.log" na pasta siesta-master/Docs.
 
 ## EMULAÇÃO DE NUCLEOS PARALELOS
 

@@ -596,9 +596,16 @@ Instalacao_SiestaTransiesta() {
     #./install_netcdf4.bash
     echo "#./install_netcdf4.bash\n\n"
     cd siesta-master/Docs
-    sed -i '213c\ ' install_netcdf4.bash
-    sed -i '214c\ ' install_netcdf4.bash
-    ./install_netcdf4.bash
+
+    echo '\n\nOBS: Existe a possibilidade de aparecer o termo \033[32mtee: saída padrão: Recurso temporariamente indisponível"\033[00m no processo ./install_netcdf4.bash, Apenas aguarde, pois está sendo efetuado testes para a biblioteca HDF5, quando terminar o processo, a visualização de instalação do SIESTA continuará neste terminal.\n\nOBS2: Pode ser visto o processo de testes do HDF5 em \033[05;33m"install_netcdf4.log"\033[00;00m na pasta siesta-master/Docs\n\n'
+    echo "Iniciando em:\n"
+    for tempo in $(seq 30 -1 0); do
+    echo $tempo"..."
+    sleep 1
+    done	
+    echo "\n\n"
+
+    (./install_netcdf4.bash 2>&1) | tee install_netcdf4.log
     echo "\n\n"
 
     cd ..
