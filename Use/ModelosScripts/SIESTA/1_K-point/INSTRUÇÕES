@@ -1,0 +1,15 @@
+Kpoints
+
+
+SCRIPT ELETRODO:
+
+
+EMULAR.sh
+
+
+1:
+
+Realizar K-points dos eletrodos
+
+sugere-se deixar fixo o K-point para X e Y e variar para Z, depois fixar Z e variar X e Y.
+
