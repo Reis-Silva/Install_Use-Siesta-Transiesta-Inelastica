@@ -662,7 +662,7 @@ Main() {
         yad --form --title "DEVELOPER" --buttons-layout=center --button=READY:0 \
         --image="$raizInstalacao/res/img/IronGit.png" --image-on-top \
         --text "Developer: Júlio César Reis da Silva\nGithub: https://github.com/Reis-Silva\nLicence: Open-Source\n\n
-	        Page: https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica\n\nTestes realizados com Ubuntu: 16.04, 18.04 e 20.04, Linux Mint: 18 e 20, WindowsFX/LinuxFX.\n\n" --text-align=center
+	        Page: https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica\n\nTestes realizados no Ubuntu: 16.04, 18.04 e 20.04, Linux Mint: 18 e 20, WindowsFX/LinuxFX.\n\n" --text-align=center
     )
 
     observacoes=$(
