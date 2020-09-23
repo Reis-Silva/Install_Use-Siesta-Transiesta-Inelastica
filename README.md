@@ -31,12 +31,12 @@
 
 #### Início:
 <p align="center">
-<img src="https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/ReferenceImage/Developer.png">
+<img src="https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/res/ReferenceImage/Developer.png">
 </p>
 
 #### Opções de Instalação:
 <p align="center">
-<img src="https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/ReferenceImage/Install.png">
+<img src="https://github.com/Reis-Silva/Install_Use-Siesta-Transiesta-Inelastica/blob/master/Install/res/ReferenceImage/Install.png">
 </p>
 
 ## Observações:
