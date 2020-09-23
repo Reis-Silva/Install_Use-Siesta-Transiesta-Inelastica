@@ -23,11 +23,13 @@
 </p>
 
 ## Opções de instalação completa na interface do programa:
-[1] - Todos os Pacotes essenciais
+[1] - INSTALAÇÃO - PACOTES ESSENCIAIS - SIESTA
 
-[2] - Siesta/Transiesta - OBS: Todos os programas UTILS compilados!
+[2] - INSTALAÇÃO - SIESTA/TRANSIESTA - OBS: Todos os programas UTILS compilados!
 
-[3] - Inelastica
+[3] - INSTALAÇÃO - PACOTES ESSENCIAIS - INELASTICA
+
+[4] - INSTALAÇÃO - INELASTICA
 
 #### Início:
 <p align="center">
