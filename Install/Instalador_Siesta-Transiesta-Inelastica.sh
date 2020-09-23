@@ -416,7 +416,6 @@ Instalacao_PacotesEssenciais_Inelastica() {
         sudo apt-get install python-numpy -y
         sudo apt-get install python -y
         sudo apt-get install python-dev -y
-        echo '\033[33m\n\nOs Pacotes: python-scipy, python-matplotlib e python-netcdf4 foram encontrados\n\n\033[00m'
         apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
     elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ] || [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
         echo '\033[33m\n\nOs Pacotes:  python-scipy, python-matplotlib e python-netcdf4 não foram encontrados\nBaixando por outras fontes...\n\n\033[00m'
@@ -561,7 +560,7 @@ Instalacao_PacotesEssenciais_Inelastica() {
     fi
 
     #Reatualização de repositorios e bibliotecas
-    echo '\033[33m#Reatualização de repositorios e bibliotecas\n\n\033[00m'
+    echo '\033[33m\n\n#Reatualização de repositorios e bibliotecas\n\n\033[00m'
     sudo apt-get update -y
     sudo apt-get dist-upgrade -y
     echo "\n\n"
