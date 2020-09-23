@@ -147,9 +147,9 @@ Instalacao_PacotesEssenciais_Siesta() {
     pacote=$(dpkg --get-selections | grep abinit)
 
     if [ -n "$pacote" ]; then
-        echo '\033[33m\n\nPacote '"$pacote"' Encontrado\033[00m'
+        echo '\033[33m\n\nO Pacote '"$pacote"' foi encontrado\033[00m'
     elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ] || [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
-        echo '\033[33m\n\nPacote '"$pacote"' não Encontrado\nBaixando por outras fontes...\n\n\033[00m'
+        echo '\033[33m\n\nO Pacote abinit não foi encontrado\nBaixando por outras fontes...\n\n\033[00m'
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
         sudo dpkg -i abinit-data_8.10.2-2_all.deb
         wget -c http://archive.ubuntu.com/ubuntu/pool/universe/a/abinit/abinit_8.10.2-2_amd64.deb
@@ -175,9 +175,9 @@ Instalacao_PacotesEssenciais_Siesta() {
     pacote=$(dpkg --get-selections | grep meep-lam4)
 
     if [ -n "$pacote" ]; then
-        echo '\033[33m\n\nPacote '"$pacote"' Encontrado\033[00m'
+        echo '\033[33m\n\nO Pacote '"$pacote"' foi encontrado\033[00m'
     elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ] || [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
-        echo '\033[33m\n\nPacote '"$pacote"' não Encontrado\nBaixando por outras fontes...\n\n\033[00m'
+        echo '\033[33m\n\nO Pacote meep-lam4 não foi encontrado\nBaixando por outras fontes...\n\n\033[00m'
         sudo apt-get install guile-3.0 -y
         sudo apt-get install meep -y
     else
@@ -416,10 +416,10 @@ Instalacao_PacotesEssenciais_Inelastica() {
         sudo apt-get install python-numpy -y
         sudo apt-get install python -y
         sudo apt-get install python-dev -y
-        echo '\033[33m\n\nPacotes '"$pacote"' '"$pacote2"' '"$pacote3"' Encontrados\n\n\033[00m'
+        echo '\033[33m\n\nOs Pacotes: python-scipy, python-matplotlib e python-netcdf4 foram encontrados\n\n\033[00m'
         apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
     elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ] || [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
-        echo '\033[33m\n\nPacotes $'"$pacote"' '"$pacote2"' '"$pacote3"' não Encontrados\nBaixando por outras fontes...\n\n\033[00m'
+        echo '\033[33m\n\nOs Pacotes:  python-scipy, python-matplotlib e python-netcdf4 não foram encontrados\nBaixando por outras fontes...\n\n\033[00m'
 
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
