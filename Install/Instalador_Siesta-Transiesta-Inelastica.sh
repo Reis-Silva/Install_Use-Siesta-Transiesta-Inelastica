@@ -527,6 +527,7 @@ Instalacao_PacotesEssenciais_Inelastica() {
         sudo dpkg -i libmatheval1_1.1.11+dfsg-2_amd64.deb
         wget -c http://ppa.launchpad.net/linuxuprising/libpng12/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
         sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
         sudo dpkg -i gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
         wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
         sudo dpkg -i libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
