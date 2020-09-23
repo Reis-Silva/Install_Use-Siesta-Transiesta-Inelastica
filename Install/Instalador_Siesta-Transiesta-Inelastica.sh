@@ -558,7 +558,6 @@ Instalacao_PacotesEssenciais_Inelastica() {
         sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
         apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
         echo "\n\n"
-        apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
     else
         echo '\033[33m\nErro: Possivelmente conexão instável, Reinicie a instalação...\033[00m'
     fi
