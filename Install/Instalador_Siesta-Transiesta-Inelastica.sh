@@ -406,12 +406,12 @@ InstalacaoPacotesEssenciaisSiestaIntermediario() {
 #####################################################----INICIO---INSTALADOR---INELASTICA----##############################################
 Instalacao_PacotesEssenciais_Inelastica() {
 
-    sudo apt-get install python-scipy python-matplotlib python-netcdf4 -y
-    pacote=$(dpkg --get-selections | grep python-scipy)
-    pacote2=$(dpkg --get-selections | grep python-matplotlib)
-    pacote3=$(dpkg --get-selections | grep python-netcdf4)
+    echo '\033[05;33m####INSTALATAÇÃO DE PACOTES PARA INELASTICA - ARQUITETURA AMD64####\n\n\033[00;00m'
 
-    if [ -n "$pacote" ] && [ -n "$pacote2" ] && [ -n "$pacote3" ]; then
+    if [ "$(echo "${numeracaoSistema} < 20.00" | bc)" -eq 1 ]; then
+        sudo apt-get install python-scipy -y
+        sudo apt-get install python-matplotlib -y
+        sudo apt-get install python-netcdf4 -y
         sudo apt-get install python-tk -y
         sudo apt-get install python-numpy -y
         sudo apt-get install python -y
@@ -420,7 +420,6 @@ Instalacao_PacotesEssenciais_Inelastica() {
         apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
     elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ] || [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
         echo '\033[33m\n\nOs Pacotes:  python-scipy, python-matplotlib e python-netcdf4 não foram encontrados\nBaixando por outras fontes...\n\n\033[00m'
-
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
@@ -557,7 +556,6 @@ Instalacao_PacotesEssenciais_Inelastica() {
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
         sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
         apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
-        echo "\n\n"
     else
         echo '\033[33m\nErro: Possivelmente conexão instável, Reinicie a instalação...\033[00m'
     fi
