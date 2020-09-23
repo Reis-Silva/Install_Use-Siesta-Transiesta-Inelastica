@@ -43,7 +43,7 @@
 
 ##### OBS: Versão Generalizada do Ubuntu e Linux Mint (algumas outras versões derivadas do Debian provavelmente).
 
-##### OBS2: Testes realizados com  Ubuntu: 16.04, 18.04 e 20.04 e Linux Mint: 18 e 20.
+##### OBS2: Testes realizados com  Ubuntu: 16.04, 18.04 e 20.04, Linux Mint: 18 e 20, WindowsFx/LinuxFx.
 
 ##### OBS3: Lembre-se quando terminar de instalar tudo, feche e abra o terminal de novo para poder emular (reload .bashrs).
 
