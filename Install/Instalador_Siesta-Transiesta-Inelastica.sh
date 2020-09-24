@@ -417,8 +417,6 @@ Instalacao_PacotesEssenciais_Inelastica() {
     echo "\n\n"
     
     if [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
-        echo '\033[33m\n\nOs Pacotes:  python-scipy, python-matplotlib e python-netcdf4 não foram encontrados\nBaixando por outras fontes...\n\n\033[00m'
-        echo '\033[33m\n\nOs Pacotes:  python-scipy, python-matplotlib e python-netcdf4 não foram encontrados\nBaixando por outras fontes...\n\n\033[00m'
         wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi6_3.2.1-9_amd64.deb
         sudo dpkg -i libffi6_3.2.1-9_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/r/readline/libreadline7_7.0-5_amd64.deb
@@ -498,7 +496,6 @@ Instalacao_PacotesEssenciais_Inelastica() {
         sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
         apt-mark hold python-cftime python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
     elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ]; then
-        echo '\033[33m\n\nOs Pacotes:  python-scipy, python-matplotlib e python-netcdf4 não foram encontrados\nBaixando por outras fontes...\n\n\033[00m'
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/python2.7-minimal_2.7.16-2+deb10u1_amd64.deb
