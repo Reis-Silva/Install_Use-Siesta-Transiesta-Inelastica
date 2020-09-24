@@ -678,7 +678,7 @@ Main() {
     		\nVERSION: Inelastica v1.3.6\nLINK: http://https://tfrederiksen.github.io/inelastica/docs/latest/index.html\n" --text-align=center \
             --field="INSTALAÇÃO - PACOTES ESSENCIAIS - SIESTA":CHK \
             --field="INSTALAÇÃO - SIESTA/TRANSIESTA":CHK \
-            --field "Ajuste um nome de preferência para a emulação do SIESTA (Nome PADRÃO: Siesta):" \
+            --field "Caso queira ajustar um nome de preferência para a emulação do SIESTA (Nome PADRÃO: siesta) digite aqui:" \
             --field="INSTALAÇÃO - PACOTES ESSENCIAIS - INELASTICA":CHK \
             --field="INSTALAÇÃO - INELASTICA":CHK \
             --buttons-layout=end --button="gtk-close":1 --button=" INSTALAR!.icons/te.png":2
