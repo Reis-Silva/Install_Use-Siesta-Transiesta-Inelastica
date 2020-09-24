@@ -147,7 +147,7 @@ Instalacao_PacotesEssenciais_Siesta() {
     pacote=$(dpkg --get-selections | grep abinit)
 
     if [ -n "$pacote" ]; then
-        echo '\033[33m\n\nO Pacote '"$pacote"' foi encontrado\033[00m'
+        echo '\033[33m\n\nO Pacote abinit foi encontrado\033[00m'
     elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ] || [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
         echo '\033[33m\n\nO Pacote abinit não foi encontrado\nBaixando por outras fontes...\n\n\033[00m'
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/a/abinit/abinit-data_8.10.2-2_all.deb
@@ -175,7 +175,7 @@ Instalacao_PacotesEssenciais_Siesta() {
     pacote=$(dpkg --get-selections | grep meep-lam4)
 
     if [ -n "$pacote" ]; then
-        echo '\033[33m\n\nO Pacote '"$pacote"' foi encontrado\033[00m'
+        echo '\033[33m\n\nO Pacote meep-lam4 foi encontrado\033[00m'
     elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ] || [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
         echo '\033[33m\n\nO Pacote meep-lam4 não foi encontrado\nBaixando por outras fontes...\n\n\033[00m'
         sudo apt-get install guile-3.0 -y
