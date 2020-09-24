@@ -407,17 +407,97 @@ InstalacaoPacotesEssenciaisSiestaIntermediario() {
 Instalacao_PacotesEssenciais_Inelastica() {
 
     echo '\033[05;33m####INSTALATAÇÃO DE PACOTES PARA INELASTICA - ARQUITETURA AMD64####\n\n\033[00;00m'
+    sleep 2
 
-    if [ "$(echo "${numeracaoSistema} < 20.00" | bc)" -eq 1 ]; then
-        sudo apt-get install python-scipy -y
-        sudo apt-get install python-matplotlib -y
-        sudo apt-get install python-netcdf4 -y
-        sudo apt-get install python-tk -y
-        sudo apt-get install python-numpy -y
-        sudo apt-get install python -y
-        sudo apt-get install python-dev -y
-        apt-mark hold libpython-dbg libpython-dev python python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg
-    elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ] || [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
+    #Reatualização de repositorios e bibliotecas
+    echo '\033[33m\n\n#Atualização de repositorios e bibliotecas\n\n\033[00m'
+    apt-mark unhold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
+    sudo apt-get update -y
+    sudo apt-get dist-upgrade -y
+    echo "\n\n"
+    
+    if [ "$versionSistema" = "Windowsfx 10" ] && [ "$(echo "${numeracaoSistema} >= 10.00" | bc)" -eq 1 ]; then
+        echo '\033[33m\n\nOs Pacotes:  python-scipy, python-matplotlib e python-netcdf4 não foram encontrados\nBaixando por outras fontes...\n\n\033[00m'
+        echo '\033[33m\n\nOs Pacotes:  python-scipy, python-matplotlib e python-netcdf4 não foram encontrados\nBaixando por outras fontes...\n\n\033[00m'
+        wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi6_3.2.1-9_amd64.deb
+        sudo dpkg -i libffi6_3.2.1-9_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/r/readline/libreadline7_7.0-5_amd64.deb
+        sudo dpkg -i libreadline7_7.0-5_amd64.deb    
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/e/elpa/libelpa-dev_2016.05.001-6build1_amd64.deb
+        sudo dpkg -i libelpa-dev_2016.05.001-6build1_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/u/underscore/libjs-underscore_1.9.1~dfsg-1_all.deb
+        sudo dpkg -i libjs-underscore_1.9.1~dfsg-1_all.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/s/sphinx/libjs-sphinxdoc_1.8.4-1_all.deb
+        sudo dpkg -i libjs-sphinxdoc_1.8.4-1_all.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-openmpi-103_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpi4py/python-mpi4py_3.0.2-13_amd64.deb
+        sudo dpkg -i python-mpi4py_3.0.2-13_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/h/h5py/python-h5py_2.9.0-7_amd64.deb
+        sudo dpkg -i python-h5py_2.9.0-7_amd64.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-pkg-resources_44.1.1-1_all.deb
+        sudo dpkg -i python-pkg-resources_44.1.1-1_all.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/p/python-setuptools/python-setuptools_44.1.1-1_all.deb
+        sudo dpkg -i python-setuptools_44.1.1-1_all.deb
+        wget -c http://ftp.us.debian.org/debian/pool/main/libf/libffi/libffi-dev_3.2.1-9_amd64.deb
+        sudo dpkg -i libffi-dev_3.2.1-9_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/c/cython/cython_0.29.14-0.1ubuntu3_amd64.deb
+        sudo dpkg -i cython_0.29.14-0.1ubuntu3_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/n/netcdf/libnetcdf13_4.6.2-1build1_amd64.deb
+        sudo dpkg -i libnetcdf13_4.6.2-1build1_amd64.deb
+        wget -c http://ftp.br.debian.org/debian/pool/main/c/cftime/python-cftime_1.0.3.4-1_amd64.deb
+        sudo dpkg -i python-cftime_1.0.3.4-1_amd64.deb
+        wget -c http://ftp.br.debian.org/debian/pool/main/n/netcdf4-python/python-netcdf4_1.4.2-1+b1_amd64.deb
+        sudo dpkg -i python-netcdf4_1.4.2-1+b1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-decorator/python-decorator_4.3.0-1.1_all.deb
+        sudo dpkg -i python-decorator_4.3.0-1.1_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy_1.2.2-4_amd64.deb
+        sudo dpkg -i python-scipy_1.2.2-4_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/fonts-mathjax_2.7.4+dfsg-1_all.deb
+        sudo dpkg -i fonts-mathjax_2.7.4+dfsg-1_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mathjax/libjs-mathjax_2.7.4+dfsg-1_all.deb
+        sudo dpkg -i libjs-mathjax_2.7.4+dfsg-1_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/p/python-scipy/python-scipy-doc_1.2.2-4_all.deb
+        sudo dpkg -i python-scipy-doc_1.2.2-4_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libh/libhdf4/libhdf4-0_4.2.10-3.2_amd64.deb
+        sudo dpkg -i libhdf4-0_4.2.10-3.2_amd64.deb
+        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/glibc/multiarch-support_2.23-0ubuntu11.2_amd64.deb
+        sudo dpkg -i multiarch-support_2.23-0ubuntu11.2_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/libm/libmatheval/libmatheval1_1.1.11+dfsg-2_amd64.deb
+        sudo dpkg -i libmatheval1_1.1.11+dfsg-2_amd64.deb
+        wget -c http://ppa.launchpad.net/linuxuprising/libpng12/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+        sudo dpkg -i libpng12-0_1.2.54-1ubuntu1.1+1~ppa0~focal_amd64.deb
+        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
+        sudo dpkg -i gcc-5-base_5.4.0-6ubuntu1~16.04.12_amd64.deb
+        wget -c http://security.ubuntu.com/ubuntu/pool/main/g/gcc-5/libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
+        sudo dpkg -i libgfortran3_5.4.0-6ubuntu1~16.04.12_amd64.deb
+        wget -c http://security.ubuntu.com/ubuntu/pool/universe/h/hdf5/libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
+        sudo dpkg -i libhdf5-10_1.8.16+docs-4ubuntu1.1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/h5utils/h5utils_1.12.1-4_amd64.deb
+        sudo dpkg -i h5utils_1.12.1-4_amd64.deb
+        sudo apt-get install guile-3.0 -y
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hwloc/hwloc-nox_2.1.0+dfsg-4_amd64.deb
+        sudo dpkg -i hwloc-nox_2.1.0+dfsg-4_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/m/mpich/libmpich12_3.3.2-2build1_amd64.deb
+        sudo dpkg -i libmpich12_3.3.2-2build1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-openmpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-mpi-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-mpich-103_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpich/mpich_3.3.2-2build1_amd64.deb
+        sudo dpkg -i mpich_3.3.2-2build1_amd64.deb
+        wget -c http://archive.ubuntu.com/ubuntu/pool/universe/m/mpich/libmpich-dev_3.3.2-2build1_amd64.deb
+        sudo dpkg -i libmpich-dev_3.3.2-2build1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-doc_1.10.0-patch1+docs-4_all.deb
+        sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
+        wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        apt-mark hold python-cftime python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
+    elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ]; then
         echo '\033[33m\n\nOs Pacotes:  python-scipy, python-matplotlib e python-netcdf4 não foram encontrados\nBaixando por outras fontes...\n\n\033[00m'
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
@@ -554,6 +634,15 @@ Instalacao_PacotesEssenciais_Inelastica() {
         sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
         sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
+        apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
+    elif [ "$(echo "${numeracaoSistema} < 20.00" | bc)" -eq 1 ]; then
+        sudo apt-get install python-scipy -y
+        sudo apt-get install python-matplotlib -y
+        sudo apt-get install python-netcdf4 -y
+        sudo apt-get install python-tk -y
+        sudo apt-get install python-numpy -y
+        sudo apt-get install python -y
+        sudo apt-get install python-dev -y
         apt-mark hold libpython-dbg libpython-dev python python-cftime python-dbg python-dev python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
     else
         echo '\033[33m\nErro: Possivelmente conexão instável, Reinicie a instalação...\033[00m'
