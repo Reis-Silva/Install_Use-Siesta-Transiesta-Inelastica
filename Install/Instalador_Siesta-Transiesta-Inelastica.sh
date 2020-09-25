@@ -494,7 +494,8 @@ Instalacao_PacotesEssenciais_Inelastica() {
         sudo dpkg -i libhdf5-doc_1.10.0-patch1+docs-4_all.deb
         wget -c http://mirrors.kernel.org/ubuntu/pool/universe/h/hdf5/libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
         sudo dpkg -i libhdf5-mpich-dev_1.10.4+repack-11ubuntu1_amd64.deb
-        apt-mark hold python-cftime python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python-scipy-dbg python2-dbg python2-dev
+	sudo apt-get install python-dev -y
+        apt-mark hold python-cftime python-h5py python-mpi4py python-netcdf4 python-numpy-dbg python-scipy python2-dbg python2-dev
     elif [ "$(echo "${numeracaoSistema} >= 20.00" | bc)" -eq 1 ]; then
         wget -c http://ftp.us.debian.org/debian/pool/main/p/python2.7/libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
         sudo dpkg -i libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb
