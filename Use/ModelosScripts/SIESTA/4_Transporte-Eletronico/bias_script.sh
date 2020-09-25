@@ -12,28 +12,31 @@ mkdir cont   # read the comment at the end of this script.
 for k in `seq -w 0.00 0.10 1.00`  #Escolha as variações das tensões
 do
 
-
 cp -r cont $k
 cd $k
 cp ../*.psf .
 cp ../*.TSHS .
 
-
+# Names
 cat > INPUT.fdf <<EOF
 
 SystemName scat                                                                                                                                                                                                        
 SystemLabel   scat
 
+# Basis set variables
 NumberOfSpecies 1
-
 %block ChemicalSpeciesLabel
   1   6  C
 %endblock ChemicalSpeciesLabel
 
+PAO.BasisType           split
+PAO.BasisSize           SZP        
+WriteMullikenPop        1
+WriteBands              F
 xc.functional           LDA                     
-xc.authors              CA     
+xc.authors              CA 
 
-                
+# Converges settings                
 MeshCutoff              300.00000000 Ry 
 SolutionMethod          Diagon                      
 OccupationFunction      MP                      
@@ -51,10 +54,20 @@ DM.OccupancyTolerance   0.1000000000E-11
 DM.NumberKick           0                       
 DM.KickMixingWeight     0.01000000000            
 DM.Tolerance            0.1000000000E-03        
-DM.UseSaveDM            true          # to use continuation files
 
-UseSaveData             T                       
-                  
+#SCF.DM.Converge     true
+#SCF.DM.Tolerance    1.000000000E-04
+
+#SCF.H.Converge      true
+#SCF.H.Tolerance     1.000000000E-03 ev
+
+#EDM.Converge    true
+#EDM.Tolerance   0.2000000000E+02
+
+#FreeE.Converge true
+#Harris.Converge true
+
+# Steps       
 MD.NumCGsteps           0                        
 MD.TypeOfRun            CG                       
 MD.VariableCell         F                        
@@ -67,31 +80,28 @@ Diag.ParallelOverK      F
 PAO.EnergyShift         85.0 meV  # 50.0 meV anteriormente                   
 PAO.SplitNorm           0.1500000000              
 
-# Basis set variables
-PAO.BasisType           split
-PAO.BasisSize           SZP        
-                          
-
-WriteMullikenPop                1
-WriteBands                      F
+# SAVES
 SaveRho                         F
 SaveElectrostaticPotential      F
 SaveTotalPotential              F
 WriteCoorXmol                   T
 SaveDeltaRho                    .false.
-SaveHS                          .true.
-
-
-WriteMDXmol                     .true.
-WriteMDhistory                  .false.
-WriteEigenvalues                yes
-                                                                                                                           
-
-
+SaveHS                          T
+TS.HS.Save                      T
+TS.SaveHS                       T
+TS.DE.Save                      T
+UseSaveData                     T
+DM.UseSaveDM                    T          # to use continuation files
+UseSaveData                     T
+                                                                                                                          
 # ATOMIC POSITIONS
 # Atomic coordinates
-NumberOfAtoms                    16 #Numero de atomos da  estrutura
 
+WriteMDXmol                     T
+WriteMDhistory                  F
+WriteEigenvalues                T
+
+NumberOfAtoms                    16 #Numero de atomos da  estrutura
 AtomicCoordinatesFormat         Ang
 
 %block AtomicCoordinatesAndAtomicSpecies
@@ -101,9 +111,9 @@ AtomicCoordinatesFormat         Ang
 
 %endblock AtomicCoordinatesAndAtomicSpecies
 
+
 # UNIT CELL
 LatticeConstant       1.00 Ang 
-
 
 %block LatticeVectors 
        20.000000    0.000000    0.000000
@@ -119,11 +129,7 @@ LatticeConstant       1.00 Ang
 0   1   0   0.0
 0   0   45  0.0
 %endblock kgrid_Monkhorst_Pack
-
-
-WriteEigenvalues                false
                                                   
-
 TS.Voltage    $k eV
 
 PAO.SplitNorm         0.15
@@ -269,10 +275,6 @@ mpirun --oversubscribe -np 4 siesta < INPUT.fdf  | tee OUTPUT.fdf
 cd ..
 rm -rf cont 
 mkdir cont
-
-cp  ./$i/scat.TSDE ./$i/scat.TSHS ./$i/scat.DM  cont  # copy these files for continuation of the next bias step.
-
-
 
 done
 
