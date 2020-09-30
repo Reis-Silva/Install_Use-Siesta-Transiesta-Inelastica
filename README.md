@@ -4,9 +4,10 @@
 
 --- Versões SIESTA v4.1-262/INELASTICA v1.3.6
 
+
 <p align="center">
   <b>Link YouTube:</b><br>
-  <a href="http://www.youtube.com/watch?v=af9cmUdHDJ8">Install SIESTA/Inelastica com Interface</a> |
+  <a href="http://www.youtube.com/watch?v=af9cmUdHDJ8">01 - Install SIESTA/Inelastica com Interface</a> |
   <br><br>
   <img src="http://img.youtube.com/vi/af9cmUdHDJ8/0.jpg">
 </p>
@@ -17,9 +18,16 @@
 
 <p align="center">
   <b>Link YouTube:</b><br>
-  <a href="https://www.youtube.com/watch?v=2pTLMxiM1GY">UPDATE - Install SIESTA/Inelastica com Interface</a> |
+  <a href="https://www.youtube.com/watch?v=2pTLMxiM1GY">02 - UPDATE - Install SIESTA/Inelastica com Interface</a> |
   <br><br>
   <img src="http://img.youtube.com/vi/2pTLMxiM1GY/0.jpg">
+</p>
+===========================================================================
+<p align="center">
+  <b>Link YouTube:</b><br>
+  <a href="https://www.youtube.com/watch?v=R_09pLtj0NY">03 - Install SIESTA e Use no WindowsFX/LinuxFx (e outros)</a> |
+  <br><br>
+  <img src="http://i3.ytimg.com/vi/R_09pLtj0NY/hqdefault.jpg">
 </p>
 
 ## Opções de instalação completa na interface do programa:
