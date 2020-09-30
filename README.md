@@ -22,7 +22,10 @@
   <br><br>
   <img src="http://img.youtube.com/vi/2pTLMxiM1GY/0.jpg">
 </p>
-===========================================================================
+<p align="center">
+ ===========================================================================
+</p>
+
 <p align="center">
   <b>Link YouTube:</b><br>
   <a href="https://www.youtube.com/watch?v=R_09pLtj0NY">03 - Install SIESTA e Use no WindowsFX/LinuxFx (e outros)</a> |
